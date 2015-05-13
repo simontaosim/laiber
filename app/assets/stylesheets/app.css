@@ -1,0 +1,23 @@
+/* Write your styles */
+.nav li{
+float: right;
+border: none;
+    margin-right: 5%;
+}
+.rg_content{
+width: 60%;
+    margin-top: 3%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.login_content{
+width: 30%;
+    margin-top: 3%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.fg_pw{
+    float: right;
+}

@@ -1,0 +1,62 @@
+<%= form_for @user, :html => {:class => 'am-form', :id => 'doc-vld-msg' } do |f| %>
+  <fieldset>
+    <legend>新用户注册</legend>
+    <div class="am-form-group">
+      <label for="doc-vld-name-2">用户名：</label>
+      <%= f.text_field :name, id:"doc-vld-name-2", minlength:"3", placeholder:"只能英文字母、数字、中文中的一种或者混搭", required: 1 %>
+    </div>
+
+   <div class="am-form-group">
+      
+      <label for="doc-vld-pwd-1">设置密码：</label>
+      <%= f.password_field :password, id: "doc-vld-pwd-1", placeholder: "6-12位，输入字符无限制", pattern: '^\d{6,12}$'.to_s, required: 1,  'data-foolish-msg': "请输入正确位数的密码！" %>
+    </div>
+
+<div class="am-form-group">
+      <label for="doc-vld-pwd-2">确认密码：</label>
+      <%= f.password_field :password_confirm, id: "doc-vld-pwd-2", placeholder: "必须与设置密码内的内容一致", 'data-equal-to': "#doc-vld-pwd-1", required: 1, 'data-foolish-msg': "两次密码不一致" %>
+    </div>
+    
+<div class="am-form-group">
+      <label for="doc-vld-pwd-1-0">邀请码：</label>
+      <%= f.password_field :invite_code, id: "doc-vld-pwd-1-0", placeholder: "必须输入正确的邀请码才能登录", pattern: '^\d{4}$'.to_s, required: 1, 'data-foolish-msg': "请输入正确的邀请码！" %>
+      
+    </div>
+
+
+  </fieldset>
+
+        <div class="am-checkbox">
+          <label>
+            <input type="checkbox"> 阅读并且同意 <a href="">《xx服务协议xx》</a>
+          </label>
+        </div>
+        <button type="submit" class="am-btn am-btn-secondary  am-btn-block">注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册</button>
+    <% end %>
+  <script>
+    
+    $(function() {
+  $('#doc-vld-msg').validator({
+    onValid: function(validity) {
+      $(validity.field).closest('.am-form-group').find('.am-alert').hide();
+    },
+
+    onInValid: function(validity) {
+      var $field = $(validity.field);
+      var $group = $field.closest('.am-form-group');
+      var $alert = $group.find('.am-alert');
+      // 使用自定义的提示信息 或 插件内置的提示信息
+      var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+
+      if (!$alert.length) {
+        $alert = $('<div class="am-alert am-alert-danger"></div>').hide().
+          appendTo($group);
+      }
+
+      $alert.html(msg).show();
+    }
+  });
+});
+</script>
+
+<!--<![endif]-->

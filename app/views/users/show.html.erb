@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Screct pass:</strong>
+  <%= @user.screct_pass %>
+</p>
+
+<p>
+  <strong>Invite code:</strong>
+  <%= @user.invite_code %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
