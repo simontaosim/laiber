@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    @user.screct_pass = @user.password
+    @user.screct_pass = @user.md5(user_params[:password].to_s)
     respond_to do |format|
       if @user.save
         format.html { redirect_to user_sessions_new_path, notice: '1' }
@@ -69,6 +69,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :screct_pass, :invite_code)
+      params.require(:user).permit(:name, :screct_pass, :invite_code, :password)
     end
 end
