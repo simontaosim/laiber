@@ -28,14 +28,26 @@
   <%= favicon_link_tag 'app-icon72x72@2x.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
   <%= stylesheet_link_tag    'amazeui.min.css', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag    'app.css', media: 'all', 'data-turbolinks-track' => true %>
-  
+  <%= javascript_include_tag    'application.js', media: 'all', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 <div class="nav">
      <ul class="am-nav am-nav-tabs">
       <li class="am-active ">
-      <li><a href="<%= user_sessions_new_path %>">登陆</a></li>
+      <% 
+        if session[:progress]
+          user_session = UserSession.find(session[:progress].fetch("_id").fetch("$oid"))  
+        end
+        if user_session
+       %>
+      <li>
+      <%= link_to '登出', user_session_path(user_session),
+               method: :delete,
+               data: { confirm: '您确定不?' } %>
+      <% else %>
+      <li><a href="<%= new_user_session_path %>">登陆</a></li>
+      <% end %>
     </ul>
 </div>
 

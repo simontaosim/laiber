@@ -1,13 +1,20 @@
 Rails.application.routes.draw do
+  resources :posts
+  get 'mobile_new_session/index'
+
+  get 'mobile_new_session/create'
+
+  get 'mobile_new_session/destory'
+
   get 'welcome/index'
 
-  get 'user_sessions/new'
-
-  get 'user_sessions/destroy'
-
+  
   get 'user_sessions/success_info'
 
   post 'user_sessions/auth'
+
+  resources :user_sessions
+
 
   resources :users
   # The priority is based upon order of creation: first created -> highest priority.

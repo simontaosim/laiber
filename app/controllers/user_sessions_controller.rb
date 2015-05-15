@@ -2,7 +2,13 @@ class UserSessionsController < ApplicationController
   def new
   	@user = User.new
   end
+  def index
 
+  end
+
+  def show
+    
+  end
   def auth
   	
     	@user = User.where(:name => user_params[:name]).first
@@ -15,6 +21,11 @@ class UserSessionsController < ApplicationController
   		if @user
   			@user = @user.auth_pass(user_params[:password])
   			if @user
+          @user_session = UserSession.new
+          @user_session.user = @user
+          @user_session.name = @user.name
+          @user_session.save
+          session[:progress] = @user_session
 	  			respond_to do |format|
 	  				format.html{ redirect_to user_sessions_success_info_path+"?info=success" }
 	  			end
@@ -32,10 +43,12 @@ class UserSessionsController < ApplicationController
   end
 
   def destroy
+
   end
 
+
   def success_info
-  	render json: params[:info]
+  	render json: session[:progress]
   end
    private
     # Use callbacks to share common setup or constraints between actions.

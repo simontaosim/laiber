@@ -1,0 +1,2 @@
+module MobileNewSessionHelper
+end
