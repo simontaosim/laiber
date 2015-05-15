@@ -1,12 +1,17 @@
 class User
   include Mongoid::Document
+  attr_accessor :password, :password_confirmation
   include Mongoid::Timestamps
   field :name, type: String
   field :email, type: String
   field :mobile, type: String
   field :screct_pass, type: String
   field :invite_code, type: String
-  attr_accessor :password, :password_confirm
+  
+  validates_confirmation_of :password
+  validates :password, confirmation: true
+  validates_length_of       :name,    :within => 3..100
+  validates_uniqueness_of   :name,    :case_sensitive => false, :massage => '用户名已经存在'
 
   def auth_pass(pass)
   	if self.screct_pass == self.md5(pass)

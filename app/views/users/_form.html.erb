@@ -1,4 +1,21 @@
+
+
+
 <%= form_for @user, :html => {:class => 'am-form', :id => 'doc-vld-msg' } do |f| %>
+<% if @user.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
   <fieldset>
     <legend>新用户注册</legend>
     <div class="am-form-group">
@@ -14,7 +31,7 @@
 
 <div class="am-form-group">
       <label for="doc-vld-pwd-2">确认密码：</label>
-      <%= f.password_field :password_confirm, id: "doc-vld-pwd-2", placeholder: "必须与设置密码内的内容一致", 'data-equal-to': "#doc-vld-pwd-1", required: 1, 'data-foolish-msg': "两次密码不一致" %>
+      <%= f.password_field :password_confirmation, id: "doc-vld-pwd-2", placeholder: "必须与设置密码内的内容一致", 'data-equal-to': "#doc-vld-pwd-1", required: 1, 'data-foolish-msg': "两次密码不一致" %>
     </div>
     
 <div class="am-form-group">
