@@ -4,7 +4,7 @@ class MobileNewSessionController < ApplicationController
     # put real origins here
   	  origins '*', 'null'
     # and configure real resources here
-   	 resource '*', :headers => :any, :methods => [:get, :post, :options]
+   	 resource '*', :headers => :any, :methods => [:get, :post]
   	end
   end
   skip_before_filter :verify_authenticity_token, only: [:create]
@@ -45,6 +45,6 @@ private
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :screct_pass, :invite_code, :password)
+      params.require(:user).permit(:name, :screct_pass, :password)
     end
 end
