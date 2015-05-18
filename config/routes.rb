@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'user_mobile/create'
+
+  get 'user_mobile/is_exist'
+
+  get 'user_mobile/invite_judge'
+
   resources :posts
   get 'mobile_new_session/index'
 
@@ -6,8 +12,11 @@ Rails.application.routes.draw do
 
   get 'mobile_new_session/destory'
 
+  get 'users/create_remote'
+
   get 'welcome/index'
 
+  get 'user_sessions/user_exist'
   
   get 'user_sessions/success_info'
 

@@ -53,6 +53,17 @@
   <script>
     
     $(function() {
+      $("#doc-vld-name-2").blur(function(event) {
+           $.get("<%= user_sessions_user_exist_path %>?user[user_attr]="+$(this).val(), function(data){
+              if (data=='1') {
+                alert('用户名已存在');
+              }
+              if (data=='0') {
+                alert('用户名可用')
+              }
+          });
+      });
+     
   $('#doc-vld-msg').validator({
     onValid: function(validity) {
       $(validity.field).closest('.am-form-group').find('.am-alert').hide();
@@ -71,9 +82,11 @@
       }
 
       $alert.html(msg).show();
+
     }
   });
 });
 </script>
+
 
 <!--<![endif]-->

@@ -9,6 +9,23 @@ class UserSessionsController < ApplicationController
   def show
     
   end
+
+  def user_exist
+    #根据用户名，用户邮箱，用户手机号检测用户是否存在
+     @user = User.where(:name => user_params[:user_attr]).first
+      if @user.nil?
+        @user = User.where(:email => user_params[:user_attr]).first
+      end
+      if @user.nil?
+        @user = User.where(:mobile => user_params[:user_attr]).first
+      end
+      if @user
+        render json: 1
+      else
+        render json: 0
+      end
+  end
+
   def auth
   	
     	@user = User.where(:name => user_params[:name]).first
@@ -43,7 +60,11 @@ class UserSessionsController < ApplicationController
   end
 
   def destroy
-
+    @user_session = UserSession.find(params[:id])
+    session[:progress] = nil
+    if @user_session.destroy 
+      redirect_to root_url, notice: "您已经退出！"
+    end
   end
 
 
@@ -58,6 +79,6 @@ class UserSessionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :screct_pass, :invite_code, :password)
+      params.require(:user).permit(:name, :screct_pass, :invite_code, :password, :user_attr)
     end
 end

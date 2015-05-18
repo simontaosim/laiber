@@ -7,7 +7,14 @@
   <meta name="keywords" content="">
   <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>Ulaiber登陆页面</title>
+  <title>
+    <% if @title %>
+    <%= @title %>
+    <% else %>
+    Laiber
+    <% end %>
+
+  </title>
 
   <!-- Set render engine for 360 browser -->
   <meta name="renderer" content="webkit">
@@ -45,6 +52,20 @@
       <%= link_to '登出', user_session_path(user_session),
                method: :delete,
                data: { confirm: '您确定不?' } %>
+      </li>
+      <li ><%= link_to(user_session.name.to_s, "url" ) %></li>
+      <li class="am-dropdown" data-am-dropdown>
+        <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+            消息 <span class="am-icon-caret-down"></span>
+        </a>
+        <ul class="am-dropdown-content">
+            <li><a href="#">此处有消息菜单</a></li>
+              <li><a href="#">此处有消息菜单</a></li>
+                <li><a href="#">此处有消息菜单</a></li>
+                  <li><a href="#">此处有消息菜单</a></li>
+                    <li><a href="#">此处有消息菜单</a></li>
+          </ul>
+    </li>
       <% else %>
       <li><a href="<%= new_user_session_path %>">登陆</a></li>
       <% end %>
