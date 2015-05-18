@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   get 'personal_center/index'
 
-  post 'user_mobile/create'
-
   get 'user_mobile/is_name_exist'
+
+  post 'user_mobile/create'
 
   get 'user_mobile/invite_judge'
 
