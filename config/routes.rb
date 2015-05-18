@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get 'user_mobile/create'
 
-  get 'user_mobile/is_exist'
+  get 'user_mobile/is_name_exist'
 
   get 'user_mobile/invite_judge'
 
