@@ -15,7 +15,6 @@ class UserMobileController < ApplicationController
       else
         render json: 0
       end
-    end
   end
 
   def is_exist
