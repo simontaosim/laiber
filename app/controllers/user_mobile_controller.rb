@@ -7,6 +7,7 @@ class UserMobileController < ApplicationController
    	 resource '*', :headers => :any, :methods => [:get, :post, :options]
   	end
   end
+  skip_before_filter :verify_authenticity_token, only: [:create]
   def create
     @user = User.new(user_params)
     @user.screct_pass = user_params[:password]
