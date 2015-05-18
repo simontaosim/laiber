@@ -18,7 +18,7 @@ class UserMobileController < ApplicationController
   end
 
   def is_name_exist
-     @user = User.where(:name => user_params[:user_attr])
+     @user = User.where(:name => params[:user_attr])
       if @user.length < 1
         render json: 0
       else
