@@ -1,4 +1,6 @@
 class MobileNewSessionController < ApplicationController
+  skip_before_filter :verify_authenticity_token, only: [:create]
+
   use Rack::Cors do
   	allow do
     # put real origins here
@@ -7,7 +9,6 @@ class MobileNewSessionController < ApplicationController
    	 resource '*', :headers => :any, :methods => [:get, :post]
   	end
   end
-  skip_before_filter :verify_authenticity_token, only: [:create]
 
   def create
   	@user = User.where(:name => user_params[:name]).first
@@ -19,12 +20,13 @@ class MobileNewSessionController < ApplicationController
     	end
   		if @user
   			@user = @user.auth_pass(user_params[:password])
-        @user_session = UserSession.new
-        @user_session.user = @user
-        @user_session.name = @user.name
-        @user_session.save
-        session[:progress] = @user_session
+        
   			if @user
+          @user_session = UserSession.new
+          @user_session.user = @user
+          @user_session.name = @user.name
+          @user_session.save
+          session[:progress] = @user_session
 	  			render json: @user
 	  		else
 	  			render json: 0
