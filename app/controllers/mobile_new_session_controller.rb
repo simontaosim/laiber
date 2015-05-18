@@ -7,6 +7,7 @@ class MobileNewSessionController < ApplicationController
    	 resource '*', :headers => :any, :methods => [:get, :post, :options]
   	end
   end
+  skip_before_filter :verify_authenticity_token, only: [:create]
   def index
   end
 

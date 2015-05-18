@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :posts
   get 'mobile_new_session/index'
 
-  get 'mobile_new_session/create'
+  post 'mobile_new_session/create'
 
   get 'mobile_new_session/destory'
 
