@@ -17,19 +17,13 @@ class UserMobileController < ApplicationController
       end
   end
 
-  def is_exist
+  def is_name_exist
   	#根据用户名，用户邮箱，用户手机号检测用户是否存在
      @user = User.where(:name => user_params[:user_attr]).first
       if @user.nil?
-        @user = User.where(:email => user_params[:user_attr]).first
-      end
-      if @user.nil?
-        @user = User.where(:mobile => user_params[:user_attr]).first
-      end
-      if @user.nil?
-        render json: @user
+        render json: 0
       else
-        render json: @user
+        render json: 1
       end
   end
 
