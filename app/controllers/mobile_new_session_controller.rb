@@ -20,12 +20,12 @@ class MobileNewSessionController < ApplicationController
     		@user = User.where(:mobile => user_params[:name]).first
     	end
   		if @user
+  			@user = @user.auth_pass(user_params[:password])
         @user_session = UserSession.new
         @user_session.user = @user
         @user_session.name = @user.name
         @user_session.save
         session[:progress] = @user_session
-  			@user = @user.auth_pass(user_params[:password])
   			if @user
 	  			render json: @user
 	  		else
