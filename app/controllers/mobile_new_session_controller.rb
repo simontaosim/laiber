@@ -8,8 +8,6 @@ class MobileNewSessionController < ApplicationController
   	end
   end
   skip_before_filter :verify_authenticity_token, only: [:create]
-  def index
-  end
 
   def create
   	@user = User.where(:name => user_params[:name]).first
