@@ -40,7 +40,7 @@ class UserMobileController < ApplicationController
   private
   
   def user_params
-      params.require(:user).permit(:name, :screct_pass, :invite_code, :password, :user_attr)
+      params.require(:user).permit(:name, :screct_pass, :invite_code, :password,:password_confirmation, :user_attr)
   end
 
 end
