@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @user.screct_pass = @user.md5(user_params[:password].to_s)
     respond_to do |format|
       if @user.save
-        format.html { redirect_to user_sessions_new_path, notice: '1' }
+        format.html { redirect_to new_user_session_path, notice: '1' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
