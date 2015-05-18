@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'personal_center/index'
 
-  get 'user_mobile/create'
+  post 'user_mobile/create'
 
   get 'user_mobile/is_name_exist'
 
