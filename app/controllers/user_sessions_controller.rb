@@ -27,7 +27,7 @@ class UserSessionsController < ApplicationController
   end
 
   def auth
-  	
+    
     	@user = User.where(:name => user_params[:name]).first
     	if @user.nil?
     		@user = User.where(:email => user_params[:name]).first
