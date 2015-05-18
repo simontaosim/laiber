@@ -26,10 +26,10 @@ class UserMobileController < ApplicationController
       if @user.nil?
         @user = User.where(:mobile => user_params[:user_attr]).first
       end
-      if @user
-        render json: 1
-      else
+      if @user.nil?
         render json: 0
+      else
+        render json: 1
       end
   end
 
