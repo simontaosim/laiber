@@ -27,7 +27,7 @@ class UserSessionsController < ApplicationController
   end
 
   def auth
-    
+
     	@user = User.where(:name => user_params[:name]).first
     	if @user.nil?
     		@user = User.where(:email => user_params[:name]).first
@@ -44,7 +44,7 @@ class UserSessionsController < ApplicationController
           @user_session.save
           session[:progress] = @user_session
 	  			respond_to do |format|
-	  				format.html{ redirect_to user_sessions_success_info_path+"?info=success" }
+	  				format.html{ redirect_to root_url }
 	  			end
 	  		else
 	  			respond_to do |format|
