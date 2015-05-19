@@ -7,6 +7,7 @@ class UserMobileController < ApplicationController
    	 resource '*', :headers => :any, :methods => [:get, :post, :options]
   	end
   end
+  skip_before_filter :verify_authenticity_token, only: [:create]
   def create
     @user = User.new(user_params)
     @user.screct_pass = user_params[:password]
@@ -17,19 +18,12 @@ class UserMobileController < ApplicationController
       end
   end
 
-  def is_exist
-  	#根据用户名，用户邮箱，用户手机号检测用户是否存在
-     @user = User.where(:name => user_params[:user_attr]).first
-      if @user.nil?
-        @user = User.where(:email => user_params[:user_attr]).first
-      end
-      if @user.nil?
-        @user = User.where(:mobile => user_params[:user_attr]).first
-      end
-      if @user
-        render json: 1
-      else
+  def is_name_exist
+     @user = User.where(:name => params[:user_attr])
+      if @user.length < 1
         render json: 0
+      else
+        render json: 1
       end
   end
 

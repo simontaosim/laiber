@@ -1,16 +1,14 @@
 Rails.application.routes.draw do
   get 'personal_center/index'
 
-  get 'user_mobile/create'
+  get 'user_mobile/is_name_exist'
 
-  get 'user_mobile/is_exist'
+  post 'user_mobile/create'
+  post 'mobile_new_session/create'
 
   get 'user_mobile/invite_judge'
 
   resources :posts
-  get 'mobile_new_session/index'
-
-  get 'mobile_new_session/create'
 
   get 'mobile_new_session/destory'
 
