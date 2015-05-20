@@ -63,6 +63,9 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.find(params[:id])
     session[:progress] = nil
     if @user_session.destroy 
+      if params[:mobile]
+        render json: 
+      end
       redirect_to root_url, notice: "您已经退出！"
     end
   end
