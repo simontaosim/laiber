@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   post 'user_mobile/create'
   post 'mobile_new_session/create'
+  get 'mobile_new_session/create'
 
   get 'user_mobile/invite_judge'
 
@@ -31,6 +32,12 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
+
+  #mobileapp
+  get 'mobile_app/posts/all'
+  get 'mobile_app/posts/new'
+  post 'mobile_app/posts/new'
+  get 'mobile_app/posts/test'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
