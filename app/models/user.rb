@@ -3,6 +3,7 @@ class User
   attr_accessor :password, :password_confirmation
   include Mongoid::Timestamps
   has_many :user_sessions,  dependent: :destroy
+  has_many :post, dependent: :destroy
   field :name, type: String
   field :email, type: String
   field :mobile, type: String
@@ -24,7 +25,7 @@ class User
 
   def md5(pass)
    Digest::MD5.hexdigest(pass)
-  end
+ end
 
 
 end
