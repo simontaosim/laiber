@@ -7,7 +7,7 @@ class UserSessionsController < ApplicationController
   end
 
   def show
-    
+
   end
 
   def user_exist
@@ -49,23 +49,21 @@ class UserSessionsController < ApplicationController
 	  		else
 	  			respond_to do |format|
   					format.html{ redirect_to user_sessions_success_info_path+"?info=密码错误" }
-  				end	
+  				end
 	  		end
   		else
   			respond_to do |format|
   				format.html{ redirect_to user_sessions_success_info_path+"?info=failed" }
   			end
-  		end  
-  	
+  		end
+
   end
 
   def destroy
     @user_session = UserSession.find(params[:id])
     session[:progress] = nil
-    if @user_session.destroy 
-      if params[:mobile]
-        render json: 
-      end
+    if @user_session.destroy
+
       redirect_to root_url, notice: "您已经退出！"
     end
   end
