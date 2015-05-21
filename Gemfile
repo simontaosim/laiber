@@ -43,5 +43,5 @@ group :development, :test do
   gem 'spring'
   gem "mongoid", "~> 4.0.0"
   gem 'thin'
+  gem 'rails_kindeditor'
 end
-
