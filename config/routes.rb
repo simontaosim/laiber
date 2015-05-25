@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :admins
   mount RailsAdmin::Engine => '/poo_poo_admin', as: 'rails_admin'
   get 'personal_center/index'
 
