@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount RailsAdmin::Engine => '/poo_poo_admin', as: 'rails_admin'
   get 'personal_center/index'
 
   get 'user_mobile/is_name_exist'
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   get 'user_sessions/user_exist'
-  
+
   get 'user_sessions/success_info'
 
   post 'user_sessions/auth'
