@@ -121,7 +121,7 @@ padding-right: 100%;
 }
 #idea_body{
     position: relative;
-    min-height: 1300px;
+/*    min-height: 1300px;*/
     /* -webkit-column-width:202px;
     -webkit-column-width:202px;
     -moz-column-width:202px;
@@ -133,7 +133,7 @@ padding-right: 100%;
     -moz-column-count:4;
     -ms-column-count:4;
     -o-column-count:4;
-    
+
 */
 }
 .box{
@@ -150,7 +150,7 @@ padding-right: 100%;
 .pic img{
     width: 270px;
 
-   
+
 }
 .idea_content{
     height: 170px;
@@ -196,4 +196,22 @@ width: 100%;
 }
 .logo_img{
   height: 40px;
+}
+.ideaTitle{
+    margin-top: 10px;
+    text-align: center;
+   height:auto;
+    width: 270px;
+}
+.ideaClassify{
+    text-align: center;
+    height:auto;
+    width: 270px;
+}
+
+.ideaIntruduce{
+padding: 5px 12px 6px;
+height:auto;
+    width: 270px;
+    text-align: center;
 }
