@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   post 'mobile_new_session/create'
   get 'mobile_new_session/create'
 
+  get 'posts/all'
+
+  post 'posts/all'
+
   get 'user_mobile/invite_judge'
 
   resources :posts
