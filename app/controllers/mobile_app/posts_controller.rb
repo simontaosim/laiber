@@ -2,10 +2,10 @@ class MobileApp::PostsController < ApplicationController
 	use Rack::Cors do
 		allow do
 			origins '*', 'null'
-			resource '*', :headers => :any, :methods => [:get, :post, :options]
+			resource '*', :headers => :any, :methods => [:new, :get]
 		end
 	end
-	skip_before_filter :verify_authenticity_token, only: [:new]
+	skip_before_filter :verify_authenticity_token, only: [:new, :get]
 
 	def all
 		render json:{"posts":Post.all, "users":User.all}
@@ -15,10 +15,10 @@ class MobileApp::PostsController < ApplicationController
 		result = false
 		if params[:post] && params[:user]
 			post = Post.new(new_post_params)
-			currUser = User.find(Utils::DbUtil.GetObjectId(user_params))
-			# currUser = UserSession.find(session[:progress]["_id"]["$oid"]).user
-			if currUser
-				post.user = currUser
+			current_user = User.find(Utils::DbUtil.GetObjectIdFromJson(user_params))
+			# current_user = UserSession.find(session[:progress]["_id"]["$oid"]).user
+			if current_user
+				post.user = current_user
 				if post.save
 					result = true
 				end
@@ -32,11 +32,11 @@ class MobileApp::PostsController < ApplicationController
 	end
 
 	def get
-		if params[:post]
+		if params[:posts]
 			if params[:post_parent]
-				get_posts_from_parent(get_posts_from_parent_params)
+				render json: get_posts_from_parent(get_posts_from_parent_params)
 			else
-				get_posts(get_posts_params)
+				render json: get_posts(get_posts_params)
 			end
 		else
 			render json: 0
@@ -46,25 +46,25 @@ class MobileApp::PostsController < ApplicationController
 	end
 
 	def test
-		render json: UserSession.find(session[:progress]["_id"]["$oid"]).user
+		render json: session[:progress]
 	end
 
 	private
 
-	def get_posts(args)
-		if params[:post_for_top]
-			render json: "TODO"
-		elsif params[:post_for_bottom]
-			render json: "TODO"
+	def get_posts(get_posts_params)
+		if params[:posts_for_top]
+			return package_posts_data(Post.PostsHelper.get_posts_for_top(get_posts_params, get_posts_for_top_params))
+		elsif params[:posts_for_bottom]
+			return package_posts_data(Post.PostsHelper.get_posts_for_bottom(get_posts_params, get_posts_for_bottom_params))
 		else 
-			render json: 0
+			return package_posts_data(Post.PostsHelper.get_posts(get_posts_params))
 		end
 
 		# render json: Helpers::PostsHelper.Instance.get_posts
 	end
 
 	def get_posts_from_parent(args)
-		render json: "TODO"
+		return "TODO"
 	end
 
 	def new_post_params
@@ -76,18 +76,31 @@ class MobileApp::PostsController < ApplicationController
 	end
 
 	def get_posts_params
-		params.require(:post).permit(:num)
+		params.require(:posts).permit(:num)
 	end
 
 	def get_posts_for_top_params
-		params.require(:post_for_top).permit(:_id)
+		params.require(:posts_for_top).permit(:_id)
 	end
 
 	def get_posts_for_bottom_params
-		params.require(:post_for_bottom).permit(:_id)
+		params.require(:posts_for_bottom).permit(:_id)
 	end
 
 	def get_posts_from_parent_params
 		params.require(:post_parent).permit(:_id)
+	end
+
+	def package_posts_data(posts)
+		posts_data = []
+		posts.each_with_index{
+			|x, index|
+			if x
+				user_oid = x["user_id"]["$oid"]
+				posts_data[index] = {post:x, user:User.find(user_oid)}
+			end
+		}
+		# return posts.count
+		return {posts:posts_data}
 	end
 end

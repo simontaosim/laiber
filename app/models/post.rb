@@ -7,4 +7,19 @@ class Post
 	has_one :post_parent
 	belongs_to :user
 
+	@@instance_post_helper = nil
+
+	def self.PostsHelper
+		if @@instance_post_helper == nil
+			@@instance_post_helper = Helpers::PostsHelper.new
+		end
+		return @@instance_post_helper
+	end
+
+	def self.GetPosts(getPostsParams)
+
+	end
+
+	private
+	
 end

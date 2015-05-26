@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   get 'mobile_app/posts/all'
   post 'mobile_app/posts/new'
   get 'mobile_app/posts/get'
+  post 'mobile_app/posts/get'
   get 'mobile_app/posts/test'
 
   # Example of regular route:
