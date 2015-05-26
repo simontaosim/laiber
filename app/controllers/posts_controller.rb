@@ -22,7 +22,7 @@ class PostsController < ApplicationController
   end
 
   def all
-    render json: Post.all
+    render xml: Post.all
   end
   # POST /posts
   # POST /posts.json
