@@ -1,92 +1,49 @@
 <div class="idea_head">
-<div class="idea_head_1">
-<button class="am-btn am-btn-success" id="doc-prompt-toggle">发帖</button>
+   <div class="idea_head_1">
+    
+    <button class="am-btn am-btn-danger" data-am-modal="{target: '#my-popup'}">发帖</button>
 
-<div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
- <div class="window">
-  <div class="am-modal-dialog">
-    <div class="am-modal-hd">创建创意</div>
-    <div class="idea_title">
-     <div class="idea_title_words">创意标题:</div>
-      <input type="text" class="idea_title_input">
+<div class="am-popup"  id="my-popup">
+  <div class="am-popup-inner">
+    <div class="am-popup-hd">
+      <h4 class="am-popup-title">创建创意</h4>
+      <span data-am-modal-close
+            class="am-close">&times;</span>
     </div>
-     <div class="idea_content">
-      <div class="idea_content_words">
-          创意内容:
-      </div>
-      <div class="idea_content_input">
-     <textarea class="idea_content_input_text" rows="1" id="user-intro" placeholder="输入创意简介"></textarea>
-      </div>
+    
+    <div class="am-popup-bd" style="background-color: white;padding:0px;">
+    <div class="ideaTitle">
+     <div class="am-form-group">
+            <form class="am-form">
+  <fieldset>
+     <label for="doc-ta-1">创意标题</label>
+     <div><input type="text" placeholder=""></div>
+            </fieldset>
+</form>  
+     </div>  
     </div>
-    <div class="idea_property">
-   <div class="am-g am-margin-top">
-          <div class="idea_property_left" >产品类型：</div>
-          <div class="idea_property_right">
-            <div class="am-btn-group" data-am-button>
-              <label class="am-btn am-btn-default am-btn-xs">
-                <input type="checkbox"> 汽车交通
-              </label>
-              <label class="am-btn am-btn-default am-btn-xs">
-                <input type="checkbox"> 房产服务
-              </label>
-              <label class="am-btn am-btn-default am-btn-xs">
-                <input type="checkbox"> 医疗健康
-              </label>
-              <label class="am-btn am-btn-default am-btn-xs">
-                <input type="checkbox"> 本地生活
-              </label>
-              <label class="am-btn am-btn-default am-btn-xs">
-                <input type="checkbox"> 广告营销
-              </label>
-              <label class="am-btn am-btn-default am-btn-xs">
-                <input type="checkbox"> 企业服务
-              </label>
-              <label class="am-btn am-btn-default am-btn-xs">
-                <input type="checkbox"> 电子商务
-              </label>
-              <label class="am-btn am-btn-default am-btn-xs">
-                <input type="checkbox"> 工具软件
-              </label>
-              <label class="am-btn am-btn-default am-btn-xs">
-                <input type="checkbox"> 教育
-              </label>
-              <label class="am-btn am-btn-default am-btn-xs">
-                <input type="checkbox"> 金融
-              </label>
-              <label class="am-btn am-btn-default am-btn-xs">
-                <input type="checkbox"> 旅游
-              </label>
-              <label class="am-btn am-btn-default am-btn-xs">
-                <input type="checkbox"> 游戏
-              </label>
-              <label class="am-btn am-btn-default am-btn-xs">
-                <input type="checkbox"> 硬件
-              </label>
-              <label class="am-btn am-btn-default am-btn-xs">
-                <input type="checkbox"> 文化娱乐体育
-              </label>
-              <label class="am-btn am-btn-default am-btn-xs">
-                <input type="checkbox"> SNS社交网络
-              </label>
-              <label class="am-btn am-btn-default am-btn-xs">
-                <input type="checkbox"> 移动互联网
-              </label>
-              <label class="am-btn am-btn-default am-btn-xs">
-                <input type="checkbox"> 其他
-              </label>
-
-            </div>
-          </div>
-        </div>
+    
+    <div class="ideaBody">
+    
+      
+       <form class="am-form">
+  <fieldset>
+        <div class="am-form-group">
+            <div><label for="doc-ta-1">文本域</label></div>
+      <textarea class="" rows="5" id="doc-ta-1"></textarea>
     </div>
-    <div class="am-modal-footer">
-      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
-      <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+    <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+  </fieldset>
+</form>  
     </div>
-  </div>
+         
+      
+    </div>
   </div>
 </div>
- </div>
+ 
+   
+    </div>
 
 
  <div class="idea_head_2">
@@ -282,10 +239,39 @@
 <script>
 var hArr=[];//存放图片的高度，开始存第一行的四张图片的高度，之后存每一列的高度；
 var oBoxW = 0;
+
+
+
     
     
-//var xmlhttp=XMLHttpRequest();
-//xmlhttp.open('GET','date_url','true')
+
+
+
+
+var xmlhttp;
+if (window.XMLHttpRequest) {
+    xmlhttp = new XMLHttpRequest();
+} 
+else {
+    xmlhttp = new ActiveXObject(Microsoft.XMLHTTP);
+};
+xmlhttp.open('GET', 'http://localhost:3000/posts/all', 'true');
+xmlhttp.send();
+    if (xmlhttp.readyState === 4) {
+        //     var data_length = xmldate.getElementsByTagName('title').length
+        //     for(var i =0;i< data_length;i++){
+        //         var titledata=xmldate.getElementsByTagName('title')[i].innerHTML);
+        //     }
+        alert(xmlhttp.responseXML);
+    }
+
+
+
+
+
+
+
+
 //
 //
       
@@ -305,7 +291,7 @@ $(function() {
 
     
     
-    
+
 
 
 window.onload=function(){
@@ -316,7 +302,11 @@ window.onscroll=function(){
        var oParent=document.getElementById('idea_body');
       //将数据块渲染到页面
        var dateInt=[{"img":"/assets/1.jpg","title":"项目标题","intruduce":"项目简介","Classify":"#项目分类#"},{"img":"/assets/2.jpg","title":"项目标题1","intruduce":"项目简介1","Classify":"#项目分类1#"}] 
-       for(var i=0;i<dateInt.length;i++){
+     
+      
+       
+           
+            for(var i=0;i<dateInt.length;i++){
            var oBox=document.createElement('div');
            oBox.className='box';
            oParent.appendChild(oBox);   //将子元素塞进父元素里面
@@ -333,7 +323,7 @@ window.onscroll=function(){
            oPic.appendChild(oIdea); 
            var oHr=document.createElement('h3');
            oIdea.appendChild(oHr);
-           oHr.innerHTML=dateInt[i].title
+           oHr.innerHTML=dateInt[i].title;
            var hr1=document.createElement('hr');
            oPic.appendChild(hr1); 
            var oIntruduce=document.createElement('div');
@@ -354,7 +344,11 @@ window.onscroll=function(){
             oBox.style.position='absolute';
             oBox.style.top=minH+'px';
             oBox.style.left=oBoxW*index+'px';
-       }  
+       } //for
+    
+     
+       
+       
  }
 }
 }
