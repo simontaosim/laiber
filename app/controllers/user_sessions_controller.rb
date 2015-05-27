@@ -48,12 +48,12 @@ class UserSessionsController < ApplicationController
 	  			end
 	  		else
 	  			respond_to do |format|
-  					format.html{ redirect_to user_sessions_success_info_path+"?info=密码错误" }
+  					format.html{ redirect_to new_user_session_path, notice: "密码错误" }
   				end
 	  		end
   		else
   			respond_to do |format|
-  				format.html{ redirect_to user_sessions_success_info_path+"?info=failed" }
+          format.html{ redirect_to new_user_session_path, notice: "用户名不存在" }
   			end
   		end
 
@@ -61,6 +61,10 @@ class UserSessionsController < ApplicationController
 
   def destroy
     @user_session = UserSession.find(params[:id])
+    @user_sessions = UserSession.where(user: UserSession.find(session[:progress].fetch("_id").fetch("$oid")).user.id)
+    @user_sessions.each do |sess|
+      sess.destroy
+    end
     session[:progress] = nil
     if @user_session.destroy
 

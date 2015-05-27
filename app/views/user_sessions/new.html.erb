@@ -9,7 +9,10 @@
 
   end
 %>
+
 <div class="login_content">
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
 <%= form_for @user, url: user_sessions_auth_url, :html => {:class=> 'am-form am-form-horizontal'} do |f| %>
   <div class="am-form-group">
     <label for="doc-ipt-3" class="col-sm-2 am-form-label">账号</label>
@@ -43,6 +46,3 @@
   <div class="forget_pw"><a href="<%= new_user_path %>">没有账号</a><a class="fg_pw" href="">忘记密码</a></div>
 <% end %>
 </div>
-
-
-
