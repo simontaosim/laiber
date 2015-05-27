@@ -29,15 +29,20 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
 
-    respond_to do |format|
+
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
+        if params[:from_index]
+          redirect_to root_url, notice: '发帖成功'
+
+        else
+          redirect_to @post, notice: '发帖成功'
+        end
+
       else
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+         render :new
+         render json: @post.errors, status: :unprocessable_entity
       end
-    end
+
   end
 
   # PATCH/PUT /posts/1
