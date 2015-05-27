@@ -7,5 +7,6 @@ class Post
 	has_one :post_parent
 	belongs_to :user
 	has_and_belongs_to_many :tags
+	has_and_belongs_to_many :image_items
 
 end
