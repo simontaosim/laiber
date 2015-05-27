@@ -1,3 +1,16 @@
+<!-- 富文本编辑器样式和脚本 -->
+
+<%= stylesheet_link_tag    'font-awesome.css', media: 'all', 'data-turbolinks-track' => true %>
+<%= stylesheet_link_tag    'simditor.css', media: 'all', 'data-turbolinks-track' => true %>
+
+<%= javascript_include_tag 'module.js', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'hotkeys.js', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'uploader.js', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'simditor.js', 'data-turbolinks-track' => true %>
+
+<!-- 富文本编辑器样式和脚本 -->
+
+
 <div class="idea_head">
 <div class="idea_head_1">
 <button class="am-btn am-btn-success" id="doc-prompt-toggle">发帖</button>
@@ -15,7 +28,9 @@
           创意内容:
       </div>
       <div class="idea_content_input">
-     <textarea class="idea_content_input_text" rows="1" id="user-intro" placeholder="输入创意简介"></textarea>
+
+     <!-- <textarea class="idea_content_input_text" rows="1" id="user-intro" placeholder="输入创意简介"></textarea> -->
+     <%= kindeditor_tag :content, 'default content value', :simple_mode => true, class: "idea_content_input_text" %>
       </div>
     </div>
     <div class="idea_property">
@@ -130,7 +145,7 @@
  <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
  <hr>
        <div class="ideaClassify">#文化娱乐体育#</div>
-      
+
     </div>
 </div>
 <div class="box">
@@ -141,7 +156,7 @@
  <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
  <hr>
       <div class="ideaClassify">#文化娱乐体育#</div>
-     
+
     </div>
 </div>
 
@@ -153,7 +168,7 @@
  <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
  <hr>
       <div class="ideaClassify">#文化娱乐体育#</div>
-     
+
     </div>
 </div>
 <div class="box">
@@ -282,13 +297,13 @@
 <script>
 var hArr=[];//存放图片的高度，开始存第一行的四张图片的高度，之后存每一列的高度；
 var oBoxW = 0;
-    
-    
+
+
 //var xmlhttp=XMLHttpRequest();
 //xmlhttp.open('GET','date_url','true')
 //
 //
-      
+
 $(function() {
   $('#doc-prompt-toggle').on('click', function() {
     $('#my-prompt').modal({
@@ -303,9 +318,9 @@ $(function() {
   });
 });
 
-    
-    
-    
+
+
+
 
 
 window.onload=function(){
@@ -315,7 +330,7 @@ window.onscroll=function(){
    if(checkScrollSlide){
        var oParent=document.getElementById('idea_body');
       //将数据块渲染到页面
-       var dateInt=[{"img":"/assets/1.jpg","title":"项目标题","intruduce":"项目简介","Classify":"#项目分类#"},{"img":"/assets/2.jpg","title":"项目标题1","intruduce":"项目简介1","Classify":"#项目分类1#"}] 
+       var dateInt=[{"img":"/assets/1.jpg","title":"项目标题","intruduce":"项目简介","Classify":"#项目分类#"},{"img":"/assets/2.jpg","title":"项目标题1","intruduce":"项目简介1","Classify":"#项目分类1#"}]
        for(var i=0;i<dateInt.length;i++){
            var oBox=document.createElement('div');
            oBox.className='box';
@@ -330,31 +345,31 @@ window.onscroll=function(){
            oImgA.appendChild(oImg);
            var oIdea=document.createElement('div');
            oIdea.className='ideaTitle';
-           oPic.appendChild(oIdea); 
+           oPic.appendChild(oIdea);
            var oHr=document.createElement('h3');
            oIdea.appendChild(oHr);
            oHr.innerHTML=dateInt[i].title
            var hr1=document.createElement('hr');
-           oPic.appendChild(hr1); 
+           oPic.appendChild(hr1);
            var oIntruduce=document.createElement('div');
            oIntruduce.className='ideaIntruduce';
-            oPic.appendChild(oIntruduce); 
+            oPic.appendChild(oIntruduce);
            var oA=document.createElement('a');
            oIntruduce.appendChild(oA);
            oA.innerHTML=dateInt[i].intruduce;
            var hr1=document.createElement('hr');
-           oPic.appendChild(hr1); 
+           oPic.appendChild(hr1);
             var oClassify=document.createElement('div');
            oClassify.className='ideaClassify';
             oPic.appendChild(oClassify);
            oClassify.innerHTML=dateInt[i].Classify;
            var minH=Math.min.apply(null,hArr);//第二行，求最小值
-            var index=getMinhIndex(hArr,minH); 
+            var index=getMinhIndex(hArr,minH);
             hArr[index] += oBox.offsetHeight;//oBox.offsetHeight;
             oBox.style.position='absolute';
             oBox.style.top=minH+'px';
             oBox.style.left=oBoxW*index+'px';
-       }  
+       }
  }
 }
 }
