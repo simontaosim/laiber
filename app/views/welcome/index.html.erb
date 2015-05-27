@@ -1,7 +1,7 @@
 <div class="idea_head">
    <div class="idea_head_1">
 
-    <button class="am-btn am-btn-danger" data-am-modal="{target: '#my-popup'}">发帖</button>
+    <button class="am-btn am-btn-danger" id="post_btn">发帖</button>
 
 <div class="am-popup"  id="my-popup">
   <div class="am-popup-inner">
@@ -15,6 +15,7 @@
     
     <div class="ideaTitle1">
      <div class="am-form-group">
+<<<<<<< HEAD
     <form class="am-form">
   <fieldset>
      <label for="doc-ta-1">创意标题</label>
@@ -48,6 +49,32 @@
 </form>
     </div>
 
+=======
+      <%= form_for @post, :html => { :class => "am-form" }  do |f| %>
+      <%= hidden_field_tag :from_index,  "1" %>
+                <fieldset>
+                  <%= f.label "创意标题", for: 'doc-ta-1' %>
+                   <div>
+                     <%= f.text_field :title, placeholder: '' %>
+                  </div>
+                </fieldset>
+                <fieldset>
+                      <div class="am-form-group">
+                          <div><label for="doc-ta-1">文本域</label></div>
+                    <%= f.kindeditor :content,  :items =>
+                    [
+                      'source', 'justifyleft', 'justifycenter', 'justifyright', 'justifyfull',
+                      'formatblock', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage', 'hr', 'link', 'unlink'
+                    ]
+                     %>
+                  </div>
+                  <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+                </fieldset>
+      <% end %>
+     </div>
+    </div>
+
+>>>>>>> 52eb827b629663c2d273d435f684311c6df56ceb
 
     </div>
   </div>
@@ -248,6 +275,27 @@
 -->
 <!--<script src="assets/js/waterfall.js"></script>-->
 <script>
+$(function() {
+    var $modal = $('#my-popup');
+    <% if session[:progress] %>
+      var session_exist = true;
+    <% else %>
+      var session_exist = false;
+    <% end %>
+
+    $modal.siblings('#post_btn').on('click', function(e) {
+      var $target = $(e.target);
+
+        if (session_exist== true) {
+          $modal.modal();
+        }else{
+          $modal.modal('close');
+          alert("请先登录！");
+          window.location.assign('http://localhost:3000/user_sessions/new');
+        }
+    });
+  });
+
 var hArr=[];//存放图片的高度，开始存第一行的四张图片的高度，之后存每一列的高度；
 var oBoxW = 0;
 var xmlhttp;
