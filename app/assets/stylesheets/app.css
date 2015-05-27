@@ -1,4 +1,8 @@
 /* Write your styles */
+*{
+    padding: 0;
+    margin: 0;
+}
 .nav li{
 float: right;
 border: none;
@@ -15,11 +19,11 @@ width: 30%;
 }
 
 .login_content{
-width: 30%;
+    width: 30%;
     margin-top: 3%;
     margin-right: auto;
     margin-left: auto;
-      padding: 2%;
+    padding: 2%;
     border: 1px solid rgb(204,204,204);
     border-radius: 8px;
 }
@@ -117,17 +121,19 @@ padding-right: 100%;
 }
 #idea_body{
     position: relative;
-    -webkit-column-width:202px;
+/*    min-height: 1300px;*/
+    /* -webkit-column-width:202px;
     -webkit-column-width:202px;
     -moz-column-width:202px;
     -ms-column-width:202px;
-    -o-column-width:202px;
+    -o-column-width:202px; */
 /*
-    -webkit-column-count:5;
-    -webkit-column-count:5;
-    -moz-column-count:5;
-    -ms-column-count:5;
-    -o-column-count:5;
+    -webkit-column-count:4;
+    -webkit-column-count:4;
+    -moz-column-count:4;
+    -ms-column-count:4;
+    -o-column-count:4;
+
 */
 }
 .box{
@@ -138,11 +144,13 @@ padding-right: 100%;
     border: 1px solid #CCC;
     border-radius: 5px;
     box-shadow: 0 0 5px #ccc;
-    text-align: center;
+/*    text-align: center;*/
 }
+
 .pic img{
-    width: 165px;
-    height: auto;
+    width: 270px;
+
+
 }
 .idea_content{
     height: 170px;
@@ -155,19 +163,16 @@ padding-right: 100%;
 .idea_title_input{
  width: 70%;
     margin-right: 45px;
-
 }
 .idea_title_words{
 width: 20%;
 float: left;
 }
-
 .idea_content_words {
     width: 20%;
     float: left;
     margin-left: -108px
 }
-
 .idea_content_input{
  width: 100%;
 height: 150px;
@@ -188,4 +193,25 @@ width: 100%;
 .idea_property_right{
  width: 69%;
      float: left;
+}
+.logo_img{
+  height: 40px;
+}
+.ideaTitle{
+    margin-top: 10px;
+    text-align: center;
+   height:auto;
+    width: 270px;
+}
+.ideaClassify{
+    text-align: center;
+    height:auto;
+    width: 270px;
+}
+
+.ideaIntruduce{
+padding: 5px 12px 6px;
+height:auto;
+    width: 270px;
+    text-align: center;
 }

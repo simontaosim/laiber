@@ -39,14 +39,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
 <div class="nav">
-    <div style="text-align: center;float:left;"><a href="<%= root_url %>">LAIBER<br>LOGO</a></div>
+    <div style="text-align: center;float:left;margin-bottom:10px;margin-left:40px;"><a href="<%= root_url %>">
+      <%=image_tag 'laiber_logo.png', alt: "图片", class: "logo_img" %>
+    </a></div>
      <ul class="am-nav am-nav-tabs">
 
       <li class="am-active ">
-      <% 
+      <%
         if session[:progress]
-          user_session = UserSession.find(session[:progress].fetch("_id").fetch("$oid"))  
+          user_session = UserSession.find(session[:progress].fetch("_id").fetch("$oid"))
         end
         if user_session
        %>
@@ -81,6 +85,8 @@
 <%= yield %>
 
 <%= javascript_include_tag 'amazeui.min.js', 'data-turbolinks-track' => true %>
+
+<%= javascript_include_tag 'app.js', 'data-turbolinks-track' => true %>
 <!--<![endif]-->
 <footer>
   <hr>

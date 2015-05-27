@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'get_test/index'
+
+  devise_for :admins
+  mount RailsAdmin::Engine => '/poo_poo_admin', as: 'rails_admin'
   get 'personal_center/index'
 
   get 'user_mobile/is_name_exist'
@@ -6,6 +10,10 @@ Rails.application.routes.draw do
   post 'user_mobile/create'
   post 'mobile_new_session/create'
   get 'mobile_new_session/create'
+
+  get 'posts/all'
+
+  post 'posts/all'
 
   get 'user_mobile/invite_judge'
 
@@ -18,7 +26,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   get 'user_sessions/user_exist'
-  
+
   get 'user_sessions/success_info'
 
   post 'user_sessions/auth'

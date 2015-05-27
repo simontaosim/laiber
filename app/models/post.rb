@@ -6,6 +6,8 @@ class Post
 	has_many :post_child, dependent: :destroy
 	has_one :post_parent
 	belongs_to :user
+	has_and_belongs_to_many :tags
+	has_and_belongs_to_many :image_items
 
 	@@instance_post_helper = nil
 

@@ -1,2 +1,423 @@
-<h1>首页</h1>
+<!-- 富文本编辑器样式和脚本 -->
 
+<%= stylesheet_link_tag    'font-awesome.css', media: 'all', 'data-turbolinks-track' => true %>
+<%= stylesheet_link_tag    'simditor.css', media: 'all', 'data-turbolinks-track' => true %>
+
+<%= javascript_include_tag 'module.js', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'hotkeys.js', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'uploader.js', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'simditor.js', 'data-turbolinks-track' => true %>
+
+<!-- 富文本编辑器样式和脚本 -->
+
+
+<div class="idea_head">
+<div class="idea_head_1">
+<button class="am-btn am-btn-success" id="doc-prompt-toggle">发帖</button>
+
+<div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
+ <div class="window">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">创建创意</div>
+    <div class="idea_title">
+     <div class="idea_title_words">创意标题:</div>
+      <input type="text" class="idea_title_input">
+    </div>
+     <div class="idea_content">
+      <div class="idea_content_words">
+          创意内容:
+      </div>
+      <div class="idea_content_input">
+
+     <!-- <textarea class="idea_content_input_text" rows="1" id="user-intro" placeholder="输入创意简介"></textarea> -->
+     <%= kindeditor_tag :content, 'default content value', :simple_mode => true, class: "idea_content_input_text" %>
+      </div>
+    </div>
+    <div class="idea_property">
+   <div class="am-g am-margin-top">
+          <div class="idea_property_left" >产品类型：</div>
+          <div class="idea_property_right">
+            <div class="am-btn-group" data-am-button>
+              <label class="am-btn am-btn-default am-btn-xs">
+                <input type="checkbox"> 汽车交通
+              </label>
+              <label class="am-btn am-btn-default am-btn-xs">
+                <input type="checkbox"> 房产服务
+              </label>
+              <label class="am-btn am-btn-default am-btn-xs">
+                <input type="checkbox"> 医疗健康
+              </label>
+              <label class="am-btn am-btn-default am-btn-xs">
+                <input type="checkbox"> 本地生活
+              </label>
+              <label class="am-btn am-btn-default am-btn-xs">
+                <input type="checkbox"> 广告营销
+              </label>
+              <label class="am-btn am-btn-default am-btn-xs">
+                <input type="checkbox"> 企业服务
+              </label>
+              <label class="am-btn am-btn-default am-btn-xs">
+                <input type="checkbox"> 电子商务
+              </label>
+              <label class="am-btn am-btn-default am-btn-xs">
+                <input type="checkbox"> 工具软件
+              </label>
+              <label class="am-btn am-btn-default am-btn-xs">
+                <input type="checkbox"> 教育
+              </label>
+              <label class="am-btn am-btn-default am-btn-xs">
+                <input type="checkbox"> 金融
+              </label>
+              <label class="am-btn am-btn-default am-btn-xs">
+                <input type="checkbox"> 旅游
+              </label>
+              <label class="am-btn am-btn-default am-btn-xs">
+                <input type="checkbox"> 游戏
+              </label>
+              <label class="am-btn am-btn-default am-btn-xs">
+                <input type="checkbox"> 硬件
+              </label>
+              <label class="am-btn am-btn-default am-btn-xs">
+                <input type="checkbox"> 文化娱乐体育
+              </label>
+              <label class="am-btn am-btn-default am-btn-xs">
+                <input type="checkbox"> SNS社交网络
+              </label>
+              <label class="am-btn am-btn-default am-btn-xs">
+                <input type="checkbox"> 移动互联网
+              </label>
+              <label class="am-btn am-btn-default am-btn-xs">
+                <input type="checkbox"> 其他
+              </label>
+
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="am-modal-footer">
+      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+      <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+    </div>
+  </div>
+  </div>
+</div>
+ </div>
+
+
+ <div class="idea_head_2">
+       <form class="am-topbar-form am-topbar-left am-form-inline am-topbar-right" role="search">
+          <div class="am-form-group">
+            <input type="text" class="am-form-field am-input-sm" placeholder="搜索创意">
+          </div>
+          <button type="submit" class="am-btn am-btn-default am-btn-sm">搜索</button>
+        </form>
+  </div>
+  </div>
+  <hr>
+
+<div id="idea_body">
+<div class="box">
+    <div class="pic">
+      <a href="*"><%= image_tag '1.jpg', alt: '图片' %></a>
+        <!-- <img src="images/1.jpg" alt="图片" /> -->
+  <div class="ideaTitle"><h3>书巢</h3></div>
+  <hr>
+ <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
+ <hr>
+  <div class="ideaClassify">#文化娱乐体育#</div>
+    </div>
+</div>
+<div class="box">
+    <div class="pic">
+      <a href="*"><%= image_tag '2.jpg', alt: '图片' %></a>
+      <div class="ideaTitle"><h3>书巢</h3></div>
+        <hr>
+ <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
+ <hr>
+      <div class="ideaClassify">#文化娱乐体育#</div>
+    </div>
+</div>
+<div class="box">
+    <div class="pic">
+      <a href="*"><%= image_tag '3.jpg', alt: '图片' %></a>
+       <div class="ideaTitle"><h3>书巢</h3></div>
+       <hr>
+ <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
+ <hr>
+       <div class="ideaClassify">#文化娱乐体育#</div>
+
+    </div>
+</div>
+<div class="box">
+    <div class="pic">
+      <a href="*"><%= image_tag '4.jpg', alt: '图片' %></a>
+      <div class="ideaTitle"><h3>书巢</h3></div>
+    <hr>
+ <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
+ <hr>
+      <div class="ideaClassify">#文化娱乐体育#</div>
+
+    </div>
+</div>
+
+<div class="box">
+    <div class="pic">
+     <a href="*"><%= image_tag '5.jpg', alt: '图片' %></a>
+      <div class="ideaTitle"><h3>书巢</h3></div>
+     <hr>
+ <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
+ <hr>
+      <div class="ideaClassify">#文化娱乐体育#</div>
+
+    </div>
+</div>
+<div class="box">
+    <div class="pic">
+     <a href="*"><%= image_tag '6.jpg', alt: '图片' %></a>
+      <div class="ideaTitle"><h3>书巢</h3></div>
+    <hr>
+ <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
+ <hr>
+      <div class="ideaClassify">#文化娱乐体育#</div>
+</div>
+</div>
+
+
+<div class="box">
+    <div class="pic">
+      <a href="*"><%= image_tag '7.jpg', alt: '图片' %></a>
+      <div class="ideaTitle"><h3>书巢</h3></div>
+      <hr>
+ <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
+ <hr>
+      <div class="ideaClassify">#文化娱乐体育#</div>
+</div>
+</div>
+
+<div class="box">
+    <div class="pic">
+     <a href="*"><%= image_tag '8.jpg', alt: '图片' %></a>
+      <div class="ideaTitle"><h3>书巢</h3></div>
+  <hr>
+ <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
+ <hr>
+      <div class="ideaClassify">#文化娱乐体育#</div>
+</div>
+</div>
+
+<div class="box">
+    <div class="pic">
+      <a href="*"><%= image_tag '9.jpg', alt: '图片' %></a>
+      <div class="ideaTitle"><h3>书巢</h3></div>
+   <hr>
+ <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
+ <hr>
+      <div class="ideaClassify">#文化娱乐体育#</div>
+    </div>
+</div>
+<div class="box">
+    <div class="pic">
+     <a href="*"><%= image_tag '10.jpg', alt: '图片' %></a>
+      <div class="ideaTitle"><h3>书巢</h3></div>
+  <hr>
+ <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
+ <hr>
+      <div class="ideaClassify">#文化娱乐体育#</div>
+    </div>
+</div>
+<div class="box">
+    <div class="pic">
+     <a href="*"><%= image_tag '11.jpg', alt: '图片' %></a>
+      <div class="ideaTitle"><h3>书巢</h3></div>
+        <hr>
+ <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
+ <hr>
+      <div class="ideaClassify">#文化娱乐体育#</div>
+    </div>
+</div>
+   <div class="box">
+    <div class="pic">
+     <a href="*"><%= image_tag '12.jpg', alt: '图片' %></a>
+        <div class="ideaTitle"><h3>书巢</h3></div>
+         <hr>
+ <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
+ <hr>
+        <div class="ideaClassify">#文化娱乐体育#</div>
+    </div>
+</div>
+<div class="box">
+    <div class="pic">
+      <a href="*"><%= image_tag '13.jpg', alt: '图片' %></a>
+        <div class="ideaTitle"><h3>书巢</h3></div>
+      <hr>
+ <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
+ <hr>
+        <div class="ideaClassify">#文化娱乐体育#</div>
+    </div>
+</div>
+<div class="box">
+    <div class="pic">
+      <a href="*"><%= image_tag '14.jpg', alt: '图片' %></a>
+        <div class="ideaTitle"><h3>书巢</h3></div>
+       <hr>
+ <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
+ <hr>
+        <div class="ideaClassify">#文化娱乐体育#</div>
+    </div>
+</div>
+<div class="box">
+    <div class="pic">
+     <a href="*"><%= image_tag '15.jpg', alt: '图片' %></a>
+        <div class="ideaTitle"><h3>书巢</h3></div>
+      <hr>
+ <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
+ <hr>
+        <div class="ideaClassify">#文化娱乐体育#</div>
+    </div>
+</div>
+</div>
+
+
+
+
+<!--
+<footer>
+  <hr>
+  <p class="am-padding-left">© 2015 , Ulaiber in Shenzhen of China</p>
+</footer>
+-->
+
+<!--[if (gte IE 9)|!(IE)]><    !-->
+<!--
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/amazeui.min.js"></script>
+<script src="assets/js/app.js"></script>
+-->
+<!--<script src="assets/js/waterfall.js"></script>-->
+<script>
+var hArr=[];//存放图片的高度，开始存第一行的四张图片的高度，之后存每一列的高度；
+var oBoxW = 0;
+
+
+//var xmlhttp=XMLHttpRequest();
+//xmlhttp.open('GET','date_url','true')
+//
+//
+
+$(function() {
+  $('#doc-prompt-toggle').on('click', function() {
+    $('#my-prompt').modal({
+      relatedTarget: this,
+      onConfirm: function(e) {
+        alert('你已经成功提交创意：' + e.data || '')
+      },
+      onCancel: function(e) {
+        alert('放弃!');
+      }
+    });
+  });
+});
+
+
+
+
+
+
+window.onload=function(){
+waterfall('idea_body','box');  //封装一个waterfall函数；
+//var dateInt={"date":[{"src":'1.jpg'},{"src":'2.jpg'},{"src":'3.jpg'},{"src":'4.jpg'},]} //模拟后台数
+window.onscroll=function(){
+   if(checkScrollSlide){
+       var oParent=document.getElementById('idea_body');
+      //将数据块渲染到页面
+       var dateInt=[{"img":"/assets/1.jpg","title":"项目标题","intruduce":"项目简介","Classify":"#项目分类#"},{"img":"/assets/2.jpg","title":"项目标题1","intruduce":"项目简介1","Classify":"#项目分类1#"}]
+       for(var i=0;i<dateInt.length;i++){
+           var oBox=document.createElement('div');
+           oBox.className='box';
+           oParent.appendChild(oBox);   //将子元素塞进父元素里面
+           var oPic=document.createElement('div');
+           oPic.className='pic';
+           oBox.appendChild(oPic);
+           var oImgA=document.createElement('a')
+           oPic.appendChild(oImgA)
+           var oImg=document.createElement('img')
+           oImg.src=dateInt[i].img;
+           oImgA.appendChild(oImg);
+           var oIdea=document.createElement('div');
+           oIdea.className='ideaTitle';
+           oPic.appendChild(oIdea);
+           var oHr=document.createElement('h3');
+           oIdea.appendChild(oHr);
+           oHr.innerHTML=dateInt[i].title
+           var hr1=document.createElement('hr');
+           oPic.appendChild(hr1);
+           var oIntruduce=document.createElement('div');
+           oIntruduce.className='ideaIntruduce';
+            oPic.appendChild(oIntruduce);
+           var oA=document.createElement('a');
+           oIntruduce.appendChild(oA);
+           oA.innerHTML=dateInt[i].intruduce;
+           var hr1=document.createElement('hr');
+           oPic.appendChild(hr1);
+            var oClassify=document.createElement('div');
+           oClassify.className='ideaClassify';
+            oPic.appendChild(oClassify);
+           oClassify.innerHTML=dateInt[i].Classify;
+           var minH=Math.min.apply(null,hArr);//第二行，求最小值
+            var index=getMinhIndex(hArr,minH);
+            hArr[index] += oBox.offsetHeight;//oBox.offsetHeight;
+            oBox.style.position='absolute';
+            oBox.style.top=minH+'px';
+            oBox.style.left=oBoxW*index+'px';
+       }
+ }
+}
+}
+function waterfall(parent,box){
+    var Oparent=document.getElementById(parent);//取出父元素；
+    var oBoxs=getByClass(Oparent,box);
+    //计算每行可以放多少列图片（页面宽度/box盒子宽度）
+    oBoxW=oBoxs[0].offsetWidth;
+    var
+    cols=Math.floor(document.documentElement.clientWidth/oBoxW);
+Oparent.style.cssText='width:'+oBoxW*cols+'px;margin:0 auto;'//设置idea_body的宽度
+    for(var i=0;i<oBoxs.length;i++){
+        if(i<cols){
+            hArr.push(oBoxs[i].offsetHeight);//将第一行盒子高度放入hArr数组中
+        }
+        else{
+            var minH=Math.min.apply(null,hArr);//第二行，求最小值
+            var index=getMinhIndex(hArr,minH);
+            oBoxs[i].style.position='absolute';
+            oBoxs[i].style.top=minH+'px';
+            oBoxs[i].style.left=oBoxW*index+'px';
+            hArr[index]+=oBoxs[i].offsetHeight;
+        }
+    }
+}
+    function getByClass(parent,clsName){
+        var boxArr=new Array();//用来获取所有class为parent的box的元素
+        oElements=parent.getElementsByTagName('*')//获取父元素下所有的子元素
+        for(var i=0;i<oElements.length;i++){
+            if(oElements[i].className==clsName){
+                boxArr.push(oElements[i]);
+            }//判断传过来的
+        }
+        return boxArr;
+    }//封装一个函数，用于取出idea_body下的所有box函数
+    function  getMinhIndex(arr,val){
+    for(var i in arr){
+        if(arr[i]==val){
+        return i;
+        }
+    }
+    }
+      function checkScrollSlide(){
+    var oParent=document.getElementById('idea_body');
+    var oBoxs=getByClass(oParent,'box');
+    var lastBoxH=oBoxs[oBoxs.length-1].offsetTop+Math.floor(oBoxs[oBoxs.length-1].offsetHeight/2);
+    var scrollTop=document.body.scrollTop || document.documentElement.scrollTop;
+        var height=document.body.clientHeight || document.documentElement.clientHeight;
+        return(lastBoxH<scrollTop+height)?true:false;
+    }
+</script>

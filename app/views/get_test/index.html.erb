@@ -1,0 +1,19 @@
+<!-- 富文本编辑器样式和脚本 -->
+
+<%= stylesheet_link_tag    'font-awesome.css', media: 'all', 'data-turbolinks-track' => true %>
+<%= stylesheet_link_tag    'simditor.css', media: 'all', 'data-turbolinks-track' => true %>
+
+<%= javascript_include_tag 'module.js', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'hotkeys.js', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'uploader.js', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'simditor.js', 'data-turbolinks-track' => true %>
+
+<!-- 富文本编辑器样式和脚本 -->
+<textarea name="name" rows="8" cols="40" id="mytest"></textarea>
+
+
+<script type="text/javascript">
+var editor = new Simditor({
+  textarea: $('#mytest')
+});
+</script>

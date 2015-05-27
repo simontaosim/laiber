@@ -2,7 +2,7 @@ class MobileApp::PostsController < ApplicationController
 	use Rack::Cors do
 		allow do
 			origins '*', 'null'
-			resource '*', :headers => :any, :methods => [:new, :get]
+			resource '*', :headers => :any, :methods => [:get, :post]
 		end
 	end
 	skip_before_filter :verify_authenticity_token, only: [:new, :get]
@@ -13,10 +13,10 @@ class MobileApp::PostsController < ApplicationController
 
 	def new
 		result = false
-		if params[:post] && params[:user]
+		if params[:post]
 			post = Post.new(new_post_params)
-			current_user = User.find(Utils::DbUtil.GetObjectIdFromJson(user_params))
-			# current_user = UserSession.find(session[:progress]["_id"]["$oid"]).user
+			# current_user = User.find(Utils::DbUtil.GetObjectIdFromJson(user_params))
+			current_user = UserSession.find(session[:progress]["_id"]["$oid"]).user
 			if current_user
 				post.user = current_user
 				if post.save

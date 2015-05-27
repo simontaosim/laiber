@@ -25,7 +25,7 @@ class MobileNewSessionController < ApplicationController
           @user_session.name = @user.name
           @user_session.save
           session[:progress] = @user_session
-	  			render json: @user
+	  			render json: @user_session
 	  		else
 	  			render json: 0
 	  		end
