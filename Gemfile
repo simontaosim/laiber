@@ -27,6 +27,10 @@ gem 'rails_admin'
 
 gem 'devise'
 
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+
+gem 'mongoid-grid_fs', github: 'ahoward/mongoid-grid_fs'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

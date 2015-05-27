@@ -199,9 +199,7 @@ width: 100%;
 }
 .ideaTitle{
     margin-top: 10px;
-    text-align: center;
    height:auto;
-    width: 270px;
 }
 .ideaClassify{
     text-align: center;
@@ -214,4 +212,27 @@ padding: 5px 12px 6px;
 height:auto;
     width: 270px;
     text-align: center;
+}
+
+
+.am-popup-bd {
+    height: 575px;
+}
+
+.am-popup {
+    border-radius: 5px;
+}
+#am-popup {
+    border-radius: 5px;
+}
+.am-popup-hd {
+    border-radius: 5px;
+}
+.idea_head_1{
+line-height: 50px;}
+.label {
+font-weight: 100;}
+
+#my-popup {
+/*    background-color: rgb(204,204,204);*/
 }
