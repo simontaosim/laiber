@@ -65,17 +65,27 @@
 <% @posts.each do |post| %>
 <div class="box">
     <div class="pic">
+
       <% if post.image_items[0] %>
         <% if post.image_items[0].url and post.image_items[0].url.to_s != '' %>
         <a class='' href="#"><%= image_tag post.image_items[0].url, alt: '图片' %></a>
         <% elsif post.image_items[0].url_from_content and post.image_items[0].url_from_content.to_s != '' %>
         <a class="" data-am-modal="{target: '#my-alert'}" href="#"><img src='<%= post.image_items[0].url_from_content.to_s %>', alt: '图片' %></a>
+
+      <% if post[2] %>
+      <% if post[2][0] %>
+        <% if ImageItem.find(post[2][0]).url and ImageItem.find(post[2][0]).url.to_s != '' %>
+        <a class='' href="#"><%= image_tag ImageItem.find(post[2][0]).url, alt: '图片' %></a>
+        <% elsif ImageItem.find(post[2][0]).url_from_content and ImageItem.find(post[2][0]).url_from_content.to_s != '' %>
+        <a class='' href="#"><img src='<%= ImageItem.find(post[2][0]).url_from_content.to_s %>', alt: '图片' %></a>
+>>>>>>> 5e4fcecb8f6018366d68ded9fa1c16d7da705b9c
         <% else %>
           <a class="" data-am-modal="{target: '#my-alert'}" href="#"><%= image_tag '1.jpg', alt: '图片' %></a>
         <% end %>
       <% else%>
         <a class="" data-am-modal="{target: '#my-alert'}" href="#"><%= image_tag '1.jpg', alt: '图片' %></a>
       <% end %>
+
        
 
  <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
@@ -107,8 +117,13 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
   </div>
 </div>
        
+
+      <% else %>
+        <a href="#"><%= image_tag '1.jpg', alt: '图片' %></a>
+      <% end %>
+
         <!-- <img src="images/1.jpg" alt="图片" /> -->
-  <div class="ideaTitle1"><h3><%= post.title%></h3></div>
+  <div class="ideaTitle1"><h3><%= post[1] %></h3></div>
   <hr>
  <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
  <hr>
