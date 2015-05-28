@@ -70,18 +70,71 @@
       <% if post[2][0] %>
       <% image_item = ImageItem.find(post[2][0]) %>
         <% if image_item.url and image_item.url.to_s != '' %>
-        <a class='' href="#"><%= image_tag image_item.url, alt: '图片' %></a>
+        <a class="" data-am-modal="{target: '#my-alert'}" href="#"><%= image_tag image_item.url, alt: '图片' %></a>
         <% elsif image_item.url_from_content and image_item.url_from_content.to_s != '' %>
-        <a class='' href="#"><img src='<%= image_item.url_from_content.to_s %>', alt: '图片' %></a>
+       <a class="" data-am-modal="{target: '#my-alert'}" href="#"><img src='<%= image_item.url_from_content.to_s %>', alt: '图片' %></a>
+
         <% else %>
-          <a clsss='' href="#"><%= image_tag '1.jpg', alt: '图片' %></a>
+        <a class="" data-am-modal="{target: '#my-alert'}" href="#"><%= image_tag 'default.jpg', alt: '图片' %></a>
         <% end %>
       <% else%>
-        <a href="#"><%= image_tag '1.jpg', alt: '图片' %></a>
+        <a class="" data-am-modal="{target: '#my-alert'}" href="#"><%= image_tag 'default.jpg', alt: '图片' %></a>
       <% end %>
+
+       
+
+ <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+  <div class="am-modal-dialog" style="height:500px;overflow:scroll;">
+    <div class="am-modal-hd">创意详情</div>
+    <hr>
+    <div class="ideaContent">
+    <article data-am-widget="paragraph" class="am-paragraph am-paragraph-default"
+data-am-paragraph="{ tableScrollable: true, pureview: true }">
+  <img src=http://s.cn.bing.net/az/hprichbg/rb/NightViewWuTown_ZH-CN9812523916_1920x1080.jpg width="500px">
+   <p class=paragraph-default-p>1.南极洲又称
+    <a href=http://zh.wikipedia.org/w/index.php?title=%E7%AC%AC%E4%B8%83%E5%A4%A7%E9%99%86&redirect=no>第七大陆</a>，是地球上最后一个被发现、唯一没有土著人居住的大陆。</p>
+  <p>南极大陆为通常所说的南大洋（太平洋、印度洋和大西洋的南部水域）所包围，它与南美洲最近的距离为965公里，距新西兰2000公里、距澳大利亚2500公里、距南非3800公里、距中国北京的距离约有12000公里。南极大陆的总面积为1390万平方公里，相当于中国和印巴次大陆面积的总和，居世界各洲第五位。</p>
+ 
+  <p>2.整个南极大陆被一个巨大的冰盖所覆盖，平均海拔为2350米。南极洲是由冈瓦纳大陆分离解体而成，是世界上最高的大陆。南极横断山脉将南极大陆分成东西两部分。这两部分在地理和地质上差别很大。</p>
+
+  <p>3.东南极洲是一块很古老的大陆，据科学家推算,已有几亿年的历史。它的中心位于难接近点，从任何海边到难接近点的距离都很远。东南极洲平均海拔高度2500米，最大高度4800
+    米。在东南极洲有南极大陆最大的活火山，即位于罗斯岛上的埃里伯斯火山，海拔高度3795米，有四个喷火口</p>
+</article>
+ <hr>
+  <div class="idea_author">
+       <div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait1.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div>
+       <div class="idea_author_name" style="
+    font-weight: 600;">陈芸莹</div>
+    <div class="ideaClassfy" style="
+    font-weight: 600;">#社会科学#</div>
+   </div>
+    <hr>
+  <div class="ideaDiscuss">
+        <div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div>
+        <div class="i_input">
+                <textarea placeholder="说点什么吧..." class="W_input" action-type="check" cols="" rows="" name="" node-type="textEl" range="0&amp;0" style="overflow: hidden; line-height: 40px; outline: none; height: 40px;width:80%;border-radius: 2px; border: 1px solid rgb(204,204,204);"></textarea>
+            </div>
+            <div class="discussButton"><button class="am-btn am-btn-primary am-btn-xs">发送</button></div>
+            <div class="alsoCollect">收藏了该创意的还有:<a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a>
+<a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a>
+           <a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a>            
+            </div>
+            
+  </div>
+  
+   </div>
+
+    <div class="am-modal-footer">
+      <span class="am-modal-btn">确定</span>
+    </div>
+  </div>
+</div>
+       
+
       <% else %>
-        <a href="#"><%= image_tag '1.jpg', alt: '图片' %></a>
+        <a data-am-modal="{target: '#my-alert'}"  href="#"><%= image_tag 'default.jpg', alt: '图片' %></a>
       <% end %>
+
         <!-- <img src="images/1.jpg" alt="图片" /> -->
   <div class="ideaTitle1"><h3><%= post[1] %></h3></div>
   <hr>
@@ -170,7 +223,7 @@ window.onscroll=function(){
    if(checkScrollSlide){
        var oParent=document.getElementById('idea_body');
       //将数据块渲染到页面
-       var dateInt=[{"img":"/assets/1.jpg","title":"项目标题","intruduce":"项目简介","Classify":"#项目分类#"},{"img":"/assets/2.jpg","title":"项目标题1","intruduce":"项目简介1","Classify":"#项目分类1#"}]
+       var dateInt=[{"img":"/assets/default.jpg","title":"项目标题","intruduce":"项目简介","Classify":"#项目分类#"},{"img":"/assets/default.jpg","title":"项目标题1","intruduce":"项目简介1","Classify":"#项目分类1#"}]
             for(var i=0;i<dateInt.length;i++){
            var oBox=document.createElement('div');
            oBox.className='box';
