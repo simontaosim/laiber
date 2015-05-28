@@ -66,10 +66,10 @@
 <div class="box">
     <div class="pic">
       <% if post.image_items[0] %>
-        <% if post.image_items[0].url != '' %>
-        <a href="*"><%= image_tag post.image_items[0].url, alt: '图片' %></a>
-        <% elsif post.image_items[0].url_from_content != ''  %>
-        <a href="*"><img src='<%= post.image_items[0].url_from_content.to_s %>', alt: '图片' %></a>
+        <% if post.image_items[0].url and post.image_items[0].url.to_s != '' %>
+        <a href="#"><%= image_tag post.image_items[0].url, alt: '图片' %></a>
+        <% elsif post.image_items[0].url_from_content and post.image_items[0].url_from_content.to_s != '' %>
+        <a href="#"><img src='<%= post.image_items[0].url_from_content.to_s %>', alt: '图片' %></a>
         <% else %>
           <a href="*"><%= image_tag '1.jpg', alt: '图片' %></a>
         <% end %>
