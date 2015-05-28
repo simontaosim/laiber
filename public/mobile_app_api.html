@@ -67,7 +67,7 @@
 			<div class="panel-heading">登陆相关</div>
 			<div class="panel-body">
 				<div class="panel panel-default">
-					<div class="panel-heading">登陆：sign/sign_in</div>
+					<div class="panel-heading">登陆：mobile_app/sign/signIn</div>
 					<div class="panel-body">
 						<p>参数：user[name] user[email] user[mobile] user[password]</p>
 						<p>成功：返回{token:*}，即SignToken的id</p>
@@ -77,7 +77,7 @@
 				</div>
 
 				<div class="panel panel-default">
-					<div class="panel-heading">自动登陆（通过token）：sign/auto_sign_in</div>
+					<div class="panel-heading">自动登陆（通过token）：mobile_app/sign/autoSignIn</div>
 					<div class="panel-body">
 						<p>参数：token</p>
 						<p>成功：返回</p>
@@ -87,7 +87,7 @@
 				</div>
 
 				<div class="panel panel-default">
-					<div class="panel-heading">登出：sign/sign_out</div>
+					<div class="panel-heading">登出：mobile_app/sign/signOut</div>
 					<div class="panel-body">
 						<p>参数：无</p>
 						<p>可选参数：token</p>
@@ -101,31 +101,12 @@
 			<div class="panel-heading">帖子相关</div>
 			<div class="panel-body">
 				<div class="panel panel-default">
-					<div class="panel-heading">发帖</div>
+					<div class="panel-heading">发帖：mobile_app/posts/new</div>
 					<div class="panel-body">
 						<p>参数：user[name] user[email] user[mobile] user[password]</p>
 						<p>成功：返回{token:*}，即SignToken的id</p>
 						<p>失败：密码错误返回0，用户名不存在返回1</p>
 						<p>TODO：删除冗余登陆token</p>
-					</div>
-				</div>
-
-				<div class="panel panel-default">
-					<div class="panel-heading">自动登陆（通过token）</div>
-					<div class="panel-body">
-						<p>参数：token</p>
-						<p>成功：返回</p>
-						<p>失败：返回</p>
-						<p>TODO：删除冗余登陆token</p>
-					</div>
-				</div>
-
-				<div class="panel panel-default">
-					<div class="panel-heading">登出</div>
-					<div class="panel-body">
-						<p>参数：无</p>
-						<p>可选参数：token</p>
-						<p>返回：0</p>
 					</div>
 				</div>
 			</div>

@@ -5,14 +5,14 @@ class MobileApp::SignController
 			resource '*', :headers => :any, :methods => [:get, :post]
 		end
 	end
-	skip_before_filter :verify_authenticity_token, only: [:sign_in, :sign_out, :auto_sign_in]
+	skip_before_filter :verify_authenticity_token, only: [:signIn, :signOut, :autoSignIn]
 
 	# 登陆
 	# 参数：user[name] user[email] user[mobile] user[password]
 	# 成功：返回{token:*}，即SignToken的id
 	# 失败：密码错误返回0，用户名不存在返回1
 	# TODO：删除冗余登陆token
-	def sign_in
+	def signIn
 		user = User.where(:name => paramsUser[:name]).first
 		if user.nil?
 			user = User.where(:email => paramsUser[:name]).first
@@ -42,7 +42,7 @@ class MobileApp::SignController
 	# 成功：返回0
 	# 失败：返回1
 	# TODO：删除冗余登陆token
-	def auto_sign_in
+	def autoSignIn
 		signToken = SignToken.find(params[:token])
 		if signToken
 			session[:signToken] = signToken.getId
@@ -54,7 +54,7 @@ class MobileApp::SignController
 
 	# 登出
 	# 返回：0
-	def sign_out
+	def signOut
 		if session[:signToken] != nil
 			signToken = SignToken.find(session[:signToken])
 			signToken.destroy
