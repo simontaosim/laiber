@@ -17,17 +17,25 @@ class MobileApp::PostsController < ApplicationController
 		render json: result
 	end
 
+	# 发帖
+	# 参数：post[title] post[content] post[post_parent]
+	# 可选参数：token
+	# 成功：1
+	# 失败：0
 	def new
 		result = false
 		if params[:post]
 			post = Post.new(new_post_params)
-			if params[:user]
-				current_user = User.find(Utils::DbUtil.GetObjectIdFromJson(user_params))
+
+			if params[:token]
+				signTokenId = params[:signToken]
 			else
-				current_user = UserSession.find(session[:progress]["_id"]["$oid"]).user
+				signTokenId = session[:signToken]
 			end
-			if current_user
-				post.user = current_user
+			currentUser = SignToken.find(signTokenId).user
+
+			if currentUser
+				post.user = currentUser
 				if post.save
 					result = true
 				end
@@ -40,27 +48,28 @@ class MobileApp::PostsController < ApplicationController
 		end
 	end
 
+	
 	def get
 		if params[:posts]
-			if params[:post_parent]
-				render json: get_posts_from_parent(get_posts_from_parent_params)
-			else
-				render json: get_posts(get_posts_params)
-			end
+			render json: get_posts
 		else
-			render json: 0
+			render json: -1
 		end
+	end
 
-
+	def testName
+		render json: "testName"
 	end
 
 	def test
-		render json: session[:progress]
+		res = []
+		Post.GetPosts(5, 0).each{|x| res.push(x.getPostAndUser)}
+		render json: res
 	end
 
 	private
 
-	def get_posts(get_posts_params)
+	def get_posts
 		if params[:posts_for_top]
 			return package_posts_data(Post.PostsHelper.get_posts_for_top(get_posts_params, get_posts_for_top_params))
 		elsif params[:posts_for_bottom]
@@ -84,7 +93,7 @@ class MobileApp::PostsController < ApplicationController
 		params.require(:user).permit(:_id)
 	end
 
-	def get_posts_params
+	def paramsGetPosts
 		params.require(:posts).permit(:num)
 	end
 

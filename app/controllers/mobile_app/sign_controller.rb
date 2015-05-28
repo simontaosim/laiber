@@ -9,36 +9,30 @@ class MobileApp::SignController
 
 	# 登陆
 	# 参数：user[name] user[email] user[mobile] user[password]
-	# 成功：返回token，即SignToken的id
+	# 成功：返回{token:*}，即SignToken的id
 	# 失败：密码错误返回0，用户名不存在返回1
+	# TODO：删除冗余登陆token
 	def sign_in
-		user = User.where(:name => user_params[:name]).first
+		user = User.where(:name => paramsUser[:name]).first
 		if user.nil?
-			user = User.where(:email => user_params[:name]).first
+			user = User.where(:email => paramsUser[:name]).first
 		end
 		if user.nil?
-			user = User.where(:mobile => user_params[:name]).first
+			user = User.where(:mobile => paramsUser[:name]).first
 		end
 		if user
-			if user.screct_pass == user_params[:password]
-				tokens = SignToken.where(:user => user)
-				tokens.each_with_index{
-					|x, index|
-					
-				}
-
-				user_session = UserSession.new
-				user_session.user = user
-				user_session.name = user.name
-				user_session.save
-				session[:mobile_app] = user_session
-				render json: SignToken
+			if user.screct_pass == paramsUser[:password]
+				signToken = SignToken.new
+				signToken.user = user
+				signToken.save
+				session[:signToken] = signToken.getId
+				render json: signToken.getToken
 			else
 				# 密码错误
 				render json: 0
 			end
 		else
-			# 用户名不存在
+			# 用户不存在
 			render json: 1
 		end  
 	end
@@ -47,18 +41,30 @@ class MobileApp::SignController
 	# 参数：token
 	# 成功：返回0
 	# 失败：返回1
+	# TODO：删除冗余登陆token
 	def auto_sign_in
-		user_session = UserSession.find(params[:token])
-		if user_session
-			session[:mobile_app] = user_session
+		signToken = SignToken.find(params[:token])
+		if signToken
+			session[:signToken] = signToken.getId
 			render json: 0
 		else
 			render json: 1
 		end
 	end
 
-	
+	# 登出
+	# 返回：0
 	def sign_out
+		if session[:signToken] != nil
+			signToken = SignToken.find(session[:signToken])
+			signToken.destroy
+			session[:signToken] = nil
+		end
+		render json: 0
+	end
 
+	private
+	def paramsUser
+		return params.require(:user).permit(:_id)
 	end
 end

@@ -1,4 +1,4 @@
-class Post
+class Post < ModelBase
 	include Mongoid::Document
 	include Mongoid::Timestamps
 	field :title, type: String
@@ -18,33 +18,33 @@ class Post
 		return @@instance_post_helper
 	end
 
-	def self.GetPosts(getPostsParams)
-
+	def self.GetPosts(limit, offset)
+		return Post.desc(:created_at).limit(limit).offset(offset)
 	end
 
-	def getPostOnly
-		return {"id": JSON.parse(self.id.to_json)["$oid"], "title": self.title, "content": self.content}
+	def getPost
+		return {"id": getId, "title": self.title, "content": self.content}
 	end
 
-	def getUserOnly
-		return {"id": JSON.parse(self.user.id.to_json)["$oid"], "name": self.user.name}
+	def getUser
+		return {"id": getId, "name": self.user.name}
 	end
 	
-	def getTagsOnly
+	def getTags
 		res = []
 		self.tags.each_with_index{
 			|x, index|
-			res[index] = {"id": JSON.parse(x.id.to_json)["$oid"], "name": x.name}
+			res[index] = {"id": getId, "name": x.name}
 		}
 		return res
 	end
 
 	def getPostAndUser
-		return {"post": getPostOnly, "user": getUserOnly}
+		return {"post": getPost, "user": getUser}
 	end
 
 	def getPostAndUserAndTags
-		return {"post": getPostOnly, "user": getUserOnly, "tags": getTagsOnly}
+		return {"post": getPost, "user": getUser, "tags": getTags}
 	end
 
 	
