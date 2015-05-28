@@ -71,15 +71,25 @@
                 beforeSend: function( xhr ) {
                   xhr.overrideMimeType( "text/plain; charset=utf-8" );
                   $("#my-alert").html(
-                  '<div class="am-modal-dialog"><div class="am-modal-hd">正在载入...</div><div class="am-modal-bd"><span class="am-icon-spinner am-icon-spin"></span></div>'
+                  '<div class="am-modal-dialog"><div class="am-modal-hd">正在载入...请稍等</div><div class="am-modal-bd"><span class="am-icon-spinner am-icon-spin"></span></div>'
                   );
                 $modal.modal();
                  },
                 data: {id: post_id},
                 dataType: "json"
               }).done(function( msg ) {
-                  $("#my-alert").html('<div class="am-modal-dialog"><div class="am-modal-hd">载入成功！</div><div class="am-modal-bd"><span class="am-icon-spinner am-icon-spin"></span></div>');
-              }).fail(function(){alert('很抱歉，服务器故障');})
+                  $("#my-alert").html('<div class="am-modal-dialog" style="height:500px;overflow:scroll;"><div class="am-modal-hd">创意详情</div><hr><div class="ideaContent"><article data-am-widget="paragraph" class="am-paragraph am-paragraph-default"data-am-paragraph="{ tableScrollable: true, pureview: true }">'+msg.content+'</article><hr><div class="idea_author"><div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait1.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><div class="idea_author_name" style="    font-weight: 600;">陈芸莹</div><div class="ideaClassfy" style="    font-weight: 600;">#社会科学#</div></div><hr><div class="ideaDiscuss"><div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><div class="i_input"><textarea placeholder="说点什么吧..." class="W_input" action-type="check" cols="" rows="" name="" node-type="textEl" range="0&amp;0" style="overflow: hidden; line-height: 40px; outline: none; height: 40px;width:80%;border-radius: 2px; border: 1px solid rgb(204,204,204);"></textarea></div><div class="discussButton"><button class="am-btn am-btn-primary am-btn-xs">发送</button></div><div class="alsoCollect">收藏了该创意的还有:<a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><hr></div><div class="allDiscuss"><div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><div class="allDiscuss_name"><span>一直特例独行的猪:</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">钟恺是个傻逼啊！！！！！</span></div><div class="allDdiscuss_time">今日12:08</div></div><hr><div class="allDiscuss"><div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><div class="allDiscuss_name"><span>一直特例独行的猪:</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！</span></div><div class="allDdiscuss_time">今日12:08</div></div><hr></div><div class="am-modal-footer"><span class="am-modal-btn">确定</span></div></div>');
+                  $("#my-alert").css('display', 'block');
+                  $("#my-alert").css('position', 'absolute');
+                   
+              }).fail(function(){
+                  $("#my-alert").html(
+                  '<div class="am-modal-dialog"><div class="am-modal-hd">正在载入...请稍等</div><div class="am-modal-bd"><span class="am-icon-spinner am-icon-spin"></span></div>'
+                  );
+                $modal.modal();
+
+
+              })
             }
         
         
