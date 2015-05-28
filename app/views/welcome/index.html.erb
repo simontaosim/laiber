@@ -65,12 +65,14 @@
 <% @posts.each do |post| %>
 <div class="box">
     <div class="pic">
+
       <% if post[2] %>
       <% if post[2][0] %>
-        <% if ImageItem.find(post[2][0]).url and ImageItem.find(post[2][0]).url.to_s != '' %>
-        <a class='' href="#"><%= image_tag ImageItem.find(post[2][0]).url, alt: '图片' %></a>
-        <% elsif ImageItem.find(post[2][0]).url_from_content and ImageItem.find(post[2][0]).url_from_content.to_s != '' %>
-        <a class='' href="#"><img src='<%= ImageItem.find(post[2][0]).url_from_content.to_s %>', alt: '图片' %></a>
+      <% image_item = ImageItem.find(post[2][0]) %>
+        <% if image_item.url and image_item.url.to_s != '' %>
+        <a class='' href="#"><%= image_tag image_item.url, alt: '图片' %></a>
+        <% elsif image_item.url_from_content and image_item.url_from_content.to_s != '' %>
+        <a class='' href="#"><img src='<%= image_item.url_from_content.to_s %>', alt: '图片' %></a>
         <% else %>
           <a clsss='' href="#"><%= image_tag '1.jpg', alt: '图片' %></a>
         <% end %>
