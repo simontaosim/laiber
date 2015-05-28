@@ -5,4 +5,8 @@ class WelcomeController < ApplicationController
   	@posts = Post.desc(:created_at).pluck(:id, :title, :image_item_ids, :created_at)
     @post = Post.new
   end
+
+  def get_one_post
+    @post = Post.find(params[:id])
+  end
 end
