@@ -22,7 +22,10 @@ class MobileApp::SignController
 		if user
 			if user.screct_pass == user_params[:password]
 				tokens = SignToken.where(:user => user)
-				
+				tokens.each_with_index{
+					|x, index|
+					
+				}
 
 				user_session = UserSession.new
 				user_session.user = user

@@ -3,7 +3,8 @@ class User
   attr_accessor :password, :password_confirmation
   include Mongoid::Timestamps
   has_many :user_sessions,  dependent: :destroy
-  has_many :post, dependent: :destroy
+  has_many :posts, dependent: :destroy
+  has_many :sign_tokens, dependent: :destroy
   field :name, type: String
   field :email, type: String
   field :mobile, type: String

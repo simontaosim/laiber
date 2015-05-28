@@ -3,7 +3,7 @@ class Post
 	include Mongoid::Timestamps
 	field :title, type: String
 	field :content, type: String
-	has_many :post_child, dependent: :destroy
+	has_many :post_children, dependent: :destroy
 	has_one :post_parent
 	belongs_to :user
 	has_and_belongs_to_many :tags
@@ -22,6 +22,30 @@ class Post
 
 	end
 
-	private
+	def getPostOnly
+		return {"id": JSON.parse(self.id.to_json)["$oid"], "title": self.title, "content": self.content}
+	end
+
+	def getUserOnly
+		return {"id": JSON.parse(self.user.id.to_json)["$oid"], "name": self.user.name}
+	end
+	
+	def getTagsOnly
+		res = []
+		self.tags.each_with_index{
+			|x, index|
+			res[index] = {"id": JSON.parse(x.id.to_json)["$oid"], "name": x.name}
+		}
+		return res
+	end
+
+	def getPostAndUser
+		return {"post": getPostOnly, "user": getUserOnly}
+	end
+
+	def getPostAndUserAndTags
+		return {"post": getPostOnly, "user": getUserOnly, "tags": getTagsOnly}
+	end
+
 	
 end

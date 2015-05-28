@@ -8,15 +8,24 @@ class MobileApp::PostsController < ApplicationController
 	skip_before_filter :verify_authenticity_token, only: [:new, :get]
 
 	def all
-		render json:{"posts":Post.all, "users":User.all}
+		# render json:{"posts":Post.all, "users":User.all}
+		result = []
+		Post.all.each_with_index{
+			|x, index|
+			result[index] = x.getPostAndUser
+		}
+		render json: result
 	end
 
 	def new
 		result = false
 		if params[:post]
 			post = Post.new(new_post_params)
-			# current_user = User.find(Utils::DbUtil.GetObjectIdFromJson(user_params))
-			current_user = UserSession.find(session[:progress]["_id"]["$oid"]).user
+			if params[:user]
+				current_user = User.find(Utils::DbUtil.GetObjectIdFromJson(user_params))
+			else
+				current_user = UserSession.find(session[:progress]["_id"]["$oid"]).user
+			end
 			if current_user
 				post.user = current_user
 				if post.save
