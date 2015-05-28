@@ -66,24 +66,19 @@
 <div class="box">
     <div class="pic">
 
-      <% if post.image_items[0] %>
-        <% if post.image_items[0].url and post.image_items[0].url.to_s != '' %>
-        <a class='' href="#"><%= image_tag post.image_items[0].url, alt: '图片' %></a>
-        <% elsif post.image_items[0].url_from_content and post.image_items[0].url_from_content.to_s != '' %>
-        <a class="" data-am-modal="{target: '#my-alert'}" href="#"><img src='<%= post.image_items[0].url_from_content.to_s %>', alt: '图片' %></a>
-
       <% if post[2] %>
       <% if post[2][0] %>
-        <% if ImageItem.find(post[2][0]).url and ImageItem.find(post[2][0]).url.to_s != '' %>
-        <a class='' href="#"><%= image_tag ImageItem.find(post[2][0]).url, alt: '图片' %></a>
-        <% elsif ImageItem.find(post[2][0]).url_from_content and ImageItem.find(post[2][0]).url_from_content.to_s != '' %>
-        <a class='' href="#"><img src='<%= ImageItem.find(post[2][0]).url_from_content.to_s %>', alt: '图片' %></a>
->>>>>>> 5e4fcecb8f6018366d68ded9fa1c16d7da705b9c
+      <% image_item = ImageItem.find(post[2][0]) %>
+        <% if image_item.url and image_item.url.to_s != '' %>
+        <a class="" data-am-modal="{target: '#my-alert'}" href="#"><%= image_tag image_item.url, alt: '图片' %></a>
+        <% elsif image_item.url_from_content and image_item.url_from_content.to_s != '' %>
+       <a class="" data-am-modal="{target: '#my-alert'}" href="#"><img src='<%= image_item.url_from_content.to_s %>', alt: '图片' %></a>
+
         <% else %>
-          <a class="" data-am-modal="{target: '#my-alert'}" href="#"><%= image_tag '1.jpg', alt: '图片' %></a>
+        <a class="" data-am-modal="{target: '#my-alert'}" href="#"><%= image_tag 'default.jpg', alt: '图片' %></a>
         <% end %>
       <% else%>
-        <a class="" data-am-modal="{target: '#my-alert'}" href="#"><%= image_tag '1.jpg', alt: '图片' %></a>
+        <a class="" data-am-modal="{target: '#my-alert'}" href="#"><%= image_tag 'default.jpg', alt: '图片' %></a>
       <% end %>
 
        
@@ -107,8 +102,26 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
 </article>
  <hr>
   <div class="idea_author">
-       <div class="idea_author_img"><img src="" alt=""></div><div class="idea_author_name">作者:</div><div class="ideaClassfy">#社会科学#</div>
+       <div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait1.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div>
+       <div class="idea_author_name" style="
+    font-weight: 600;">陈芸莹</div>
+    <div class="ideaClassfy" style="
+    font-weight: 600;">#社会科学#</div>
    </div>
+    <hr>
+  <div class="ideaDiscuss">
+        <div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div>
+        <div class="i_input">
+                <textarea placeholder="说点什么吧..." class="W_input" action-type="check" cols="" rows="" name="" node-type="textEl" range="0&amp;0" style="overflow: hidden; line-height: 40px; outline: none; height: 40px;width:80%;border-radius: 2px; border: 1px solid rgb(204,204,204);"></textarea>
+            </div>
+            <div class="discussButton"><button class="am-btn am-btn-primary am-btn-xs">发送</button></div>
+            <div class="alsoCollect">收藏了该创意的还有:<a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a>
+<a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a>
+           <a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a>            
+            </div>
+            
+  </div>
+  
    </div>
 
     <div class="am-modal-footer">
@@ -119,7 +132,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
        
 
       <% else %>
-        <a href="#"><%= image_tag '1.jpg', alt: '图片' %></a>
+        <a data-am-modal="{target: '#my-alert'}"  href="#"><%= image_tag 'default.jpg', alt: '图片' %></a>
       <% end %>
 
         <!-- <img src="images/1.jpg" alt="图片" /> -->
@@ -210,7 +223,7 @@ window.onscroll=function(){
    if(checkScrollSlide){
        var oParent=document.getElementById('idea_body');
       //将数据块渲染到页面
-       var dateInt=[{"img":"/assets/1.jpg","title":"项目标题","intruduce":"项目简介","Classify":"#项目分类#"},{"img":"/assets/2.jpg","title":"项目标题1","intruduce":"项目简介1","Classify":"#项目分类1#"}]
+       var dateInt=[{"img":"/assets/default.jpg","title":"项目标题","intruduce":"项目简介","Classify":"#项目分类#"},{"img":"/assets/default.jpg","title":"项目标题1","intruduce":"项目简介1","Classify":"#项目分类1#"}]
             for(var i=0;i<dateInt.length;i++){
            var oBox=document.createElement('div');
            oBox.className='box';

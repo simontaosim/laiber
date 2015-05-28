@@ -243,6 +243,7 @@ font-weight: 100;}
 /*    background-color: rgb(204,204,204);*/
 }
 
+/*
 .am-modal-hd{
   right:0;
     top:0; 
@@ -253,6 +254,7 @@ font-weight: 100;}
     font-weight:bold; 
     background-color:rgb(204,204,204);
 }
+*/
 
 
 .idea_author_img {
@@ -261,8 +263,41 @@ font-weight: 100;}
 
 .idea_author_name {
     float: left;
+    line-height: 40px;
+    margin-left: 25px;
+    font-size: 10px;
+    
 }
 
 .ideaClassfy {
-    float: left;
+ float: left;
+    line-height: 40px;
+    margin-left: 80px;
+    font-size: 10px;
+}
+
+.idea_author {
+    height: 40px;
+}
+
+.ideaDiscuss {
+    margin-top: 5px;
+}
+
+.discussButton {
+    float: right;
+    margin-right: 5%;
+    margin-top: 5px;
+    width: 100%;
+    text-align: right;
+    
+}
+
+.alsoCollect {
+    width: 100%;
+    font-size: 5px;
+    font-weight: 600;
+    text-align: left;
+    padding-left: 30px;
+    
 }
