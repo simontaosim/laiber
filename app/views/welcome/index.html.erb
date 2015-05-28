@@ -60,7 +60,6 @@
   </div>
   </div>
   <hr>
-
 <div id="idea_body">
 <% @posts.each do |post| %>
 <div class="box">
@@ -70,18 +69,25 @@
       <% if post[2][0] %>
       <% image_item = ImageItem.find(post[2][0]) %>
         <% if image_item.url and image_item.url.to_s != '' %>
-        <a class="" data-am-modal="{target: '#my-alert'}" href="#"><%= image_tag image_item.url, alt: '图片' %></a>
+        <a class="al-alert"  href="#"><%= image_tag image_item.url, alt: '图片' %></a>
         <% elsif image_item.url_from_content and image_item.url_from_content.to_s != '' %>
-       <a class="" data-am-modal="{target: '#my-alert'}" href="#"><img src='<%= image_item.url_from_content.to_s %>', alt: '图片' %></a>
+       <a class="al-alert"  href="javascript:popAlert()"><img src='<%= image_item.url_from_content.to_s %>', alt: '图片' %></a>
 
         <% else %>
-        <a class="" data-am-modal="{target: '#my-alert'}" href="#"><%= image_tag 'default.jpg', alt: '图片' %></a>
+        <a class="al-alert" href="javascript:popAlert()"><%= image_tag 'default.jpg', alt: '图片' %></a>
         <% end %>
       <% else%>
-        <a class="" data-am-modal="{target: '#my-alert'}" href="#"><%= image_tag 'default.jpg', alt: '图片' %></a>
+        <a class="al-alert"  href="javascript:popAlert()"><%= image_tag 'default.jpg', alt: '图片' %></a>
       <% end %>
 
-       
+       <script>
+        function popAlert(){
+             var $modal = $('#my-alert');
+        $modal.modal();
+        }
+        
+        
+        </script>
 
  <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
   <div class="am-modal-dialog" style="height:500px;overflow:scroll;">
@@ -119,8 +125,26 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
 <a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a>
            <a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a>            
             </div>
-            
+             <hr>    
   </div>
+<div class="allDiscuss">
+    <div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div>
+    <div class="allDiscuss_name">
+    <span>一直特例独行的猪:</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">钟恺是个傻逼啊！！！！！</span>
+    </div>
+    <div class="allDdiscuss_time">今日12:08</div>
+    </div>                             
+    <hr> 
+    <div class="allDiscuss">
+    <div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div>
+    <div class="allDiscuss_name">
+    <span>一直特例独行的猪:</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！</span>
+    </div>
+     <div class="allDdiscuss_time">今日12:08</div>
+    </div>               
+    <hr> 
+
+  
   
    </div>
 
@@ -132,7 +156,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
        
 
       <% else %>
-        <a data-am-modal="{target: '#my-alert'}"  href="#"><%= image_tag 'default.jpg', alt: '图片' %></a>
+        <a  href="javascript:popAlert()" ><%= image_tag 'default.jpg', alt: '图片' %></a>
       <% end %>
 
         <!-- <img src="images/1.jpg" alt="图片" /> -->
@@ -182,7 +206,13 @@ $(function() {
           window.location.assign('<%= root_url %>/user_sessions/new');
         }
     });
+    
+   
+    
   });
+    
+
+    
 var hArr=[];//存放图片的高度，开始存第一行的四张图片的高度，之后存每一列的高度；
 var oBoxW = 0;
 var xmlhttp;
