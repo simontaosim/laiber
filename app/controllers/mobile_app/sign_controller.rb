@@ -65,6 +65,6 @@ class MobileApp::SignController < ApplicationController
 
 	private
 	def paramsUser
-		return params.require(:user).permit(:_id)
+		return params.require(:user).permit(:name, :email, :mobile, :password)
 	end
 end
