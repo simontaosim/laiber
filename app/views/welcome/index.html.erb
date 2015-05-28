@@ -1,0 +1,257 @@
+<div class="idea_head">
+   <div class="idea_head_1">
+
+    <button class="am-btn am-btn-danger" id="post_btn">发帖</button>
+
+<div class="am-popup"  id="my-popup">
+  <div class="am-popup-inner">
+    <div class="am-popup-hd">
+      <h4 class="am-popup-title">创建创意</h4>
+      <span data-am-modal-close
+            class="am-close">&times;</span>
+    </div>
+
+    <div class="am-popup-bd" style="background-color: white;padding:0px;">
+    <div class="ideaTitle">
+     <div class="am-form-group">
+      <%= form_for @post, :html => { :class => "am-form" }  do |f| %>
+      <%= hidden_field_tag :from_index,  "1" %>
+      <% if session[:progress] %>
+      <%= f.hidden_field :user_id, value: UserSession.find(session[:progress].fetch("_id").fetch("$oid")).user.id %>
+      <% end %>
+                <fieldset>
+                  <%= f.label "创意标题", for: 'doc-ta-1' %>
+                   <div>
+                     <%= f.text_field :title, placeholder: '' %>
+                  </div>
+                </fieldset>
+                <fieldset>
+                      <div class="am-form-group">
+                          <div><label for="doc-ta-1">文本域</label></div>
+                    <%= f.kindeditor :content,  :items =>
+                    [
+                      'source', 'justifyleft', 'justifycenter', 'justifyright', 'justifyfull',
+                      'formatblock', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage', 'hr', 'link', 'unlink'
+                    ]
+                     %>
+                  </div>
+                  <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+                </fieldset>
+      <% end %>
+     </div>
+    </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+    </div>
+
+
+ <div class="idea_head_2">
+       <form class="am-topbar-form am-topbar-left am-form-inline am-topbar-right" role="search">
+          <div class="am-form-group">
+            <input type="text" class="am-form-field am-input-sm" placeholder="搜索创意">
+          </div>
+          <button type="submit" class="am-btn am-btn-default am-btn-sm">搜索</button>
+        </form>
+  </div>
+  </div>
+  <hr>
+
+<div id="idea_body">
+<% @posts.each do |post| %>
+<div class="box">
+    <div class="pic">
+      <% if post.image_items[0] %>
+        <% if post.image_items[0].url and post.image_items[0].url.to_s != '' %>
+        <a href="#"><%= image_tag post.image_items[0].url, alt: '图片' %></a>
+        <% elsif post.image_items[0].url_from_content and post.image_items[0].url_from_content.to_s != '' %>
+        <a href="#"><img src='<%= post.image_items[0].url_from_content.to_s %>', alt: '图片' %></a>
+        <% else %>
+          <a href="*"><%= image_tag '1.jpg', alt: '图片' %></a>
+        <% end %>
+      <% else%>
+        <a href="*"><%= image_tag '1.jpg', alt: '图片' %></a>
+      <% end %>
+        <!-- <img src="images/1.jpg" alt="图片" /> -->
+  <div class="ideaTitle"><h3><%= post.title%></h3></div>
+  <hr>
+ <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
+ <hr>
+  <div class="ideaClassify">#文化娱乐体育#</div>
+    </div>
+</div>
+<% end %>
+
+</div>
+
+
+
+
+<!--
+<footer>
+  <hr>
+  <p class="am-padding-left">© 2015 , Ulaiber in Shenzhen of China</p>
+</footer>
+-->
+
+<!--[if (gte IE 9)|!(IE)]><    !-->
+<!--
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/amazeui.min.js"></script>
+<script src="assets/js/app.js"></script>
+-->
+<!--<script src="assets/js/waterfall.js"></script>-->
+<script>
+$(function() {
+    var $modal = $('#my-popup');
+    <% if session[:progress] %>
+      var session_exist = true;
+    <% else %>
+      var session_exist = false;
+    <% end %>
+    $modal.siblings('#post_btn').on('click', function(e) {
+      var $target = $(e.target);
+        if (session_exist== true) {
+          $modal.modal();
+        }else{
+          $modal.modal('close');
+          alert("请先登录！");
+          window.location.assign('<%= root_url %>/user_sessions/new');
+        }
+    });
+  });
+var hArr=[];//存放图片的高度，开始存第一行的四张图片的高度，之后存每一列的高度；
+var oBoxW = 0;
+var xmlhttp;
+if (window.XMLHttpRequest) {
+    xmlhttp = new XMLHttpRequest();
+}
+else {
+    xmlhttp = new ActiveXObject(Microsoft.XMLHTTP);
+};
+xmlhttp.open('GET', 'http://localhost:3000/posts/all', 'true');
+xmlhttp.send();
+    if (xmlhttp.readyState === 4) {
+        //     var data_length = xmldate.getElementsByTagName('title').length
+        //     for(var i =0;i< data_length;i++){
+        //         var titledata=xmldate.getElementsByTagName('title')[i].innerHTML);
+        //     }
+        alert(xmlhttp.responseXML);
+    }
+//
+//
+$(function() {
+  $('#doc-prompt-toggle').on('click', function() {
+    $('#my-prompt').modal({
+      relatedTarget: this,
+      onConfirm: function(e) {
+        alert('你已经成功提交创意：' + e.data || '')
+      },
+      onCancel: function(e) {
+        alert('放弃!');
+      }
+    });
+  });
+});
+window.onload=function(){
+waterfall('idea_body','box');  //封装一个waterfall函数；
+//var dateInt={"date":[{"src":'1.jpg'},{"src":'2.jpg'},{"src":'3.jpg'},{"src":'4.jpg'},]} //模拟后台数
+window.onscroll=function(){
+   if(checkScrollSlide){
+       var oParent=document.getElementById('idea_body');
+      //将数据块渲染到页面
+       var dateInt=[{"img":"/assets/1.jpg","title":"项目标题","intruduce":"项目简介","Classify":"#项目分类#"},{"img":"/assets/2.jpg","title":"项目标题1","intruduce":"项目简介1","Classify":"#项目分类1#"}]
+            for(var i=0;i<dateInt.length;i++){
+           var oBox=document.createElement('div');
+           oBox.className='box';
+           oParent.appendChild(oBox);   //将子元素塞进父元素里面
+           var oPic=document.createElement('div');
+           oPic.className='pic';
+           oBox.appendChild(oPic);
+           var oImgA=document.createElement('a')
+           oPic.appendChild(oImgA)
+           var oImg=document.createElement('img')
+           oImg.src=dateInt[i].img;
+           oImgA.appendChild(oImg);
+           var oIdea=document.createElement('div');
+           oIdea.className='ideaTitle';
+           oPic.appendChild(oIdea);
+           var oHr=document.createElement('h3');
+           oIdea.appendChild(oHr);
+           oHr.innerHTML=dateInt[i].title;
+           var hr1=document.createElement('hr');
+           oPic.appendChild(hr1);
+           var oIntruduce=document.createElement('div');
+           oIntruduce.className='ideaIntruduce';
+            oPic.appendChild(oIntruduce);
+           var oA=document.createElement('a');
+           oIntruduce.appendChild(oA);
+           oA.innerHTML=dateInt[i].intruduce;
+           var hr1=document.createElement('hr');
+           oPic.appendChild(hr1);
+            var oClassify=document.createElement('div');
+           oClassify.className='ideaClassify';
+            oPic.appendChild(oClassify);
+           oClassify.innerHTML=dateInt[i].Classify;
+           var minH=Math.min.apply(null,hArr);//第二行，求最小值
+            var index=getMinhIndex(hArr,minH);
+            hArr[index] += oBox.offsetHeight;//oBox.offsetHeight;
+            oBox.style.position='absolute';
+            oBox.style.top=minH+'px';
+            oBox.style.left=oBoxW*index+'px';
+       } //for
+ }
+}
+}
+function waterfall(parent,box){
+    var Oparent=document.getElementById(parent);//取出父元素；
+    var oBoxs=getByClass(Oparent,box);
+    //计算每行可以放多少列图片（页面宽度/box盒子宽度）
+    oBoxW=oBoxs[0].offsetWidth;
+    var
+    cols=Math.floor(document.documentElement.clientWidth/oBoxW);
+Oparent.style.cssText='width:'+oBoxW*cols+'px;margin:0 auto;'//设置idea_body的宽度
+    for(var i=0;i<oBoxs.length;i++){
+        if(i<cols){
+            hArr.push(oBoxs[i].offsetHeight);//将第一行盒子高度放入hArr数组中
+        }
+        else{
+            var minH=Math.min.apply(null,hArr);//第二行，求最小值
+            var index=getMinhIndex(hArr,minH);
+            oBoxs[i].style.position='absolute';
+            oBoxs[i].style.top=minH+'px';
+            oBoxs[i].style.left=oBoxW*index+'px';
+            hArr[index]+=oBoxs[i].offsetHeight;
+        }
+    }
+}
+    function getByClass(parent,clsName){
+        var boxArr=new Array();//用来获取所有class为parent的box的元素
+        oElements=parent.getElementsByTagName('*')//获取父元素下所有的子元素
+        for(var i=0;i<oElements.length;i++){
+            if(oElements[i].className==clsName){
+                boxArr.push(oElements[i]);
+            }//判断传过来的
+        }
+        return boxArr;
+    }//封装一个函数，用于取出idea_body下的所有box函数
+    function  getMinhIndex(arr,val){
+    for(var i in arr){
+        if(arr[i]==val){
+        return i;
+        }
+    }
+    }
+      function checkScrollSlide(){
+    var oParent=document.getElementById('idea_body');
+    var oBoxs=getByClass(oParent,'box');
+    var lastBoxH=oBoxs[oBoxs.length-1].offsetTop+Math.floor(oBoxs[oBoxs.length-1].offsetHeight/2);
+    var scrollTop=document.body.scrollTop || document.documentElement.scrollTop;
+        var height=document.body.clientHeight || document.documentElement.clientHeight;
+        return(lastBoxH<scrollTop+height)?true:false;
+    }
+</script>
