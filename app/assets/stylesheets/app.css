@@ -242,3 +242,27 @@ font-weight: 100;}
 #my-popup {
 /*    background-color: rgb(204,204,204);*/
 }
+
+.am-modal-hd{
+  right:0;
+    top:0; 
+    width:100%; 
+    position:fixed; 
+    padding:10px; 
+    text-align:center; 
+    font-weight:bold; 
+    background-color:rgb(204,204,204);
+}
+
+
+.idea_author_img {
+    float: left;
+}
+
+.idea_author_name {
+    float: left;
+}
+
+.ideaClassfy {
+    float: left;
+}
