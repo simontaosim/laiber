@@ -2,133 +2,17 @@
    <div class="idea_head_1">
 
     <button class="am-btn am-btn-danger" id="post_btn">发帖</button>
-
-<div class="am-popup"  id="my-popup">
-  <div class="am-popup-inner">
-    <div class="am-popup-hd">
-      <h4 class="am-popup-title">创建创意</h4>
-      <span data-am-modal-close
-            class="am-close">&times;</span>
-    </div>
-
-    <div class="am-popup-bd" style="background-color: white;padding:0px;">
-    <div class="ideaTitle">
-     <div class="am-form-group">
-      <%= form_for @post, :html => { :class => "am-form" }  do |f| %>
-      <%= hidden_field_tag :from_index,  "1" %>
-      <% if session[:progress] %>
-      <%= f.hidden_field :user_id, value: UserSession.find(session[:progress].fetch("_id").fetch("$oid")).user.id %>
-      <% end %>
-                <fieldset>
-                  <%= f.label "创意标题", for: 'doc-ta-1' %>
-                   <div>
-                     <%= f.text_field :title, placeholder: '' %>
-                  </div>
-                </fieldset>
-                <fieldset>
-                      <div class="am-form-group">
-                          <div><label for="doc-ta-1">文本域</label></div>
-                    <%= f.kindeditor :content,  :items =>
-                    [
-                      'source', 'justifyleft', 'justifycenter', 'justifyright', 'justifyfull',
-                      'formatblock', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage', 'hr', 'link', 'unlink'
-                    ]
-                     %>
-                  </div>
-                  <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
-                </fieldset>
-      <% end %>
-     </div>
-    </div>
-
-
+<div class="am-modal am-modal-loading am-modal-no-btn" tabindex="-1" id="my-modal-loading">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">正在载入...</div>
+    <div class="am-modal-bd">
+      <span class="am-icon-spinner am-icon-spin"></span>
     </div>
   </div>
 </div>
 
 
-    </div>
-
-
- <div class="idea_head_2">
-       <form class="am-topbar-form am-topbar-left am-form-inline am-topbar-right" role="search">
-          <div class="am-form-group">
-            <input type="text" class="am-form-field am-input-sm" placeholder="搜索创意">
-          </div>
-          <button type="submit" class="am-btn am-btn-default am-btn-sm">搜索</button>
-        </form>
-  </div>
-  </div>
-  <hr>
-<div id="idea_body">
-       <script>
-        function popAlert(post_id){
-            var $modal = $('#my-alert');
-            
-            $.ajax({
-                method: "GET",
-                url: "<%= welcome_get_one_post_path %>",
-                beforeSend: function( xhr ) {
-                  xhr.overrideMimeType( "text/plain; charset=utf-8" );
-                  $("#my-alert").html(
-                  '<div class="am-modal-dialog"><div class="am-modal-hd">正在载入...请稍等</div><div class="am-modal-bd"><span class="am-icon-spinner am-icon-spin"></span></div>'
-                  );
-                $modal.modal();
-                 },
-                data: {id: post_id},
-                dataType: "json"
-              }).done(function( msg ) {
-                  $("#my-alert").html('<div class="am-modal-dialog" style="height:500px;overflow:scroll;"><div class="am-modal-hd">创意详情</div><hr><div class="ideaContent"><article data-am-widget="paragraph" class="am-paragraph am-paragraph-default"data-am-paragraph="{ tableScrollable: true, pureview: true }">'+msg.content+'</article><hr><div class="idea_author"><div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait1.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><div class="idea_author_name" style="    font-weight: 600;">陈芸莹</div><div class="ideaClassfy" style="    font-weight: 600;">#社会科学#</div></div><hr><div class="ideaDiscuss"><div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><div class="i_input"><textarea placeholder="说点什么吧..." class="W_input" action-type="check" cols="" rows="" name="" node-type="textEl" range="0&amp;0" style="overflow: hidden; line-height: 40px; outline: none; height: 40px;width:80%;border-radius: 2px; border: 1px solid rgb(204,204,204);"></textarea></div><div class="discussButton"><button class="am-btn am-btn-primary am-btn-xs">发送</button></div><div class="alsoCollect">收藏了该创意的还有:<a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><hr></div><div class="allDiscuss"><div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><div class="allDiscuss_name"><span>一直特例独行的猪:</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">钟恺是个傻逼啊！！！！！</span></div><div class="allDdiscuss_time">今日12:08</div></div><hr><div class="allDiscuss"><div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><div class="allDiscuss_name"><span>一直特例独行的猪:</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！</span></div><div class="allDdiscuss_time">今日12:08</div></div><hr></div><div class="am-modal-footer"><span class="am-modal-btn">确定</span></div></div>');
-                  $("#my-alert").css('display', 'block');
-                  $("#my-alert").css('position', 'absolute');
-                   
-              }).fail(function(){
-                  $("#my-alert").html(
-                  '<div class="am-modal-dialog"><div class="am-modal-hd">正在载入...请稍等</div><div class="am-modal-bd"><span class="am-icon-spinner am-icon-spin"></span></div>'
-                  );
-                $modal.modal();
-
-
-              })
-            }
-        
-        
-        </script>
-<% @posts.each do |post| %>
-<div class="box">
-    <div class="pic">
-
-      <% if post[2] %>
-      <% if post[2][0] %>
-      <% image_item = ImageItem.find(post[2][0]) %>
-        <% if image_item.url and image_item.url.to_s != '' %>
-        <a class="al-alert"  href="#"><%= image_tag image_item.url, alt: '图片' %></a>
-        <% elsif image_item.url_from_content and image_item.url_from_content.to_s != '' %>
-       <a class="al-alert"  href="javascript:popAlert('<%= post[0].to_s %>')"><img src='<%= image_item.url_from_content.to_s %>', alt: '图片' %></a>
-
-        <% else %>
-        <a class="al-alert" href="javascript:popAlert('<%= post[0].to_s %>')"><%= image_tag 'default.jpg', alt: '图片' %></a>
-        <% end %>
-      <% else%>
-        <a class="al-alert"  href="javascript:popAlert('<%= post[0].to_s %>')"><%= image_tag 'default.jpg', alt: '图片' %></a>
-      <% end %>
- <% else %>
-        <a  href="javascript:popAlert('<%= post[0].to_s %>')" ><%= image_tag 'default.jpg', alt: '图片' %></a>
-      <% end %>
-
-        <!-- <img src="images/1.jpg" alt="图片" /> -->
-  <div class="ideaTitle1"><h3><%= post[1] %></h3></div>
-  <hr>
- <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
- <hr>
-  <div class="ideaClassify">#文化娱乐体育#<%= post[3].in_time_zone.to_s[0..-6] %></div>
-    </div>
-</div>
-<% end %>
-
-</div>
-
-<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+<div class="am-modal am-modal-alert" tabindex="-2" id="my-alert">
   <div class="am-modal-dialog" style="height:500px;overflow:scroll;">
     <div class="am-modal-hd">创意详情</div>
     <hr>
@@ -191,6 +75,152 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
       <span class="am-modal-btn">确定</span>
     </div>
   </div>
+</div>
+
+
+
+<div class="am-popup"  id="my-popup">
+  <div class="am-popup-inner">
+    <div class="am-popup-hd">
+      <h4 class="am-popup-title">创建创意</h4>
+      <span data-am-modal-close
+            class="am-close">&times;</span>
+    </div>
+
+    <div class="am-popup-bd" style="background-color: white;padding:0px;">
+    <div class="ideaTitle">
+     <div class="am-form-group">
+      <%= form_for @post, :html => { :class => "am-form" }  do |f| %>
+      <%= hidden_field_tag :from_index,  "1" %>
+      <% if session[:progress] %>
+      <%= f.hidden_field :user_id, value: UserSession.find(session[:progress].fetch("_id").fetch("$oid")).user.id %>
+      <% end %>
+                <fieldset>
+                  <%= f.label "创意标题", for: 'doc-ta-1' %>
+                   <div>
+                     <%= f.text_field :title, placeholder: '' %>
+                  </div>
+                </fieldset>
+                <fieldset>
+                      <div class="am-form-group">
+                          <div><label for="doc-ta-1">文本域</label></div>
+                    <%= f.kindeditor :content,  :items =>
+                    [
+                      'source', 'justifyleft', 'justifycenter', 'justifyright', 'justifyfull',
+                      'formatblock', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage', 'hr', 'link', 'unlink'
+                    ]
+                     %>
+                  </div>
+                  <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+                </fieldset>
+      <% end %>
+     </div>
+    </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+    </div>
+
+
+ <div class="idea_head_2">
+       <form class="am-topbar-form am-topbar-left am-form-inline am-topbar-right" role="search">
+          <div class="am-form-group">
+            <input type="text" class="am-form-field am-input-sm" placeholder="搜索创意">
+          </div>
+          <button type="submit" class="am-btn am-btn-default am-btn-sm">搜索</button>
+        </form>
+  </div>
+  </div>
+  <hr>
+<div id="idea_body">
+       <script>
+       function lookProperty(obj){
+　　var ob=eval(obj);
+　　var property="";
+　　for(var p in ob){
+　　property+=p+"\n";
+　　}
+　　return property;
+　　}
+       function getUserInfo(id){
+          $.ajax({
+                method: "GET",
+                url: "<%= welcome_get_user_info_path %>",
+                beforeSend: function( xhr ) {
+                  xhr.overrideMimeType( "text/plain; charset=utf-8" );
+                 },
+                data: {id: id},
+                dataType: "json"
+              }).done(function( msg ){ 
+                $('#my-alert .idea_author_name').html(msg.name);
+              }).fail(function(){alert('请等待服务器');});
+
+       }
+        function popAlert(post_id){
+            var $modal = $('#my-alert');
+            var $modal_landing = $('#my-modal-loading');
+            
+            
+            $.ajax({
+                method: "GET",
+                url: "<%= welcome_get_one_post_path %>",
+                beforeSend: function( xhr ) {
+                  xhr.overrideMimeType( "text/plain; charset=utf-8" );
+                  $modal_landing.modal();
+                 },
+                data: {id: post_id},
+                dataType: "json"
+              }).done(function( msg ) {
+                  $modal_landing.modal('close');
+                  $('#my-alert .am-modal-hd').html(msg.title);
+                  $('#my-alert article').html(msg.content);
+                  getUserInfo(msg.user_id.$oid.toString())
+
+                  $modal.modal();
+              }).fail(function(){alert('请等待服务器');})
+              .always(function(){
+                $("#my_alert").html();
+              });
+            }
+        
+        
+        </script>
+<% @posts.each do |post| %>
+<div class="box">
+    <div class="pic">
+
+      <% if post[2] %>
+      <% if post[2][0] %>
+      <% image_item = ImageItem.find(post[2][0]) %>
+        <% if image_item.url and image_item.url.to_s != '' %>
+        <a class="al-alert"  href="#"><%= image_tag image_item.url, alt: '图片' %></a>
+        <% elsif image_item.url_from_content and image_item.url_from_content.to_s != '' %>
+       <a class="al-alert"  href="javascript:popAlert('<%= post[0].to_s %>')"><img src='<%= image_item.url_from_content.to_s %>', alt: '图片' %></a>
+
+        <% else %>
+        <a class="al-alert" href="javascript:popAlert('<%= post[0].to_s %>')"><%= image_tag 'default.jpg', alt: '图片' %></a>
+        <% end %>
+      <% else%>
+        <a class="al-alert"  href="javascript:popAlert('<%= post[0].to_s %>')"><%= image_tag 'default.jpg', alt: '图片' %></a>
+      <% end %>
+ <% else %>
+        <a  href="javascript:popAlert('<%= post[0].to_s %>')" ><%= image_tag 'default.jpg', alt: '图片' %></a>
+      <% end %>
+
+        <!-- <img src="images/1.jpg" alt="图片" /> -->
+  <div class="ideaTitle1"><h3><%= post[1] %></h3></div>
+  <hr>
+ <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
+ <hr>
+  <div class="ideaClassify">#文化娱乐体育#<%= post[3].in_time_zone.to_s[0..-6] %></div>
+    </div>
+</div>
+<% end %>
+
 </div>
 
 

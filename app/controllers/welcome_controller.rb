@@ -10,4 +10,9 @@ class WelcomeController < ApplicationController
     @post = Post.find(params[:id])
     render json: @post
   end
+
+  def get_user_info
+  	@user = User.find(params[:id])
+  	render json: @user
+  end
 end
