@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  get 'welcome/get_one_post'
   get 'get_test/index'
 
   devise_for :admins

@@ -61,6 +61,29 @@
   </div>
   <hr>
 <div id="idea_body">
+       <script>
+        function popAlert(post_id){
+            var $modal = $('#my-alert');
+            
+            $.ajax({
+                method: "GET",
+                url: "<%= welcome_get_one_post_path %>",
+                beforeSend: function( xhr ) {
+                  xhr.overrideMimeType( "text/plain; charset=utf-8" );
+                  $("#my-alert").html(
+                  '<div class="am-modal-dialog"><div class="am-modal-hd">正在载入...</div><div class="am-modal-bd"><span class="am-icon-spinner am-icon-spin"></span></div>'
+                  );
+                $modal.modal();
+                 },
+                data: {id: post_id},
+                dataType: "json"
+              }).done(function( msg ) {
+                  $("#my-alert").html('<div class="am-modal-dialog"><div class="am-modal-hd">载入成功！</div><div class="am-modal-bd"><span class="am-icon-spinner am-icon-spin"></span></div>');
+              }).fail(function(){alert('很抱歉，服务器故障');})
+            }
+        
+        
+        </script>
 <% @posts.each do |post| %>
 <div class="box">
     <div class="pic">
@@ -71,25 +94,31 @@
         <% if image_item.url and image_item.url.to_s != '' %>
         <a class="al-alert"  href="#"><%= image_tag image_item.url, alt: '图片' %></a>
         <% elsif image_item.url_from_content and image_item.url_from_content.to_s != '' %>
-       <a class="al-alert"  href="javascript:popAlert()"><img src='<%= image_item.url_from_content.to_s %>', alt: '图片' %></a>
+       <a class="al-alert"  href="javascript:popAlert('<%= post[0].to_s %>')"><img src='<%= image_item.url_from_content.to_s %>', alt: '图片' %></a>
 
         <% else %>
-        <a class="al-alert" href="javascript:popAlert()"><%= image_tag 'default.jpg', alt: '图片' %></a>
+        <a class="al-alert" href="javascript:popAlert('<%= post[0].to_s %>')"><%= image_tag 'default.jpg', alt: '图片' %></a>
         <% end %>
       <% else%>
-        <a class="al-alert"  href="javascript:popAlert()"><%= image_tag 'default.jpg', alt: '图片' %></a>
+        <a class="al-alert"  href="javascript:popAlert('<%= post[0].to_s %>')"><%= image_tag 'default.jpg', alt: '图片' %></a>
+      <% end %>
+ <% else %>
+        <a  href="javascript:popAlert('<%= post[0].to_s %>')" ><%= image_tag 'default.jpg', alt: '图片' %></a>
       <% end %>
 
-       <script>
-        function popAlert(){
-             var $modal = $('#my-alert');
-        $modal.modal();
-        }
-        
-        
-        </script>
+        <!-- <img src="images/1.jpg" alt="图片" /> -->
+  <div class="ideaTitle1"><h3><%= post[1] %></h3></div>
+  <hr>
+ <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
+ <hr>
+  <div class="ideaClassify">#文化娱乐体育#<%= post[3].in_time_zone.to_s[0..-6] %></div>
+    </div>
+</div>
+<% end %>
 
- <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+</div>
+
+<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
   <div class="am-modal-dialog" style="height:500px;overflow:scroll;">
     <div class="am-modal-hd">创意详情</div>
     <hr>
@@ -153,25 +182,6 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
     </div>
   </div>
 </div>
-       
-
-      <% else %>
-        <a  href="javascript:popAlert()" ><%= image_tag 'default.jpg', alt: '图片' %></a>
-      <% end %>
-
-        <!-- <img src="images/1.jpg" alt="图片" /> -->
-  <div class="ideaTitle1"><h3><%= post[1] %></h3></div>
-  <hr>
- <div class="ideaIntruduce"><a href="">Kids Art Projects - Watercolor Circle Art. The results are always eye catching no matter how kids chose to paint it!</a></div>
- <hr>
-  <div class="ideaClassify">#文化娱乐体育#<%= post[3].in_time_zone.to_s[0..-6] %></div>
-    </div>
-</div>
-<% end %>
-
-</div>
-
-
 
 
 <!--

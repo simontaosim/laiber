@@ -8,5 +8,6 @@ class WelcomeController < ApplicationController
 
   def get_one_post
     @post = Post.find(params[:id])
+    render json: @post
   end
 end
