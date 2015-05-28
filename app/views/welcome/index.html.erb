@@ -67,14 +67,14 @@
     <div class="pic">
       <% if post.image_items[0] %>
         <% if post.image_items[0].url and post.image_items[0].url.to_s != '' %>
-        <a href="#"><%= image_tag post.image_items[0].url, alt: '图片' %></a>
+        <a class='' href="#"><%= image_tag post.image_items[0].url, alt: '图片' %></a>
         <% elsif post.image_items[0].url_from_content and post.image_items[0].url_from_content.to_s != '' %>
-        <a href="#"><img src='<%= post.image_items[0].url_from_content.to_s %>', alt: '图片' %></a>
+        <a class='' href="#"><img src='<%= post.image_items[0].url_from_content.to_s %>', alt: '图片' %></a>
         <% else %>
-          <a href="*"><%= image_tag '1.jpg', alt: '图片' %></a>
+          <a clsss='' href="#"><%= image_tag '1.jpg', alt: '图片' %></a>
         <% end %>
       <% else%>
-        <a href="*"><%= image_tag '1.jpg', alt: '图片' %></a>
+        <a href="#"><%= image_tag '1.jpg', alt: '图片' %></a>
       <% end %>
         <!-- <img src="images/1.jpg" alt="图片" /> -->
   <div class="ideaTitle"><h3><%= post.title%></h3></div>
@@ -113,10 +113,8 @@ $(function() {
     <% else %>
       var session_exist = false;
     <% end %>
-
     $modal.siblings('#post_btn').on('click', function(e) {
       var $target = $(e.target);
-
         if (session_exist== true) {
           $modal.modal();
         }else{
@@ -126,7 +124,6 @@ $(function() {
         }
     });
   });
-
 var hArr=[];//存放图片的高度，开始存第一行的四张图片的高度，之后存每一列的高度；
 var oBoxW = 0;
 var xmlhttp;
@@ -147,7 +144,6 @@ xmlhttp.send();
     }
 //
 //
-
 $(function() {
   $('#doc-prompt-toggle').on('click', function() {
     $('#my-prompt').modal({
@@ -161,8 +157,6 @@ $(function() {
     });
   });
 });
-
-
 window.onload=function(){
 waterfall('idea_body','box');  //封装一个waterfall函数；
 //var dateInt={"date":[{"src":'1.jpg'},{"src":'2.jpg'},{"src":'3.jpg'},{"src":'4.jpg'},]} //模拟后台数
@@ -171,10 +165,6 @@ window.onscroll=function(){
        var oParent=document.getElementById('idea_body');
       //将数据块渲染到页面
        var dateInt=[{"img":"/assets/1.jpg","title":"项目标题","intruduce":"项目简介","Classify":"#项目分类#"},{"img":"/assets/2.jpg","title":"项目标题1","intruduce":"项目简介1","Classify":"#项目分类1#"}]
-
-
-
-
             for(var i=0;i<dateInt.length;i++){
            var oBox=document.createElement('div');
            oBox.className='box';
@@ -214,10 +204,6 @@ window.onscroll=function(){
             oBox.style.top=minH+'px';
             oBox.style.left=oBoxW*index+'px';
        } //for
-
-
-
-
  }
 }
 }
