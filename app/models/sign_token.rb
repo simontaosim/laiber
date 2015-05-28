@@ -4,6 +4,6 @@ class SignToken < ModelBase
 	belongs_to :user
 
 	def getToken
-		return json: {"token": getId}
+		return {"token": getId}
 	end
 end
