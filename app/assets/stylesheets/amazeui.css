@@ -8742,6 +8742,7 @@ ul.am-dropdown-content > .am-disabled > a:focus {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+    width: auto;
 }
 .am-popup-hd .am-close {
   position: absolute;
