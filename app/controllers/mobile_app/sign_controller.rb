@@ -1,4 +1,4 @@
-class MobileApp::SignController
+class MobileApp::SignController < ApplicationController
 	use Rack::Cors do
 		allow do
 			origins '*', 'null'
