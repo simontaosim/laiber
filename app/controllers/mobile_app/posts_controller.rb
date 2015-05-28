@@ -28,7 +28,7 @@ class MobileApp::PostsController < ApplicationController
 			post = Post.new(new_post_params)
 
 			if params[:token]
-				signTokenId = params[:signToken]
+				signTokenId = params[:token]
 			else
 				signTokenId = session[:signToken]
 			end
@@ -48,7 +48,7 @@ class MobileApp::PostsController < ApplicationController
 		end
 	end
 
-	
+
 	def get
 		if params[:posts]
 			render json: get_posts
