@@ -66,9 +66,9 @@
 <div class="box">
     <div class="pic">
       <% if post.image_items[0] %>
-        <% if post.image_items[0].url%>
+        <% if post.image_items[0].url != nil %>
         <a href="*"><%= image_tag post.image_items[0].url, alt: '图片' %></a>
-        <% elsif post.image_items[0].url_from_content  %>
+        <% elsif post.image_items[0].url_from_content != nil  %>
         <a href="*"><img src='<%= post.image_items[0].url_from_content.to_s %>', alt: '图片' %></a>
         <% else %>
           <a href="*"><%= image_tag '1.jpg', alt: '图片' %></a>
