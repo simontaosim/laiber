@@ -242,3 +242,98 @@ font-weight: 100;}
 #my-popup {
 /*    background-color: rgb(204,204,204);*/
 }
+
+/*
+.am-modal-hd{
+  right:0;
+    top:0; 
+    width:100%; 
+    position:fixed; 
+    padding:10px; 
+    text-align:center; 
+    font-weight:bold; 
+    background-color:rgb(204,204,204);
+}
+*/
+
+
+.idea_author_img {
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    width: 10%;
+}
+
+
+.idea_author_name {
+    float: left;
+    line-height: 40px;
+    margin-left: 25px;
+    font-size: 10px;
+    
+}
+
+.ideaClassfy {
+ float: left;
+    line-height: 40px;
+    margin-left: 80px;
+    font-size: 10px;
+}
+
+.idea_author {
+    height: 40px;
+}
+
+.ideaDiscuss {
+    margin-top: 5px;
+}
+
+.discussButton {
+    float: right;
+    margin-right: 5%;
+    margin-top: 5px;
+    width: 100%;
+    text-align: right;
+    
+}
+
+.alsoCollect {
+    width: 100%;
+    font-size: 5px;
+    font-weight: 600;
+    text-align: left;
+    padding-left: 30px;
+    
+}
+
+.allDiscuss_name {
+    float:left;
+    height: auto;
+    width: 70%;
+    line-height: 20px;
+     font-size: 5px;
+    font-weight: 600;
+    text-align: left;
+    margin-left: 20px;
+      margin-top: 10px;    
+}
+
+.allDdiscuss_time {
+      float:right;
+    height: 20px;
+    line-height: 20px;
+    font-size: 5px;
+    color: rgb(204,204,204);
+     margin-top: 13px;
+  margin-right: 26px;
+      
+}
+
+.discusstext {
+    font-weight: 100;
+}
+
+.allDiscuss {
+    width: 100%;
+    height: 40px;
+}

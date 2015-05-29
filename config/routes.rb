@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+
+  get 'welcome/get_one_post'
   get 'get_test/index'
+  get 'welcome/get_user_info'
 
   devise_for :admins
   mount RailsAdmin::Engine => '/poo_poo_admin', as: 'rails_admin'
