@@ -90,7 +90,7 @@ class MobileApp::PostsController < ApplicationController
 					result.push(x.getPostAndUser)
 				}
 			else
-				Post.desc(:created_at).where(:post_parent => []).limit(params[:posts][:num]).each{
+				Post.desc(:created_at).where(:post_parent => nil).limit(params[:posts][:num]).each{
 					|x|
 					result.push(x.getPostAndUser)
 				}
