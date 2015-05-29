@@ -10,23 +10,60 @@ class Post < ModelBase
 	has_and_belongs_to_many :tags
 	has_and_belongs_to_many :image_items
 
-	@@instance_post_helper = nil
-
-	def self.PostsHelper
-		if @@instance_post_helper == nil
-			@@instance_post_helper = Helpers::PostsHelper.new
-		end
-		return @@instance_post_helper
+	def self.GetPosts(limit = nil)
+		limit = nil ? -1 : limit
+		return Post.desc(:created_at).limit(limit)
 	end
 
-	def self.GetPosts(limit, offset)
-		return Post.desc(:created_at).limit(limit).offset(offset)
+	def self.GetPostsForTop(topPostId, limit = nil)
+		limit = nil ? -1 : limit
+		topPost = Post.find(topPostId)
+		return Post.desc(:created_at).where(:created_at > topPost[:created_at]).limit(limit)
+	end
+
+	def self.GetPostsForBottom(bottomPostId, limit = nil)
+		limit = nil ? -1 : limit
+		bottomPost = Post.find(bottomPostId)
+		return Post.desc(:created_at).where(:created_at < bottomPost[:created_at]).limit(limit)
+	end
+
+	def self.GetPostsFromParentPost(parentPostId, limit = nil)
+		result = []
+		limit = nil ? -1 : limit
+		parentPost = Post.find(parentPostId)
+		parentPost.post_children.desc(:created_at).limit(limit).each{
+			|x|
+			result.push(Post.find(x.child_post_id))
+		}
+		return result
+	end
+
+	def self.GetPostsForTopFromParentPost(topPostId, parentPostId, limit = nil)
+		result = []
+		parentPost = Post.find(parentPostId)
+		topPost = Post.find(topPostId)
+		parentPost.post_children.desc(:created_at).where(:created_at > topPost[:created_at]).limit(limit).each{
+			|x|
+			result.push(Post.find(x.child_post_id))
+		}
+		return result
+	end
+
+	def self.GetPostsForBottomParentPost(bottomPostId, parentPostId, limit = nil)
+		result = []
+		parentPost = Post.find(parentPostId)
+		bottomPost = Post.find(bottomPostId)
+		parentPost.post_children.desc(:created_at).where(:created_at < bottomPost[:created_at]).limit(limit).each{
+			|x|
+			result.push(Post.find(x.child_post_id))
+		}
+		return result
 	end
 
 	def self.NewPost(postTitle, postContent, userId, parentPostId = nil)
 		post = Post.new
 		post.title = postTitle
-		post.postContent = postContent
+		post.content = postContent
 		post.user = User.find(userId)
 		# post.index = Post.last ? Post.last.index + 1 : 0
 		post.save

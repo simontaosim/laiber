@@ -51,26 +51,21 @@ class MobileApp::PostsController < ApplicationController
 		result = []
 		if params[:parent_post]
 			# 查询parent_post[id]的子帖子
-			parentPost = Post.find(params[:parent_post][:id])
-			posts = parentPost.post_children
 			if params[:posts_for_top]
 				# 查询最新帖子
-				topPost = Post.find(params[:posts_for_top][:id])
-				# Post.GetPosts(topPost.index, 0).where(:post_parent)
-				parentPost.post_children.desc(:created_at).where(:created_at > topPost[:created_at]).limit(params[:posts][:num]).each{
+				Post.GetPostsForTopFromParentPost(params[:posts_for_top][:id], params[:parent_post][:id], params[:posts][:num]).each{
 					|x|
-					result.push(Post.find(x.child_post_id).getPostAndUser)
+					result.push(x.getPostAndUser)
 				}
 			elsif params[:posts_for_bottom]
-				bottomPost = Post.find(params[:posts_for_bottom][:id])
-				parentPost.post_children.desc(:created_at).where(:created_at < bottomPost[:created_at]).limit(params[:posts][:num]).each{
+				Post.GetPostsForBottomFromParentPost(params[:posts_for_bottom][:id], params[:parent_post][:id], params[:posts][:num]).each{
 					|x|
-					result.push(Post.find(x.child_post_id).getPostAndUser)
+					result.push(x.getPostAndUser)
 				}
 			else
-				parentPost.post_children.desc(:created_at).limit(params[:posts][:num]).each{
+				Post.GetPostsFromParentPost(params[:posts_for_bottom][:id], params[:parent_post][:id], params[:posts][:num]).each{
 					|x|
-					result.push(Post.find(x.child_post_id).getPostAndUser)
+					result.push(x.getPostAndUser)
 				}
 			end
 			render json: {"parent_post": parentPost.getPostAndUser, "posts": result}
@@ -78,19 +73,17 @@ class MobileApp::PostsController < ApplicationController
 		else
 			# 查询根帖子
 			if params[:posts_for_top]
-				topPost = Post.find(params[:posts_for_top][:id])
-				Post.desc(:created_at).where(:created_at > topPost[:created_at]).limit(params[:posts][:num]).each{
+				Post.GetPostsForTop(params[:posts_for_top][:id], params[:posts][:num]).each{
 					|x|
 					result.push(x.getPostAndUser)
 				}
 			elsif params[:posts_for_bottom]
-				bottomPost = Post.find(params[:posts_for_bottom][:id])
-				Post.desc(:created_at).where(:created_at < bottomPost[:created_at]).limit(params[:posts][:num]).each{
+				Post.GetPostsForBottomFrom(params[:posts_for_bottom][:id], params[:posts][:num]).each{
 					|x|
 					result.push(x.getPostAndUser)
 				}
 			else
-				Post.desc(:created_at).where(:post_parent => nil).limit(params[:posts][:num]).each{
+				Post.GetPosts(params[:posts_for_bottom][:id], params[:posts][:num]).each{
 					|x|
 					result.push(x.getPostAndUser)
 				}
@@ -112,60 +105,5 @@ class MobileApp::PostsController < ApplicationController
 		Post.GetPosts(2, 0).each{|x| res.push(x.post_parent)}
 		render json: res
 
-	end
-
-	private
-
-	def get_posts
-		if params[:posts_for_top]
-			return package_posts_data(Post.PostsHelper.get_posts_for_top(get_posts_params, get_posts_for_top_params))
-		elsif params[:posts_for_bottom]
-			return package_posts_data(Post.PostsHelper.get_posts_for_bottom(get_posts_params, get_posts_for_bottom_params))
-		else 
-			return package_posts_data(Post.PostsHelper.get_posts(get_posts_params))
-		end
-
-		# render json: Helpers::PostsHelper.Instance.get_posts
-	end
-
-	def get_posts_from_parent(args)
-		return "TODO"
-	end
-
-	def new_post_params
-		params.require(:post).permit(:title, :content)
-	end
-
-	def user_params
-		params.require(:user).permit(:_id)
-	end
-
-	def paramsGetPosts
-		params.require(:posts).permit(:num)
-	end
-
-	def get_posts_for_top_params
-		params.require(:posts_for_top).permit(:_id)
-	end
-
-	def get_posts_for_bottom_params
-		params.require(:posts_for_bottom).permit(:_id)
-	end
-
-	def get_posts_from_parent_params
-		params.require(:post_parent).permit(:_id)
-	end
-
-	def package_posts_data(posts)
-		posts_data = []
-		posts.each_with_index{
-			|x, index|
-			if x
-				user_oid = x["user_id"]["$oid"]
-				posts_data[index] = {post:x, user:User.find(user_oid)}
-			end
-		}
-		# return posts.count
-		return {posts:posts_data}
 	end
 end
