@@ -33,8 +33,6 @@ class PostsController < ApplicationController
       if @post.save
         if params[:from_index]
           sub_content = post_params[:content]
-
-
           while sub_content.index('img src="') != nil do
             sub_content = sub_content[sub_content.index('img src="')+1..-1]
             sub_content = sub_content[sub_content.index('"')+1..-1]
