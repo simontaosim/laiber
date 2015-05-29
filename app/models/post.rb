@@ -12,7 +12,7 @@ class Post < ModelBase
 
 	def self.GetPosts(limit = nil)
 		limit = nil ? -1 : limit
-		return Post.desc(:created_at).where(.post_parent => nil).limit(limit)
+		return Post.desc(:created_at).where(:post_parent => "").limit(limit)
 	end
 
 	def self.GetPostsForTop(topPostId, limit = nil)
