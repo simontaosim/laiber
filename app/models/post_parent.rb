@@ -1,8 +1,6 @@
-class PostParent
+class PostParent < ModelBase
 	include Mongoid::Document
 	include Mongoid::Timestamps
 	belongs_to :post
-	has_many :posts, dependent: :destroy
-
-
+	field :parent_post_id, type: String
 end
