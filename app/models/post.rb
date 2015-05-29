@@ -49,7 +49,7 @@ class Post < ModelBase
 	end
 
 	def getPost
-		return {"id": getId, "title": self.title, "content": self.content}
+		return {"id": getId, "title": self.title, "content": self.content, "created_at": self.created_at}
 	end
 
 	def getUser
