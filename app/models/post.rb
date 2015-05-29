@@ -68,7 +68,7 @@ class Post < ModelBase
 		# post.index = Post.last ? Post.last.index + 1 : 0
 		post.save
 
-		if postParentId
+		if parentPostId
 			parentPost = Post.find(parentPostId)
 
 			postParent = PostParent.new
