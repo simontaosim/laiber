@@ -1,4 +1,4 @@
-class Admin
+class Admin < ModelBase
   include Mongoid::Document
   include Mongoid::Timestamps
   # Include default devise modules. Others available are:

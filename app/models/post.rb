@@ -22,6 +22,30 @@ class Post < ModelBase
 		return Post.desc(:created_at).limit(limit).offset(offset)
 	end
 
+	def self.NewPost(postTitle, postContent, userId, parentPostId = nil)
+		post = Post.new
+		post.title = postTitle
+		post.postContent = postContent
+		post.user = User.find(userId)
+		post.save
+
+		if postParentId
+			parentPost = Post.find(parentPostId)
+
+			postParent = PostParent.new
+			postParent.post = post
+			postParent.parent_post_id = parentPostId
+			postParent.save
+
+			postChild = PostChild.new
+			postChild.post = parentPost
+			postChild.child_post_id = post.getId
+			postChild.save
+		end
+
+		return post
+	end
+
 	def getPost
 		return {"id": getId, "title": self.title, "content": self.content}
 	end

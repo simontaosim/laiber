@@ -18,15 +18,13 @@ class MobileApp::PostsController < ApplicationController
 	end
 
 	# 发帖
-	# 参数：post[title] post[content] post[post_parent]
+	# 参数：post[title]帖子标题 post[content]帖子内容 post_parent[id]父帖子id
 	# 可选参数：token
 	# 成功：1
 	# 失败：0
 	def new
 		result = false
 		if params[:post]
-			post = Post.new(new_post_params)
-
 			if params[:token]
 				signTokenId = params[:token]
 			else
@@ -35,10 +33,25 @@ class MobileApp::PostsController < ApplicationController
 			currentUser = SignToken.find(signTokenId).user
 
 			if currentUser
-				post.user = currentUser
-				if post.save
-					result = true
+				post = Post.new
+				post.title = params[:post][:title]
+				post.content = params[:post][:content]
+				if params[:post_parent]
+					postParent = PostParent.new
+					postParent.post = post
+					postParentPost = Post.find(params[:post_parent][:id])
+					postParent.post_parent_id = postParentPost.getId
+					postParent.save
+
+					postChild = PostChild.new
+					postChild.post = postParentPost
+					postChild.post_child_id = post.getId
+					postChild.save
 				end
+
+				post.user = currentUser
+				post.save
+				result = true
 			end
 		end
 		if result
@@ -48,8 +61,22 @@ class MobileApp::PostsController < ApplicationController
 		end
 	end
 
-
+	# 获取帖子
+	# 参数：posts[num]数量 posts_for_top[id]请求更新的帖子 posts_for_bottom[id]请求更老的帖子 post_parent[id]父帖子id
+	# 可选参数：
 	def get
+		result = false
+		if params[:post_parent]
+			post = Post.find(params[:post_parent][:id])
+			postChildren = []
+			post.post_children.each{
+				|x|
+				postChildren.push(Post.find(x[:post_child_id]))
+			}
+
+
+		end
+
 		if params[:posts]
 			render json: get_posts
 		else
@@ -58,17 +85,18 @@ class MobileApp::PostsController < ApplicationController
 	end
 
 	def testName
-		render json: "testName"
+		# render json: testparam()
 	end
 
 	def test
 		res = []
-		Post.GetPosts(5, 0).each{|x| res.push(x.getPostAndUser)}
+		Post.GetPosts(2, 0).each{|x| res.push(x.post_parent)}
 		render json: res
+
 	end
 
 	private
-
+	
 	def get_posts
 		if params[:posts_for_top]
 			return package_posts_data(Post.PostsHelper.get_posts_for_top(get_posts_params, get_posts_for_top_params))

@@ -1,4 +1,4 @@
-class ImageItem
+class ImageItem < ModelBase
   include Mongoid::Document
   include Mongoid::Timestamps
   mount_uploader :url, AvatarUploader

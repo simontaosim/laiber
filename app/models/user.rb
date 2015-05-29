@@ -1,4 +1,4 @@
-class User
+class User < ModalBase
   include Mongoid::Document
   attr_accessor :password, :password_confirmation
   include Mongoid::Timestamps
