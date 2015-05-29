@@ -35,7 +35,7 @@ class MobileApp::PostsController < ApplicationController
 
 			Post.NewPost(params[:post][:title], params[:post][:content], currentUserId, parentPostId)
 		end
-		if result
+		if flag
 			render json: 1
 		else
 			render json: 0
