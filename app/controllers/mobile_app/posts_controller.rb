@@ -34,6 +34,7 @@ class MobileApp::PostsController < ApplicationController
 			parentPostId = params[:parent_post] ? params[:parent_post][:id] : nil
 
 			Post.NewPost(params[:post][:title], params[:post][:content], currentUserId, parentPostId)
+			flag = true
 		end
 		if flag
 			render json: 1
