@@ -18,8 +18,8 @@ class MobileApp::PostsController < ApplicationController
 	end
 
 	# 发帖
-	# 参数：post[title]帖子标题 post[content]帖子内容 post_parent[id]父帖子id
-	# 可选参数：token
+	# 参数：post[title]帖子标题 post[content]帖子内容 parent_post[id]父帖子id
+	# 可选参数：token用户验证
 	# 成功：1
 	# 失败：0
 	def new
@@ -30,29 +30,9 @@ class MobileApp::PostsController < ApplicationController
 			else
 				signTokenId = session[:signToken]
 			end
-			currentUser = SignToken.find(signTokenId).user
+			currentUserId = SignToken.find(signTokenId).user.getId
 
-			if currentUser
-				post = Post.new
-				post.title = params[:post][:title]
-				post.content = params[:post][:content]
-				if params[:post_parent]
-					postParent = PostParent.new
-					postParent.post = post
-					postParentPost = Post.find(params[:post_parent][:id])
-					postParent.post_parent_id = postParentPost.getId
-					postParent.save
-
-					postChild = PostChild.new
-					postChild.post = postParentPost
-					postChild.post_child_id = post.getId
-					postChild.save
-				end
-
-				post.user = currentUser
-				post.save
-				result = true
-			end
+			Post.NewPost(params[:post][:title], params[:post][:content], currentUserId, params[:parent_post][:id])
 		end
 		if result
 			render json: 1
@@ -96,7 +76,7 @@ class MobileApp::PostsController < ApplicationController
 	end
 
 	private
-	
+
 	def get_posts
 		if params[:posts_for_top]
 			return package_posts_data(Post.PostsHelper.get_posts_for_top(get_posts_params, get_posts_for_top_params))
