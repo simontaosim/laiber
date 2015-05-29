@@ -13,7 +13,7 @@ class Post < ModelBase
 	def self.GetPosts(limit = nil)
 		limit = nil ? -1 : limit
 
-		return Post.desc(:created_at).where(:title.to_s => "null").limit(limit)
+		return Post.desc(:created_at).for_js("this.title == \"null\"").where(:tit).limit(limit)
 	end
 
 	def self.GetPostsForTop(topPostId, limit = nil)
