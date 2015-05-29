@@ -23,7 +23,7 @@ class MobileApp::PostsController < ApplicationController
 	# 成功：1
 	# 失败：0
 	def new
-		result = false
+		flag = false
 		if params[:post]
 			if params[:token]
 				signTokenId = params[:token]
@@ -36,33 +36,71 @@ class MobileApp::PostsController < ApplicationController
 			Post.NewPost(params[:post][:title], params[:post][:content], currentUserId, parentPostId)
 		end
 		if result
-			render json: 1
+			flag json: 1
 		else
-			render json: 0
+			flag json: 0
 		end
 	end
 
 	# 获取帖子
-	# 参数：posts[num]数量 posts_for_top[id]请求更新的帖子 posts_for_bottom[id]请求更老的帖子 post_parent[id]父帖子id
-	# 可选参数：
+	# 参数：posts[num]数量 posts_for_top[id]请求更新的帖子 posts_for_bottom[id]请求更老的帖子 parent_post[id]父帖子id
+	# 成功：{parent_post:*, posts:[*,*]}
+	# 失败：-1
 	def get
-		result = false
-		# if params[:post_parent]
-		# 	post = Post.find(params[:post_parent][:id])
-		# 	postChildren = []
-		# 	post.post_children.each{
-		# 		|x|
-		# 		postChildren.push(Post.find(x[:post_child_id]))
-		# 	}
-
-
-		# end
-
-		if params[:posts]
-			render json: get_posts
+		flag = false
+		result = []
+		if params[:parent_post]
+			# 查询parent_post[id]的子帖子
+			parentPost = Post.find(params[:parent_post][:id])
+			posts = parentPost.post_children
+			if params[:posts_for_top]
+				# 查询最新帖子
+				topPost = Post.find(params[:posts_for_top][:id])
+				# Post.GetPosts(topPost.index, 0).where(:post_parent)
+				parentPost.post_children.desc(:created_at).where(:created_at > topPost[:created_at]).limit(params[:posts][:num]).each{
+					|x|
+					result.push(Post.find(x.child_post_id).getPostAndUser)
+				}
+			elsif params[:posts_for_bottom]
+				bottomPost = Post.find(params[:posts_for_bottom][:id])
+				parentPost.post_children.desc(:created_at).where(:created_at < bottomPost[:created_at]).limit(params[:posts][:num]).each{
+					|x|
+					result.push(Post.find(x.child_post_id).getPostAndUser)
+				}
+			else
+				parentPost.post_children.desc(:created_at).limit(params[:posts][:num]).each{
+					|x|
+					result.push(Post.find(x.child_post_id).getPostAndUser)
+				}
+			end
+			render json: {"parent_post": parentPost.getPostAndUser, "posts": result}
+			return
 		else
-			render json: -1
+			# 查询根帖子
+			if params[:posts_for_top]
+				topPost = Post.find(params[:posts_for_top][:id])
+				Post.desc(:created_at).where(:created_at > topPost[:created_at]).limit(params[:posts][:num]).each{
+					|x|
+					result.push(x.getPostAndUser)
+				}
+			elsif params[:posts_for_bottom]
+				bottomPost = Post.find(params[:posts_for_bottom][:id])
+				Post.desc(:created_at).where(:created_at < bottomPost[:created_at]).limit(params[:posts][:num]).each{
+					|x|
+					result.push(x.getPostAndUser)
+				}
+			else
+				Post.desc(:created_at).limit(params[:posts][:num]).each{
+					|x|
+					result.push(x.getPostAndUser)
+				}
+			end
+			render json: {"posts": result}
+			return
 		end
+
+		render json: -1
+		return
 	end
 
 	def testName

@@ -3,6 +3,7 @@ class Post < ModelBase
 	include Mongoid::Timestamps
 	field :title, type: String
 	field :content, type: String
+	# field :index, type: Integer
 	has_many :post_children, dependent: :destroy
 	has_one :post_parent
 	belongs_to :user
@@ -27,6 +28,7 @@ class Post < ModelBase
 		post.title = postTitle
 		post.postContent = postContent
 		post.user = User.find(userId)
+		# post.index = Post.last ? Post.last.index + 1 : 0
 		post.save
 
 		if postParentId
