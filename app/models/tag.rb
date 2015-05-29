@@ -1,4 +1,4 @@
-class Tag
+class Tag < ModelBase
   include Mongoid::Document
   include Mongoid::Timestamps
   field :name, type: String

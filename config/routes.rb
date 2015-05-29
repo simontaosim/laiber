@@ -48,7 +48,17 @@ Rails.application.routes.draw do
   get 'mobile_app/posts/all'
   get 'mobile_app/posts/new'
   post 'mobile_app/posts/new'
+  get 'mobile_app/posts/get'
+  post 'mobile_app/posts/get'
   get 'mobile_app/posts/test'
+  get 'mobile_app/posts/testName'
+
+  get 'mobile_app/sign/signIn'
+  post 'mobile_app/sign/signIn'
+  get 'mobile_app/sign/autoSignIn'
+  post 'mobile_app/sign/autoSignIn'
+  get 'mobile_app/sign/signOut'
+  post 'mobile_app/sign/signOut'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
