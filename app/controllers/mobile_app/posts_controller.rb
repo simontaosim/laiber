@@ -31,8 +31,9 @@ class MobileApp::PostsController < ApplicationController
 				signTokenId = session[:signToken]
 			end
 			currentUserId = SignToken.find(signTokenId).user.getId
+			parentPostId = params[:parent_post] ? params[:parent_post][:id] : nil
 
-			Post.NewPost(params[:post][:title], params[:post][:content], currentUserId, params[:parent_post][:id])
+			Post.NewPost(params[:post][:title], params[:post][:content], currentUserId, parentPostId)
 		end
 		if result
 			render json: 1
@@ -46,16 +47,16 @@ class MobileApp::PostsController < ApplicationController
 	# 可选参数：
 	def get
 		result = false
-		if params[:post_parent]
-			post = Post.find(params[:post_parent][:id])
-			postChildren = []
-			post.post_children.each{
-				|x|
-				postChildren.push(Post.find(x[:post_child_id]))
-			}
+		# if params[:post_parent]
+		# 	post = Post.find(params[:post_parent][:id])
+		# 	postChildren = []
+		# 	post.post_children.each{
+		# 		|x|
+		# 		postChildren.push(Post.find(x[:post_child_id]))
+		# 	}
 
 
-		end
+		# end
 
 		if params[:posts]
 			render json: get_posts
