@@ -36,9 +36,9 @@ class MobileApp::PostsController < ApplicationController
 			Post.NewPost(params[:post][:title], params[:post][:content], currentUserId, parentPostId)
 		end
 		if result
-			flag json: 1
+			render json: 1
 		else
-			flag json: 0
+			render json: 0
 		end
 	end
 
@@ -90,7 +90,7 @@ class MobileApp::PostsController < ApplicationController
 					result.push(x.getPostAndUser)
 				}
 			else
-				Post.desc(:created_at).limit(params[:posts][:num]).each{
+				Post.desc(:created_at).where(:post_parent => []).limit(params[:posts][:num]).each{
 					|x|
 					result.push(x.getPostAndUser)
 				}
