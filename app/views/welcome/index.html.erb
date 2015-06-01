@@ -259,13 +259,14 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
               }).fail(function(){alert('请等待服务器');});
                   //================================
                   $discuss.find('.discuss_id').html('<%= @user_session.name %>:');
+                  $(".DiscussArea").prepend('<div class="allDiscuss"><div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><div class="allDiscuss_name"><span class="discuss_id">'+'<%= session[:progress]?@user_session.name.to_s: nil %> '+':</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">'+$('.W_input').first().val()+'</span></div><div class="allDdiscuss_time"><%= Time.now.to_s[0..-6] %></div></div>')
+                $('.W_input').first().val('');
+                $(this).html('发送');
                 <% else %>
                   alert("请先登录！");
                   window.location.assign("<%= new_user_session_path %>")
                 <% end %>
-                $(".DiscussArea").prepend('<div class="allDiscuss"><div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><div class="allDiscuss_name"><span class="discuss_id">'+'<%= @user_session.name.to_s %>'+':</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">'+$('.W_input').first().val()+'</span></div><div class="allDdiscuss_time"><%= Time.now.to_s[0..-6] %></div></div>')
-                $('.W_input').first().val('');
-                $(this).html('发送');
+                
               });
             });
         
