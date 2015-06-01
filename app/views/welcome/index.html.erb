@@ -146,7 +146,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
               }).done(function( msg ){ 
                 $(".DiscussArea").html('');
                 for(var i=0; i< msg.length; i++){
-                  $(".DiscussArea:first").append('<div class="allDiscuss"><div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><div class="allDiscuss_name"><span class="discuss_id">'+msg[i].user_id.$oid+':</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">钟恺是个傻逼啊！！！！！</span></div><div class="allDdiscuss_time">今日12:08</div></div> ');                
+                  $(".DiscussArea:first").append('<div class="allDiscuss"><div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><div class="allDiscuss_name"><span class="discuss_id">'+msg[i].user_id.$oid+':</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">'+msg[i].content+'</span></div><div class="allDdiscuss_time">'+new Date(msg[i].created_at).toLocaleTimeString( )+'</div></div> ');                
                 }
                 
               }).fail(function(){alert('请等待服务器');});
@@ -157,6 +157,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
 
        function getPostOwnerInfo(id){
         //获取发帖人信息
+
           $.ajax({
                 method: "GET",
                 url: "<%= welcome_get_user_info_path %>",
@@ -215,10 +216,10 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
                 beforeSend: function( xhr ) {
                   xhr.overrideMimeType( "text/plain; charset=utf-8" );
                  },
-                data: {title:'评论', content: $('.W_input').first().val(), user_id: '<%= @user_session.user_id %>', post_id: father_post_id},
+                data: {title: null, content: $('.W_input').first().val(), user_id: '<%= @user_session.user_id %>', post_id: father_post_id},
                 dataType: "json"
               }).done(function( msg ){ 
-                alert(msg.toString());
+                alert('评论成功！');
               }).fail(function(){alert('请等待服务器');});
                   //================================
                   $discuss.find('.discuss_id').html('<%= @user_session.name %>:');
@@ -226,7 +227,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
                   alert("请先登录！");
                   window.location.assign("<%= new_user_session_path %>")
                 <% end %>
-                $(".DiscussArea").prepend('<div class="allDiscuss">'+$discuss.html()+'</div>')
+                $(".DiscussArea").prepend('<div class="allDiscuss"><div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><div class="allDiscuss_name"><span class="discuss_id">'+'<%= @user_session.name.to_s %>'+':</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">'+$('.W_input').first().val()+'</span></div><div class="allDdiscuss_time"><%= Time.now.to_s[0..-6] %></div></div>')
                 $('.W_input').first().val('');
                 $(this).html('发送');
               });

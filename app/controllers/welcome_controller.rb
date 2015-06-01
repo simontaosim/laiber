@@ -2,7 +2,7 @@ class WelcomeController < ApplicationController
 
   def index
   	@title = 'Laiber——改变世界的愿景'
-  	@posts = Post.desc(:created_at).pluck(:id, :title, :image_item_ids, :created_at)
+  	@posts = Post.where(:title.gt => '' ).desc(:created_at).pluck(:id, :title, :image_item_ids, :created_at)
     @post = Post.new
     if session[:progress]
     	@user_session = UserSession.find(session[:progress].fetch("_id").fetch("$oid"))
