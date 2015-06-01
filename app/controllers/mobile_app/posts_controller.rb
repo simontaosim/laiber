@@ -51,6 +51,7 @@ class MobileApp::PostsController < ApplicationController
 		flag = false
 		result = []
 		if params[:parent_post]
+			parentPost = Post.find(params[:parent_post][:id])
 			# 查询parent_post[id]的子帖子
 			if params[:posts_for_top]
 				# 查询最新帖子
