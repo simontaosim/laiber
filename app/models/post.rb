@@ -18,14 +18,14 @@ class Post < ModelBase
 
 	def self.GetPostsForTop(topPostId, limit = nil)
 		limit = nil ? -1 : limit
-		topPost = Post.find(topPostId)
-		return Post.desc(:created_at).for_js("this.title == null").for_js("this.created_at > topPost.crea").limit(limit)
+		topPostCreatedAt = Post.find(topPostId)[:created_at]
+		return Post.desc(:created_at).for_js("this.title == null").where(:created_at.gt => topPostCreatedAt)limit(limit)
 	end
 
 	def self.GetPostsForBottom(bottomPostId, limit = nil)
 		limit = nil ? -1 : limit
 		bottomPostCreatedAt = Post.find(bottomPostId)[:created_at]
-		return Post.desc(:created_at).where(:created_at.gt => bottomPostCreatedAt).limit(limit)
+		return Post.desc(:created_at).for_js("this.title == null").where(:created_at.lt => bottomPostCreatedAt).limit(limit)
 	end
 
 	def self.GetPostsFromParentPost(parentPostId, limit = nil)
@@ -42,8 +42,8 @@ class Post < ModelBase
 	def self.GetPostsForTopFromParentPost(topPostId, parentPostId, limit = nil)
 		result = []
 		parentPost = Post.find(parentPostId)
-		topPost = Post.find(topPostId)
-		parentPost.post_children.desc(:created_at).where(:created_at > topPost[:created_at]).limit(limit).each{
+		topPostCreatedAt = Post.find(topPostId)[:created_at]
+		parentPost.post_children.desc(:created_at).where(:created_at.gt => topPostCreatedAt).limit(limit).each{
 			|x|
 			result.push(Post.find(x.child_post_id))
 		}
@@ -53,8 +53,8 @@ class Post < ModelBase
 	def self.GetPostsForBottomParentPost(bottomPostId, parentPostId, limit = nil)
 		result = []
 		parentPost = Post.find(parentPostId)
-		bottomPost = Post.find(bottomPostId)
-		parentPost.post_children.desc(:created_at).where(:created_at < bottomPost[:created_at]).limit(limit).each{
+		bottomPostCreatedAt = Post.find(bottomPostId)[:created_at]
+		parentPost.post_children.desc(:created_at).where(:created_at.lt => bottomPostCreatedAt).limit(limit).each{
 			|x|
 			result.push(Post.find(x.child_post_id))
 		}
