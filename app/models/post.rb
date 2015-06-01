@@ -18,7 +18,7 @@ class Post < ModelBase
 	def self.GetRootPosts(limit = nil)
 		limit = nil ? -1 : limit
 
-		return Post.desc(:created_at).where(:post_children.ne => []).limit(limit)
+		return Post.desc(:created_at).for_js("this.title != null").limit(limit)
 	end
 
 	def self.GetRootPostsForTop(topPostId, limit = nil)
