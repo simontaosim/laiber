@@ -1,7 +1,7 @@
 <div class="idea_head">
    <div class="idea_head_1">
 
-    <button class="am-btn am-btn-danger" id="post_btn">发帖</button>
+    <button class="am-btn am-btn-primary" id="post_btn">发帖</button>
 <div class="am-modal am-modal-loading am-modal-no-btn" tabindex="-1" id="my-modal-loading">
   <div class="am-modal-dialog">
     <div class="am-modal-hd">正在载入...</div>
@@ -76,7 +76,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
 <div class="am-popup"  id="my-popup">
   <div class="am-popup-inner">
     <div class="am-popup-hd">
-      <h4 class="am-popup-title">创建创意</h4>
+      <h4 class="am-popup-title">我的创意</h4>
       <span data-am-modal-close
             class="am-close">&times;</span>
     </div>
@@ -97,7 +97,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
                 </fieldset>
                 <fieldset>
                       <div class="am-form-group">
-                          <div><label for="doc-ta-1">文本域</label></div>
+                          <div><label for="doc-ta-1">创意详情</label></div>
                     <%= f.kindeditor :content,  :items =>
                     [
                       'source', 'justifyleft', 'justifycenter', 'justifyright', 'justifyfull',
@@ -105,15 +105,51 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
                     ]
                      %>
                   </div>
-                  <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
                 </fieldset>
       <% end %>
      </div>
     </div>
-
-
     </div>
+<!--    tag-->
+  <div class="tagheader" style="padding-left:10px;font-weight: 700;color: #555;">
+      <p>创意分类:</p>
   </div>
+   <div class="tags-list">
+    <ul class="tags-list-item nav nav-pills">
+       <button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">社交</button>   
+
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">硬件</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">媒体</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">游戏</button>
+ <button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">视频</button>
+  <button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">招聘</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">旅游</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">教育</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">金融</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">体育</button>
+  <button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">工具</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">娱乐</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">婚恋</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">健康</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">营销</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">安全</button>
+ <button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">文化</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">阅读</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">公益</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">创意</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">交通</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">O2O</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">P2P</button>
+
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">其他</button>
+</ul>
+   <p style="text-align:center;"><button type="submit" class="am-btn am-btn-primary">提交</button></p>
+</div>
+<!--   tag-->
+
+    
+  </div>
+  
 </div>
 
 
@@ -290,6 +326,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
 -->
 <!--<script src="assets/js/waterfall.js"></script>-->
 <script>
+    
 $(function() {
     var $modal = $('#my-popup');
     <% if session[:progress] %>
@@ -354,7 +391,7 @@ window.onscroll=function(){
        var oParent=document.getElementById('idea_body');
       //将数据块渲染到页面
        var dateInt=[{"img":"/assets/default.jpg","title":"项目标题","intruduce":"项目简介","Classify":"#项目分类#"},{"img":"/assets/default.jpg","title":"项目标题1","intruduce":"项目简介1","Classify":"#项目分类1#"}]
-            for(var i=0;i<dateInt.length;i++){
+       for(var i=0;i<dateInt.length;i++){
            var oBox=document.createElement('div');
            oBox.className='box';
            oParent.appendChild(oBox);   //将子元素塞进父元素里面
@@ -365,7 +402,7 @@ window.onscroll=function(){
            oPic.appendChild(oImgA)
            var oImg=document.createElement('img')
            oImg.src=dateInt[i].img;
-           oImgA.appendChild(oImg);
+           oImgA.appendChild(oImg);  //onload事件
            var oIdea=document.createElement('div');
            oIdea.className='ideaTitle';
            oPic.appendChild(oIdea);
@@ -393,7 +430,7 @@ window.onscroll=function(){
             oBox.style.top=minH+'px';
             oBox.style.left=oBoxW*index+'px';
        } //for
- }
+}
 }
 }
 function waterfall(parent,box){
@@ -403,7 +440,7 @@ function waterfall(parent,box){
     oBoxW=oBoxs[0].offsetWidth;
     var
     cols=Math.floor(document.documentElement.clientWidth/oBoxW);
-Oparent.style.cssText='width:'+oBoxW*cols+'px;margin:0 auto;'//设置idea_body的宽度
+    Oparent.style.cssText='width:'+ oBoxW*cols +'px;margin:0 auto;'//设置idea_body的宽度
     for(var i=0;i<oBoxs.length;i++){
         if(i<cols){
             hArr.push(oBoxs[i].offsetHeight);//将第一行盒子高度放入hArr数组中
@@ -429,17 +466,17 @@ Oparent.style.cssText='width:'+oBoxW*cols+'px;margin:0 auto;'//设置idea_body�
         return boxArr;
     }//封装一个函数，用于取出idea_body下的所有box函数
     function  getMinhIndex(arr,val){
-    for(var i in arr){
-        if(arr[i]==val){
-        return i;
+        for(var i in arr){
+            if(arr[i]==val){
+            return i;
+            }
         }
     }
-    }
-      function checkScrollSlide(){
-    var oParent=document.getElementById('idea_body');
-    var oBoxs=getByClass(oParent,'box');
-    var lastBoxH=oBoxs[oBoxs.length-1].offsetTop+Math.floor(oBoxs[oBoxs.length-1].offsetHeight/2);
-    var scrollTop=document.body.scrollTop || document.documentElement.scrollTop;
+    function checkScrollSlide(){
+        var oParent=document.getElementById('idea_body');
+        var oBoxs=getByClass(oParent,'box');
+        var lastBoxH=oBoxs[oBoxs.length-1].offsetTop+Math.floor(oBoxs[oBoxs.length-1].offsetHeight/2);
+        var scrollTop=document.body.scrollTop || document.documentElement.scrollTop;
         var height=document.body.clientHeight || document.documentElement.clientHeight;
         return(lastBoxH<scrollTop+height)?true:false;
     }
