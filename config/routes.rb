@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'home/index'
+
   get 'welcome/get_comments'
   get 'welcome/post_one_comment'
   get 'welcome/get_one_post'
@@ -43,7 +45,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  root 'home#index'
 
   #mobileapp
   get 'mobile_app/posts/all'
