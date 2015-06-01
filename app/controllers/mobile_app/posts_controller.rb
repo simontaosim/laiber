@@ -64,7 +64,7 @@ class MobileApp::PostsController < ApplicationController
 					result.push(x.getPostAndUser)
 				}
 			else
-				Post.GetPostsFromParentPost(params[:posts_for_bottom][:id], params[:parent_post][:id], params[:posts][:num]).each{
+				Post.GetPostsFromParentPost(params[:parent_post][:id], params[:posts][:num]).each{
 					|x|
 					result.push(x.getPostAndUser)
 				}
