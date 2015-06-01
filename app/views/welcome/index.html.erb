@@ -1,7 +1,7 @@
 <div class="idea_head">
    <div class="idea_head_1">
 
-    <button class="am-btn am-btn-danger" id="post_btn">发帖</button>
+    <button class="am-btn am-btn-primary" id="post_btn">发帖</button>
 <div class="am-modal am-modal-loading am-modal-no-btn" tabindex="-1" id="my-modal-loading">
   <div class="am-modal-dialog">
     <div class="am-modal-hd">正在载入...</div>
@@ -74,7 +74,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
 <div class="am-popup"  id="my-popup">
   <div class="am-popup-inner">
     <div class="am-popup-hd">
-      <h4 class="am-popup-title">创建创意</h4>
+      <h4 class="am-popup-title">我的创意</h4>
       <span data-am-modal-close
             class="am-close">&times;</span>
     </div>
@@ -95,7 +95,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
                 </fieldset>
                 <fieldset>
                       <div class="am-form-group">
-                          <div><label for="doc-ta-1">文本域</label></div>
+                          <div><label for="doc-ta-1">创意详情</label></div>
                     <%= f.kindeditor :content,  :items =>
                     [
                       'source', 'justifyleft', 'justifycenter', 'justifyright', 'justifyfull',
@@ -109,165 +109,39 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
     </div>
     </div>
 <!--    tag-->
+  <div class="tagheader" style="padding-left:10px;font-weight: 700;color: #555;">
+      <p>创意分类:</p>
+  </div>
    <div class="tags-list">
     <ul class="tags-list-item nav nav-pills">
-    <li id="tag-社交" class="ladda-button tag first" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E7%A4%BE%E4%BA%A4" data-remote="true">
-        <span class="ladda-label">社交</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-硬件" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E7%A1%AC%E4%BB%B6" data-remote="true">
-        <span class="ladda-label">硬件</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-媒体" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E5%AA%92%E4%BD%93" data-remote="true">
-        <span class="ladda-label">媒体</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-游戏" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E6%B8%B8%E6%88%8F" data-remote="true">
-        <span class="ladda-label">游戏</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-视频" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E8%A7%86%E9%A2%91" data-remote="true">
-        <span class="ladda-label">视频</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-招聘" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E6%8B%9B%E8%81%98" data-remote="true">
-        <span class="ladda-label">招聘</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-旅游" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E6%97%85%E6%B8%B8" data-remote="true">
-        <span class="ladda-label">旅游</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-教育" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E6%95%99%E8%82%B2" data-remote="true">
-        <span class="ladda-label">教育</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-金融" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E9%87%91%E8%9E%8D" data-remote="true">
-        <span class="ladda-label">金融</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-体育" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E4%BD%93%E8%82%B2" data-remote="true">
-        <span class="ladda-label">体育</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-工具" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E5%B7%A5%E5%85%B7" data-remote="true">
-        <span class="ladda-label">工具</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-娱乐" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E5%A8%B1%E4%B9%90" data-remote="true">
-        <span class="ladda-label">娱乐</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-婚恋" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E5%A9%9A%E6%81%8B" data-remote="true">
-        <span class="ladda-label">婚恋</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-健康" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E5%81%A5%E5%BA%B7" data-remote="true">
-        <span class="ladda-label">健康</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-医疗" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E5%8C%BB%E7%96%97" data-remote="true">
-        <span class="ladda-label">医疗</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-亲子" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E4%BA%B2%E5%AD%90" data-remote="true">
-        <span class="ladda-label">亲子</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-营销" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E8%90%A5%E9%94%80" data-remote="true">
-        <span class="ladda-label">营销</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-安全" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E5%AE%89%E5%85%A8" data-remote="true">
-        <span class="ladda-label">安全</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-文化" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E6%96%87%E5%8C%96" data-remote="true">
-        <span class="ladda-label">文化</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-阅读" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E9%98%85%E8%AF%BB" data-remote="true">
-        <span class="ladda-label">阅读</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-公益" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E5%85%AC%E7%9B%8A" data-remote="true">
-        <span class="ladda-label">公益</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-创意" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E5%88%9B%E6%84%8F" data-remote="true">
-        <span class="ladda-label">创意</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-交通" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E4%BA%A4%E9%80%9A" data-remote="true">
-        <span class="ladda-label">交通</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-O2O" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=O2O" data-remote="true">
-        <span class="ladda-label">O2O</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-P2P" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=P2P" data-remote="true">
-        <span class="ladda-label">P2P</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-LBS" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=LBS" data-remote="true">
-        <span class="ladda-label">LBS</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-共享经济" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E5%85%B1%E4%BA%AB%E7%BB%8F%E6%B5%8E" data-remote="true">
-        <span class="ladda-label">共享经济</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-智能家居" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85" data-remote="true">
-        <span class="ladda-label">智能家居</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-企业服务" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E4%BC%81%E4%B8%9A%E6%9C%8D%E5%8A%A1" data-remote="true">
-        <span class="ladda-label">企业服务</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-电子商务" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E7%94%B5%E5%AD%90%E5%95%86%E5%8A%A1" data-remote="true">
-        <span class="ladda-label">电子商务</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
-    <li id="tag-生活消费" class="ladda-button tag" data-style="zoom-in" data-spinner-color="#3be0c7">
-      <a href="/projects?tag=%E7%94%9F%E6%B4%BB%E6%B6%88%E8%B4%B9" data-remote="true">
-        <span class="ladda-label">生活消费</span>
-        <span class="ladda-spinner"></span>
-</a>    </li>
+       <button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">社交</button>   
+
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">硬件</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">媒体</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">游戏</button>
+ <button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">视频</button>
+  <button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">招聘</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">旅游</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">教育</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">金融</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">体育</button>
+  <button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">工具</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">娱乐</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">婚恋</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">健康</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">营销</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">安全</button>
+ <button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">文化</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">阅读</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">公益</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">创意</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">交通</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">O2O</button>
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">P2P</button>
+
+<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">其他</button>
 </ul>
-   <p><button type="submit" class="am-btn am-btn-default">提交</button></p>
+   <p style="text-align:center;"><button type="submit" class="am-btn am-btn-primary">提交</button></p>
 </div>
 <!--   tag-->
 
@@ -388,6 +262,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
 -->
 <!--<script src="assets/js/waterfall.js"></script>-->
 <script>
+    
 $(function() {
     var $modal = $('#my-popup');
     <% if session[:progress] %>
@@ -452,7 +327,7 @@ window.onscroll=function(){
        var oParent=document.getElementById('idea_body');
       //将数据块渲染到页面
        var dateInt=[{"img":"/assets/default.jpg","title":"项目标题","intruduce":"项目简介","Classify":"#项目分类#"},{"img":"/assets/default.jpg","title":"项目标题1","intruduce":"项目简介1","Classify":"#项目分类1#"}]
-            for(var i=0;i<dateInt.length;i++){
+       for(var i=0;i<dateInt.length;i++){
            var oBox=document.createElement('div');
            oBox.className='box';
            oParent.appendChild(oBox);   //将子元素塞进父元素里面
@@ -463,7 +338,7 @@ window.onscroll=function(){
            oPic.appendChild(oImgA)
            var oImg=document.createElement('img')
            oImg.src=dateInt[i].img;
-           oImgA.appendChild(oImg);
+           oImgA.appendChild(oImg);  //onload事件
            var oIdea=document.createElement('div');
            oIdea.className='ideaTitle';
            oPic.appendChild(oIdea);
@@ -491,7 +366,7 @@ window.onscroll=function(){
             oBox.style.top=minH+'px';
             oBox.style.left=oBoxW*index+'px';
        } //for
- }
+}
 }
 }
 function waterfall(parent,box){
@@ -501,7 +376,7 @@ function waterfall(parent,box){
     oBoxW=oBoxs[0].offsetWidth;
     var
     cols=Math.floor(document.documentElement.clientWidth/oBoxW);
-Oparent.style.cssText='width:'+oBoxW*cols+'px;margin:0 auto;'//设置idea_body的宽度
+    Oparent.style.cssText='width:'+ oBoxW*cols +'px;margin:0 auto;'//设置idea_body的宽度
     for(var i=0;i<oBoxs.length;i++){
         if(i<cols){
             hArr.push(oBoxs[i].offsetHeight);//将第一行盒子高度放入hArr数组中
@@ -527,17 +402,17 @@ Oparent.style.cssText='width:'+oBoxW*cols+'px;margin:0 auto;'//设置idea_body�
         return boxArr;
     }//封装一个函数，用于取出idea_body下的所有box函数
     function  getMinhIndex(arr,val){
-    for(var i in arr){
-        if(arr[i]==val){
-        return i;
+        for(var i in arr){
+            if(arr[i]==val){
+            return i;
+            }
         }
     }
-    }
-      function checkScrollSlide(){
-    var oParent=document.getElementById('idea_body');
-    var oBoxs=getByClass(oParent,'box');
-    var lastBoxH=oBoxs[oBoxs.length-1].offsetTop+Math.floor(oBoxs[oBoxs.length-1].offsetHeight/2);
-    var scrollTop=document.body.scrollTop || document.documentElement.scrollTop;
+    function checkScrollSlide(){
+        var oParent=document.getElementById('idea_body');
+        var oBoxs=getByClass(oParent,'box');
+        var lastBoxH=oBoxs[oBoxs.length-1].offsetTop+Math.floor(oBoxs[oBoxs.length-1].offsetHeight/2);
+        var scrollTop=document.body.scrollTop || document.documentElement.scrollTop;
         var height=document.body.clientHeight || document.documentElement.clientHeight;
         return(lastBoxH<scrollTop+height)?true:false;
     }
