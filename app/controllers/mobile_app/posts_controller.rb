@@ -79,7 +79,7 @@ class MobileApp::PostsController < ApplicationController
 					result.push(x.getPostAndUser)
 				}
 			elsif params[:posts_for_bottom]
-				Post.GetPostsForBottomFrom(params[:posts_for_bottom][:id], params[:posts][:num]).each{
+				Post.GetPostsForBottom(params[:posts_for_bottom][:id], params[:posts][:num]).each{
 					|x|
 					result.push(x.getPostAndUser)
 				}
