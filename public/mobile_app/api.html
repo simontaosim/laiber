@@ -101,12 +101,28 @@
 			<div class="panel-heading">帖子相关</div>
 			<div class="panel-body">
 				<div class="panel panel-default">
+					<div class="panel-heading">帖子完整数据固定格式</div>
+					<div class="panel-body">
+						<p>{post:{id:*, title:*, content:*, created_at:*}, user:{id:*, name:*}]}</p>
+					</div>
+				</div>
+
+				<div class="panel panel-default">
 					<div class="panel-heading">发帖（包含评论）：mobile_app/posts/new</div>
 					<div class="panel-body">
-						<p>参数：post[title] post[content] post[post_parent]</p>
-						<p>可选参数：token</p>
+						<p>参数：post[title]帖子标题 post[content]帖子内容 parent_post[id]父帖子id</p>
+						<p>可选参数：token用户验证</p>
 						<p>成功：1</p>
 						<p>失败：0</p>
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">获取帖子：mobile_app/posts/get</div>
+					<div class="panel-body">
+						<p>参数：posts[num]数量 posts_for_top[id]请求更新的帖子 posts_for_bottom[id]请求更老的帖子 parent_post[id]父帖子id</p>
+						<p>成功：{parent_post:*帖子完整数据固定格式*, posts:[*帖子完整数据固定格式*, *帖子完整数据固定格式*]</p>
+						<p>失败：-1</p>
 					</div>
 				</div>
 			</div>
