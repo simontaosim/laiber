@@ -59,7 +59,7 @@ class Post < ModelBase
 	def self.GetPostsForBottomFromParentPost(bottomPostId, parentPostId, limit = nil)
 		result = []
 		parentPost = Post.find(parentPostId)
-		bottomPostCreatedAt = PostParent.where(:parent_post_id => bottomPostId).first[:created_at]
+		bottomPostCreatedAt = PostChild.where(:child_post_id => bottomPostId).first[:created_at]
 		parentPost.post_children.desc(:created_at).where(:created_at.lt => bottomPostCreatedAt).limit(limit).each{
 			|x|
 			result.push(Post.find(x.child_post_id))
