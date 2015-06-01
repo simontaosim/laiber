@@ -12,7 +12,7 @@
 </div>
 
 
-<div class="am-modal am-modal-alert" tabindex="-2" id="my-alert">
+<div class="am-modal am-modal-alert" tabindex="-2" id="my-alert" post-id=''>
   <div class="am-modal-dialog" style="height:500px;overflow:scroll;">
     <div class="am-modal-hd">创意详情</div>
     <hr>
@@ -35,17 +35,18 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
         <div class="i_input">
                 <textarea placeholder="说点什么吧..." class="W_input" action-type="check" cols="" rows="" name="" node-type="textEl" range="0&amp;0" style="overflow: hidden; line-height: 40px; outline: none; height: 40px;width:80%;border-radius: 2px; border: 1px solid rgb(204,204,204);"></textarea>
             </div>
-            <div class="discussButton"><button class="am-btn am-btn-primary am-btn-xs">发送</button></div>
+            <div class="discussButton"><button class="am-btn am-btn-primary am-btn-xs event-for-ajax">发送</button></div>
             <div class="alsoCollect">收藏了该创意的还有:<a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a>
 <a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a>
            <a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a>            
             </div>
              <hr>    
   </div>
+  <div class="DiscussArea">
 <div class="allDiscuss">
     <div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div>
     <div class="allDiscuss_name">
-    <span>一直特例独行的猪:</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">钟恺是个傻逼啊！！！！！</span>
+    <span class="discuss_id">一直特例独行的猪:</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">钟恺是个傻逼啊！！！！！</span>
     </div>
     <div class="allDdiscuss_time">今日12:08</div>
     </div>                             
@@ -53,11 +54,12 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
     <div class="allDiscuss">
     <div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div>
     <div class="allDiscuss_name">
-    <span>一直特例独行的猪:</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！</span>
+    <span class="discuss_id">一直特例独行的猪:</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！</span>
     </div>
      <div class="allDdiscuss_time">今日12:08</div>
     </div>               
     <hr> 
+    </div>
 
   
   
@@ -130,13 +132,37 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
   <hr>
 <div id="idea_body">
        <script>
-       
+       function getPostComments(id){
+        //获取评论列表
+          $.ajax({
+                method: "GET",
+                url: "<%= welcome_get_comments_path %>",
+                beforeSend: function( xhr ) {
+                  xhr.overrideMimeType( "text/plain; charset=utf-8" );
+                  $(".DiscussArea").html('评论载入中......');
+                 },
+                data: {parent_id: id, limit: 5},
+                dataType: "json"
+              }).done(function( msg ){ 
+                $(".DiscussArea").html('');
+                for(var i=0; i< msg.length; i++){
+                  $(".DiscussArea:first").append('<div class="allDiscuss"><div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><div class="allDiscuss_name"><span class="discuss_id">'+msg[i].user_id.$oid+':</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">钟恺是个傻逼啊！！！！！</span></div><div class="allDdiscuss_time">今日12:08</div></div> ');                
+                }
+                
+              }).fail(function(){alert('请等待服务器');});
+
+       }
+
+
+
        function getPostOwnerInfo(id){
+        //获取发帖人信息
           $.ajax({
                 method: "GET",
                 url: "<%= welcome_get_user_info_path %>",
                 beforeSend: function( xhr ) {
                   xhr.overrideMimeType( "text/plain; charset=utf-8" );
+
                  },
                 data: {id: id},
                 dataType: "json"
@@ -146,6 +172,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
 
        }
         function popAlert(post_id){
+          //弹出帖子详情
             var $modal = $('#my-alert');
             var $modal_landing = $('#my-modal-loading');
             
@@ -161,13 +188,49 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
                 dataType: "json"
               }).done(function( msg ) {
                   $modal_landing.modal('close');
+                  $('#my-alert').attr('post-id', msg._id.$oid.toString());
                   $('#my-alert .am-modal-hd').html(msg.title);
                   $('#my-alert article').html(msg.content);
                   getPostOwnerInfo(msg.user_id.$oid.toString())
-
+                  getPostComments(msg._id.$oid.toString())
                   $modal.modal();
               }).fail(function(){alert('请等待服务器');});
             }
+
+            
+            
+            $(document).ready(function($) {
+
+
+              $('.event-for-ajax').click(function(event) {
+                
+                var $discuss = $(".allDiscuss").first().clone();
+                var content = $discuss.find('.discusstext').html($('.W_input').first().val()).toString();
+                var father_post_id = $('#my-alert').attr('post-id').toString();
+                <% if session[:progress] %>
+                  //================================ajax发评论
+                  $.ajax({
+                method: "GET",
+                url: "<%= welcome_post_one_comment_path %>",
+                beforeSend: function( xhr ) {
+                  xhr.overrideMimeType( "text/plain; charset=utf-8" );
+                 },
+                data: {title:'评论', content: $('.W_input').first().val(), user_id: '<%= @user_session.user_id %>', post_id: father_post_id},
+                dataType: "json"
+              }).done(function( msg ){ 
+                alert(msg.toString());
+              }).fail(function(){alert('请等待服务器');});
+                  //================================
+                  $discuss.find('.discuss_id').html('<%= @user_session.name %>:');
+                <% else %>
+                  alert("请先登录！");
+                  window.location.assign("<%= new_user_session_path %>")
+                <% end %>
+                $(".DiscussArea").prepend('<div class="allDiscuss">'+$discuss.html()+'</div>')
+                $('.W_input').first().val('');
+                $(this).html('发送');
+              });
+            });
         
         
         </script>
