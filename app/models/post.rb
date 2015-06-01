@@ -3,6 +3,8 @@ class Post < ModelBase
 	include Mongoid::Timestamps
 	field :title, type: String
 	field :content, type: String
+	field :num_children, type: Integer, default: 0
+	field :has_parent, type: Boolean, default: false
 	# field :index, type: Integer
 	has_many :post_children, dependent: :destroy
 	has_one :post_parent
@@ -17,20 +19,19 @@ class Post < ModelBase
 
 	def self.GetRootPosts(limit = nil)
 		limit = nil ? -1 : limit
-
-		return Post.desc(:created_at).for_js("this.title != null").limit(limit)
+		return Post.desc(:created_at).where(:has_parent => false).limit(limit)
 	end
 
 	def self.GetRootPostsForTop(topPostId, limit = nil)
 		limit = nil ? -1 : limit
 		topPostCreatedAt = Post.find(topPostId)[:created_at]
-		return Post.desc(:created_at).for_js("this.title != null").where(:created_at.gt => topPostCreatedAt).limit(limit)
+		return Post.desc(:created_at).where(:has_parent => false).where(:created_at.gt => topPostCreatedAt).limit(limit)
 	end
 
 	def self.GetRootPostsForBottom(bottomPostId, limit = nil)
 		limit = nil ? -1 : limit
 		bottomPostCreatedAt = Post.find(bottomPostId)[:created_at]
-		return Post.desc(:created_at).for_js("this.title != null").where(:created_at.lt => bottomPostCreatedAt).limit(limit)
+		return Post.desc(:created_at).where(:has_parent => false).where(:created_at.lt => bottomPostCreatedAt).limit(limit)
 	end
 
 	def self.GetPostsFromParentPost(parentPostId, limit = nil)
@@ -47,7 +48,7 @@ class Post < ModelBase
 	def self.GetPostsForTopFromParentPost(topPostId, parentPostId, limit = nil)
 		result = []
 		parentPost = Post.find(parentPostId)
-		topPostCreatedAt = Post.find(topPostId)[:created_at]
+		topPostCreatedAt = PostChild.where(:child_post_id => topPostId).first[:created_at]
 		parentPost.post_children.desc(:created_at).where(:created_at.gt => topPostCreatedAt).limit(limit).each{
 			|x|
 			result.push(Post.find(x.child_post_id))
@@ -58,7 +59,7 @@ class Post < ModelBase
 	def self.GetPostsForBottomFromParentPost(bottomPostId, parentPostId, limit = nil)
 		result = []
 		parentPost = Post.find(parentPostId)
-		bottomPostCreatedAt = Post.find(bottomPostId)[:created_at]
+		bottomPostCreatedAt = PostParent.where(:parent_post_id => bottomPostId).first[:created_at]
 		parentPost.post_children.desc(:created_at).where(:created_at.lt => bottomPostCreatedAt).limit(limit).each{
 			|x|
 			result.push(Post.find(x.child_post_id))
@@ -72,10 +73,13 @@ class Post < ModelBase
 		post.content = postContent
 		post.user = User.find(userId)
 		# post.index = Post.last ? Post.last.index + 1 : 0
+		post.has_parent = parentPostId ? false : true
 		post.save
 
 		if parentPostId
 			parentPost = Post.find(parentPostId)
+			parentPost.num_children += 1
+			parentPost.save
 
 			postParent = PostParent.new
 			postParent.post = post
