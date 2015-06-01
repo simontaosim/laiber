@@ -12,17 +12,22 @@ class Post < ModelBase
 
 	def self.GetPosts(limit = nil)
 		limit = nil ? -1 : limit
-
-		return Post.desc(:created_at).for_js("this.title != null").limit(limit)
+		return Post.desc(:created_at).limit(limit)
 	end
 
-	def self.GetPostsForTop(topPostId, limit = nil)
+	def self.GetRootPosts(limit = nil)
+		limit = nil ? -1 : limit
+
+		return Post.desc(:created_at).where(:post_children.ne => []).limit(limit)
+	end
+
+	def self.GetRootPostsForTop(topPostId, limit = nil)
 		limit = nil ? -1 : limit
 		topPostCreatedAt = Post.find(topPostId)[:created_at]
 		return Post.desc(:created_at).for_js("this.title != null").where(:created_at.gt => topPostCreatedAt).limit(limit)
 	end
 
-	def self.GetPostsForBottom(bottomPostId, limit = nil)
+	def self.GetRootPostsForBottom(bottomPostId, limit = nil)
 		limit = nil ? -1 : limit
 		bottomPostCreatedAt = Post.find(bottomPostId)[:created_at]
 		return Post.desc(:created_at).for_js("this.title != null").where(:created_at.lt => bottomPostCreatedAt).limit(limit)
@@ -50,7 +55,7 @@ class Post < ModelBase
 		return result
 	end
 
-	def self.GetPostsForBottomParentPost(bottomPostId, parentPostId, limit = nil)
+	def self.GetPostsForBottomFromParentPost(bottomPostId, parentPostId, limit = nil)
 		result = []
 		parentPost = Post.find(parentPostId)
 		bottomPostCreatedAt = Post.find(bottomPostId)[:created_at]
