@@ -19,13 +19,13 @@ class Post < ModelBase
 	def self.GetPostsForTop(topPostId, limit = nil)
 		limit = nil ? -1 : limit
 		topPost = Post.find(topPostId)
-		return Post.desc(:created_at).for_js("this.title == null").where(:created_at > topPost[:created_at]).limit(limit)
+		return Post.desc(:created_at).for_js("this.title == null").for_js("this.created_at > topPost.created_at").limit(limit)
 	end
 
 	def self.GetPostsForBottom(bottomPostId, limit = nil)
 		limit = nil ? -1 : limit
 		bottomPost = Post.find(bottomPostId)
-		return Post.desc(:created_at).for_js("this.title == null").where(:created_at < bottomPost[:created_at]).limit(limit)
+		return Post.desc(:created_at).for_js("this.title == null").for_js("this.created_at > bottomPost.created_at").limit(limit)
 	end
 
 	def self.GetPostsFromParentPost(parentPostId, limit = nil)
