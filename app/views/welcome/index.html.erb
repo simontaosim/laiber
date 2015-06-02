@@ -283,7 +283,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
         <% if image_item.url and image_item.url.to_s != '' %>
         <a class="al-alert"  href="#"><%= image_tag image_item.url, alt: '图片' %></a>
         <% elsif image_item.url_from_content and image_item.url_from_content.to_s != '' %>
-       <a class="al-alert"  href="javascript:popAlert('<%= post[0].to_s %>')"><img src='<%= image_item.url_from_content.to_s %>', alt: '图片' %></a>
+       <a class="al-alert"  href="javascript:popAlert('<%= post[0].to_s %>')"><img src='../<%= image_item.url_from_content.to_s %>', alt: '图片' %></a>
 
         <% else %>
         <a class="al-alert" href="javascript:popAlert('<%= post[0].to_s %>')"><%= image_tag 'default.jpg', alt: '图片' %></a>
