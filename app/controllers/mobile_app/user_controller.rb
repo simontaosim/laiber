@@ -14,7 +14,6 @@ class MobileApp::UserController < ApplicationController
 	# 失败：-1
 	def setPostFavor
 		currentUser = User.GetCurrentUser(params[:token])
-		currentUser.setPostFavor(params[:isFavor], params[:post][:id])
-		render json: 0
+		currentUser.setPostFavor(params[:isFavor] == "true", params[:post][:id])
 	end
 end
