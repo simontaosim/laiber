@@ -103,11 +103,13 @@ class MobileApp::PostsController < ApplicationController
 	end
 
 	def test
-		result = []
-		Post.GetRootPosts().each{
-			|x|
-			result.push(x.getPostAndUser)
-		}
-		render json: result
+		# result = []
+		# Post.GetRootPosts().each{
+		# 	|x|
+		# 	result.push(x.getPostAndUser)
+		# }
+		# render json: result
+		Post.DeletePost("556bdcf369702d141a040000")
+		render json: 0
 	end
 end
