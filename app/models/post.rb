@@ -13,30 +13,30 @@ class Post < ModelBase
 	has_and_belongs_to_many :image_items
 
 	def self.GetPosts(limit = nil)
-		limit = nil ? -1 : limit
+		limit = limit ? limit : -1
 		return Post.desc(:created_at).limit(limit)
 	end
 
 	def self.GetRootPosts(limit = nil)
-		limit = nil ? -1 : limit
+		limit = limit ? limit : -1
 		return Post.desc(:created_at).where(:has_parent => false).limit(limit)
 	end
 
 	def self.GetRootPostsForTop(topPostId, limit = nil)
-		limit = nil ? -1 : limit
+		llimit = limit ? limit : -1
 		topPostCreatedAt = Post.find(topPostId).created_at
 		return Post.desc(:created_at).where(:has_parent => false).where(:created_at.gt => topPostCreatedAt).limit(limit)
 	end
 
 	def self.GetRootPostsForBottom(bottomPostId, limit = nil)
-		limit = nil ? -1 : limit
+		limit = limit ? limit : -1
 		bottomPostCreatedAt = Post.find(bottomPostId).created_at
 		return Post.desc(:created_at).where(:has_parent => false).where(:created_at.lt => bottomPostCreatedAt).limit(limit)
 	end
 
 	def self.GetPostsFromParentPost(parentPostId, limit = nil)
 		result = []
-		limit = nil ? -1 : limit
+		limit = limit ? limit : -1
 		parentPost = Post.find(parentPostId)
 		parentPost.post_children.desc(:created_at).limit(limit).each{
 			|x|
