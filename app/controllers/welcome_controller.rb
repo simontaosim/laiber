@@ -15,6 +15,10 @@ class WelcomeController < ApplicationController
       @user_session = UserSession.find(session[:progress].fetch("_id").fetch("$oid"))
     end
     @tags = Tag.all
+    if params[:tag_id]
+      @posts = nil
+      @posts = Tag.find(params[:tag_id]).posts.pluck(:id, :title, :image_item_ids, :created_at, :tag_ids)
+    end
 
   end
 
