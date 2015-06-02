@@ -6,7 +6,7 @@ class Post < ModelBase
 	field :num_children, type: Integer, default: 0
 	field :has_parent, type: Boolean, default: false
 	# field :index, type: Integer
-	has_many :post_children, dependent: :destroy
+	has_many :post_children
 	has_one :post_parent
 	belongs_to :user
 	has_and_belongs_to_many :tags
@@ -73,7 +73,7 @@ class Post < ModelBase
 		post.content = postContent
 		post.user = User.find(userId)
 		# post.index = Post.last ? Post.last.index + 1 : 0
-		post.has_parent = parentPostId ? false : true
+		post.has_parent = parentPostId ? true : false
 		post.save
 
 		if parentPostId
@@ -93,6 +93,30 @@ class Post < ModelBase
 		end
 
 		return post
+	end
+
+	def self.DeletePost(postId)
+		post = Post.find(postId)
+		if post.has_parent
+			postParent = post.post_parent
+			parentPost = Post.find(postParent.parent_post_id)
+			parentPost.num_children -= 1
+			parentPost.save
+
+			postChild = parentPost.post_children.where(:child_post_id => post.getId)
+			postChild.destroy
+
+			postParent.destroy
+		end
+		if post.num_children > 0
+			post.post_children.each{
+				|eachPostChild|
+				Post.DeletePost(eachPostChild.child_post_id)
+				eachPostChild.destroy
+			}
+		end
+		post.destroy
+		return 0
 	end
 
 	def getPost
