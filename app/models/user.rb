@@ -35,6 +35,16 @@ class User < ModelBase
 				self.post_favors.where(:favor_post_id => postId).first.destroy
 			end
 		end
+		return 0
+	end
+
+	def getFavorPosts
+		result = []
+		self.post_favors.desc(:created_at).each{
+			|eachPostFavor|
+			result.push(Post.find(eachPostFavor.favor_post_id))
+		}
+		return result
 	end
 
 	def auth_pass(pass)
