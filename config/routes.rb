@@ -69,6 +69,8 @@ Rails.application.routes.draw do
 
   get 'mobile_app/user/setPostFavor'
   post 'mobile_app/user/setPostFavor'
+  get 'mobile_app/user/getFavorPosts'
+  post 'mobile_app/user/getFavorPosts'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
