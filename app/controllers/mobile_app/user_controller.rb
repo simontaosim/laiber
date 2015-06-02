@@ -5,7 +5,7 @@ class MobileApp::UserController < ApplicationController
 			resource '*', :headers => :any, :methods => [:get, :post]
 		end
 	end
-	skip_before_filter :verify_authenticity_token, only: [:new, :get]
+	skip_before_filter :verify_authenticity_token, only: [:setPostFavor, :getFavorPosts]
 
 	# 设置帖子收藏关系
 	# 参数：isFavor收藏关系true/false post[id]帖子id
