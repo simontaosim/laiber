@@ -6,7 +6,13 @@ class PersonalCenterController < ApplicationController
   end
 
   def upload
+  	invitation = Invitation.new
+  	invitation.generate_code
+  	render json: invitation.code
+  end
 
+  def generate_code
+    
   end
   
   def edit

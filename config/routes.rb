@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   get 'welcome/post_one_comment'
   get 'welcome/get_one_post'
   get 'get_test/index'
-  get 'welcome/get_user_info'
+  post 'welcome/get_user_info'
+  #get 'welcome/get_user_info'
 
   get 'personal_center/edit'
 
