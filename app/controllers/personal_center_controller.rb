@@ -4,4 +4,12 @@ class PersonalCenterController < ApplicationController
   	@user_session = UserSession.find(session[:progress].fetch("_id").fetch("$oid"))
 
   end
+
+  def upload
+
+  end
+  
+  def edit
+
+  end
 end

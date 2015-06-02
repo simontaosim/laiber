@@ -5,6 +5,7 @@ class User < ModelBase
   has_many :user_sessions,  dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :sign_tokens, dependent: :destroy
+  has_many :followers, dependent: :destroy
   field :name, type: String
   field :email, type: String
   field :mobile, type: String
