@@ -65,7 +65,7 @@ class MobileApp::PostsController < ApplicationController
 					result.push(x.getPostAndUser)
 				}
 			end
-			render json: {"parent_post": parentPost.getPostAndUser, "posts": result}
+			render json: {"parent_post": parentPost.getPostAndUserAndIsFavor, "posts": result}
 			return
 		else
 			# 查询根帖子

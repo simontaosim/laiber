@@ -136,6 +136,9 @@ class Post < ModelBase
 		return {"post": getPost, "user": getUser}
 	end
 
+	def getPostAndUserAndIsFavor
+		return {"post": getPost, "user": getUser, "isFavor": self.user.isPostFavor(getId)}
+
 	def getPostAndUserAndTags
 		return {"post": getPost, "user": getUser, "tags": getTags}
 	end
