@@ -1,11 +1,15 @@
 class WelcomeController < ApplicationController
 
   def index
-  	@title = 'Laiber——改变世界的愿景'
-  	@posts = Post.where(:title.gt => '' ).desc(:created_at).pluck(:id, :title, :image_item_ids, :created_at)
+  	redirect_to welcome_show_posts_path
+  end
+
+  def show_posts
+    @title = 'Laiber——改变世界的愿景'
+    @posts = Post.where(:title.gt => '' ).desc(:created_at).pluck(:id, :title, :image_item_ids, :created_at)
     @post = Post.new
     if session[:progress]
-    	@user_session = UserSession.find(session[:progress].fetch("_id").fetch("$oid"))
+      @user_session = UserSession.find(session[:progress].fetch("_id").fetch("$oid"))
     end
   end
 

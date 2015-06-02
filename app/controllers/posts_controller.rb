@@ -49,7 +49,7 @@ class PostsController < ApplicationController
           end
           @post.image_items.push(image_items)
           @post.save
-          redirect_to root_url, notice: '发帖成功'
+          redirect_to welcome_index_url, notice: '发帖成功'
           # render json: image_urls
 
         else

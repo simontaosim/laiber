@@ -27,6 +27,8 @@ gem 'rails_admin'
 
 gem 'devise'
 
+gem 'puma'
+
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 
 gem 'mongoid-grid_fs', github: 'ahoward/mongoid-grid_fs'

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'home/index'
-
+  get 'welcome/show_posts'
   get 'welcome/get_comments'
   get 'welcome/post_one_comment'
   get 'welcome/get_one_post'
