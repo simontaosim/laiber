@@ -24,13 +24,13 @@ class Post < ModelBase
 
 	def self.GetRootPostsForTop(topPostId, limit = nil)
 		limit = nil ? -1 : limit
-		topPostCreatedAt = Post.find(topPostId)[:created_at]
+		topPostCreatedAt = Post.find(topPostId).created_at
 		return Post.desc(:created_at).where(:has_parent => false).where(:created_at.gt => topPostCreatedAt).limit(limit)
 	end
 
 	def self.GetRootPostsForBottom(bottomPostId, limit = nil)
 		limit = nil ? -1 : limit
-		bottomPostCreatedAt = Post.find(bottomPostId)[:created_at]
+		bottomPostCreatedAt = Post.find(bottomPostId).created_at
 		return Post.desc(:created_at).where(:has_parent => false).where(:created_at.lt => bottomPostCreatedAt).limit(limit)
 	end
 
@@ -48,7 +48,7 @@ class Post < ModelBase
 	def self.GetPostsForTopFromParentPost(topPostId, parentPostId, limit = nil)
 		result = []
 		parentPost = Post.find(parentPostId)
-		topPostCreatedAt = PostChild.where(:child_post_id => topPostId).first[:created_at]
+		topPostCreatedAt = PostChild.where(:child_post_id => topPostId).first.created_at
 		parentPost.post_children.desc(:created_at).where(:created_at.gt => topPostCreatedAt).limit(limit).each{
 			|x|
 			result.push(Post.find(x.child_post_id))
@@ -59,7 +59,7 @@ class Post < ModelBase
 	def self.GetPostsForBottomFromParentPost(bottomPostId, parentPostId, limit = nil)
 		result = []
 		parentPost = Post.find(parentPostId)
-		bottomPostCreatedAt = PostChild.where(:child_post_id => bottomPostId).first[:created_at]
+		bottomPostCreatedAt = PostChild.where(:child_post_id => bottomPostId).first.created_at
 		parentPost.post_children.desc(:created_at).where(:created_at.lt => bottomPostCreatedAt).limit(limit).each{
 			|x|
 			result.push(Post.find(x.child_post_id))
@@ -72,7 +72,6 @@ class Post < ModelBase
 		post.title = postTitle
 		post.content = postContent
 		post.user = User.find(userId)
-		# post.index = Post.last ? Post.last.index + 1 : 0
 		post.has_parent = parentPostId ? true : false
 		post.save
 
@@ -80,16 +79,10 @@ class Post < ModelBase
 			parentPost = Post.find(parentPostId)
 			parentPost.num_children += 1
 			parentPost.save
+			postId = post.getId
 
-			postParent = PostParent.new
-			postParent.post = post
-			postParent.parent_post_id = parentPostId
-			postParent.save
-
-			postChild = PostChild.new
-			postChild.post = parentPost
-			postChild.child_post_id = post.getId
-			postChild.save
+			PostParent.NewPostParent(postId, parentPostId)
+			PostChild.NewPostChild(parentPostId, postId)
 		end
 
 		return post
@@ -97,6 +90,10 @@ class Post < ModelBase
 
 	def self.DeletePost(postId)
 		post = Post.find(postId)
+		PostFavor.where(:favor_post_id => postId).each{
+			|eachPostFavor|
+			eachPostFavor.destroy
+		}
 		if post.has_parent
 			postParent = post.post_parent
 			parentPost = Post.find(postParent.parent_post_id)
@@ -128,12 +125,12 @@ class Post < ModelBase
 	end
 	
 	def getTags
-		res = []
+		result = []
 		self.tags.each_with_index{
-			|x, index|
-			res[index] = {"id": getId, "name": x.name}
+			|x|
+			result.push({"id": getId, "name": x.name})
 		}
-		return res
+		return result
 	end
 
 	def getPostAndUser
