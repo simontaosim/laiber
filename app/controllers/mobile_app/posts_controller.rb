@@ -10,9 +10,9 @@ class MobileApp::PostsController < ApplicationController
 	def all
 		# render json:{"posts":Post.all, "users":User.all}
 		result = []
-		Post.all.each_with_index{
-			|x, index|
-			result[index] = x.getPostAndUser
+		Post.GetPosts.each{
+			|x|
+			result.push(x.getPostAndUser)
 		}
 		render json: result
 	end
@@ -51,6 +51,7 @@ class MobileApp::PostsController < ApplicationController
 		flag = false
 		result = []
 		if params[:parent_post]
+			parentPost = Post.find(params[:parent_post][:id])
 			# 查询parent_post[id]的子帖子
 			if params[:posts_for_top]
 				# 查询最新帖子
@@ -64,7 +65,7 @@ class MobileApp::PostsController < ApplicationController
 					result.push(x.getPostAndUser)
 				}
 			else
-				Post.GetPostsFromParentPost(params[:posts_for_bottom][:id], params[:parent_post][:id], params[:posts][:num]).each{
+				Post.GetPostsFromParentPost(params[:parent_post][:id], params[:posts][:num]).each{
 					|x|
 					result.push(x.getPostAndUser)
 				}
@@ -74,17 +75,17 @@ class MobileApp::PostsController < ApplicationController
 		else
 			# 查询根帖子
 			if params[:posts_for_top]
-				Post.GetPostsForTop(params[:posts_for_top][:id], params[:posts][:num]).each{
+				Post.GetRootPostsForTop(params[:posts_for_top][:id], params[:posts][:num]).each{
 					|x|
 					result.push(x.getPostAndUser)
 				}
 			elsif params[:posts_for_bottom]
-				Post.GetPostsForBottom(params[:posts_for_bottom][:id], params[:posts][:num]).each{
+				Post.GetRootPostsForBottom(params[:posts_for_bottom][:id], params[:posts][:num]).each{
 					|x|
 					result.push(x.getPostAndUser)
 				}
 			else
-				Post.GetPosts(params[:posts][:num]).each{
+				Post.GetRootPosts(params[:posts][:num]).each{
 					|x|
 					result.push(x.getPostAndUser)
 				}
@@ -102,9 +103,11 @@ class MobileApp::PostsController < ApplicationController
 	end
 
 	def test
-		res = []
-		Post.GetPosts(2, 0).each{|x| res.push(x.post_parent)}
-		render json: res
-
+		result = []
+		Post.GetRootPosts().each{
+			|x|
+			result.push(x.getPostAndUser)
+		}
+		render json: result
 	end
 end

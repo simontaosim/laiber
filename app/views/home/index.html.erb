@@ -85,7 +85,7 @@
 <header class="am-topbar am-topbar-fixed-top">
   <div class="am-container">
     <h1 class="am-topbar-brand">
-      <a href="#"><img src="/assets/laiber_logo.png" alt=""></a>
+      <a href="<%= root_url %>"><img src="/assets/laiber_logo.png" alt=""></a>
     </h1>
 
     <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-secondary am-show-sm-only"
@@ -94,17 +94,31 @@
 
     <div class="am-collapse am-topbar-collapse" id="collapse-head">
       <ul class="am-nav am-nav-pills am-topbar-nav">
-        <li class="am-active"><a href="#">首页</a></li>
-        <li><a href="#">脑库</a></li>
+        <li class="am-active"><a href="<%= root_url %>">首页</a></li>
+        <li><a href="<%= welcome_index_path %>">脑库</a></li>
       </ul>
-
-      <div class="am-topbar-right">
-        <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm" ><span class="am-icon-pencil"></span> 注册</button>
+      <%
+        if session[:progress]
+          user_session = UserSession.find(session[:progress].fetch("_id").fetch("$oid"))
+        end
+        if user_session
+       %>
+       <div class="am-topbar-right">
+       <%= link_to '<span class="am-icon-user"></span> 登出'.html_safe(), user_session_path(user_session),
+               method: :delete,
+               data: { confirm: '您确定不?' }, class: "am-btn am-btn-secondary am-topbar-btn am-btn-sm" %>
       </div>
-
-      <div class="am-topbar-right">
-        <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> 登录</button>
+        <div class="am-topbar-right">
+        <%= link_to user_session.name.to_s, personal_center_index_path, class: "am-btn am-btn-secondary am-topbar-btn am-btn-sm" %>
       </div>
+      <% else %>
+      <div class="am-topbar-right">
+        <a href="<%= new_user_path %>" class="am-btn am-btn-secondary am-topbar-btn am-btn-sm" ><span class="am-icon-pencil"></span> 注册</a>
+      </div>
+      <div class="am-topbar-right">
+        <a href="<%= new_user_session_path %>" class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> 登录</a>
+      </div>
+      <% end %>
     </div>
   </div>
 </header>
