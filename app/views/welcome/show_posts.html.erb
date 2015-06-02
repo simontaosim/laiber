@@ -310,7 +310,13 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
   <hr>
 
  <hr>
-  <div class="ideaClassify">#文化娱乐体育#</div>
+  <div class="ideaClassify">
+  <% if post[4] %>
+  <% post[4].each do |tag| %>
+  <a href="javascript:window.location.assign('<%= welcome_show_posts_path %>?tag_id=<%= tag.to_s%>')">#<%= Tag.find(tag.to_s).name %>#</a>
+  <% end %>
+  <% end %>
+  </div>
   <div style="text-align: center;font-size: small">
     <%= post[3].in_time_zone.to_s[0..-6] %>
   </div>
