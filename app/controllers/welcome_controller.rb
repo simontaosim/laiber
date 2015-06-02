@@ -10,10 +10,11 @@ class WelcomeController < ApplicationController
     @title = 'Laiber——改变世界的愿景'
     @posts = Post.where(:title.gt => '' ).desc(:created_at).pluck(:id, :title, :image_item_ids, :created_at)
     @post = Post.new
-    @tags = Tag.all
+    
     if session[:progress]
       @user_session = UserSession.find(session[:progress].fetch("_id").fetch("$oid"))
     end
+    @tags = Tag.all
 
   end
 
