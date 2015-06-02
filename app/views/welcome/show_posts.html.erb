@@ -119,7 +119,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
     <% @tags.each do |tag| %>
        <button id="doc-single-toggle" type="button" class="post-tag-btn am-btn am-btn-default" data-am-button style="  height: 20px;line-height: 1px;" tag-id='<%= tag.id %>'><%= tag.name %></button>
     <% end %>
-    <%= hidden_field_tag :tag_ids, ''  %>
+    <%= hidden_field_tag :tag_ids, '' %>
 
 </ul>
    <p style="text-align:center;"><button id="addOnePostBtn" type="submit" class="am-btn am-btn-primary">提交</button></p>
