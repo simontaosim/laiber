@@ -116,35 +116,39 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
   </div>
    <div class="tags-list">
     <ul class="tags-list-item nav nav-pills">
-       <button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">社交</button>   
+    <% @tags.each do |tag| %>
+       <button id="doc-single-toggle" type="button" class="post-tag-btn am-btn am-btn-default" data-am-button style="  height: 20px;line-height: 1px;" tag-id='<%= tag.id %>'><%= tag.name %></button>
+    <% end %>
+    <%= hidden_field_tag :tag_ids, ''  %>
 
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">硬件</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">媒体</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">游戏</button>
- <button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">视频</button>
-  <button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">招聘</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">旅游</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">教育</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">金融</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">体育</button>
-  <button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">工具</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">娱乐</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">婚恋</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">健康</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">营销</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">安全</button>
- <button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">文化</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">阅读</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">公益</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">创意</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">交通</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">O2O</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">P2P</button>
-
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">其他</button>
 </ul>
-   <p style="text-align:center;"><button type="submit" class="am-btn am-btn-primary">提交</button></p>
+   <p style="text-align:center;"><button id="addOnePostBtn" type="submit" class="am-btn am-btn-primary">提交</button></p>
 </div>
+<script type="text/javascript">
+  $(document).ready(function($) {
+    var content = '';
+    $("#new_post").submit(function(){
+      
+      $(".post-tag-btn").each(function(index, el) {
+        if ($(this).hasClass('am-active')){
+          content += '|^'+$(this).attr('tag-id');
+          
+        }
+      });
+      $("#tag_ids").val(content);
+      if ($('#post_title').val()=='') {
+        alert('标题不能为空');
+        return false;
+      }
+      
+
+      return true;
+      
+      
+    });
+  });
+</script>
+
 <% end %>
 <!--   tag-->
 
@@ -162,7 +166,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
           <div class="am-form-group">
             <input type="text" class="am-form-field am-input-sm" placeholder="搜索创意">
           </div>
-          <button type="submit" class="am-btn am-btn-default am-btn-sm">搜索</button>
+          <button type="submit" id="searchBtn" class="am-btn am-btn-default am-btn-sm">搜索</button>
         </form>
   </div>
   </div>
@@ -358,24 +362,7 @@ $(function() {
     
 var hArr=[];//存放图片的高度，开始存第一行的四张图片的高度，之后存每一列的高度；
 var oBoxW = 0;
-var xmlhttp;
-if (window.XMLHttpRequest) {
-    xmlhttp = new XMLHttpRequest();
-}
-else {
-    xmlhttp = new ActiveXObject(Microsoft.XMLHTTP);
-};
-xmlhttp.open('GET', 'http://localhost:3000/posts/all', 'true');
-xmlhttp.send();
-    if (xmlhttp.readyState === 4) {
-        //     var data_length = xmldate.getElementsByTagName('title').length
-        //     for(var i =0;i< data_length;i++){
-        //         var titledata=xmldate.getElementsByTagName('title')[i].innerHTML);
-        //     }
-        alert(xmlhttp.responseXML);
-    }
-//
-//
+
 $(function() {
   $('#doc-prompt-toggle').on('click', function() {
     $('#my-prompt').modal({

@@ -28,9 +28,12 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+
+
     image_urls = Array.new
 
       if @post.save
+        ########装照片
         if params[:from_index]
           sub_content = post_params[:content]
           while sub_content.index('img src="') != nil do
@@ -49,8 +52,23 @@ class PostsController < ApplicationController
           end
           @post.image_items.push(image_items)
           @post.save
+
+          ########装照片
+          ##存标签
+          
+          devide_string_to_array('|^',params[:tag_ids]).each do |tag_id|
+            tag = Tag.find(tag_id)
+            @post.tags.push(tag)
+            tag.posts.push(@post)
+            tag.save
+            @post.save
+          end
+
+
+          ##存标签
+
           redirect_to welcome_index_url, notice: '发帖成功'
-          # render json: image_urls
+          #render plain: devide_string_to_array('|^',params[:tag_ids])
 
         else
           redirect_to @post, notice: '发帖成功'
@@ -95,6 +113,23 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content, :user_id)
+      params.require(:post).permit(:title, :content, :user_id, :tag_ids)
+    end
+
+    def devide_string_to_array(devide_key, content)
+      items = Array.new
+      sub_content = content
+          while sub_content.index(devide_key) != nil do
+            sub_content = sub_content[sub_content.index(devide_key)+devide_key.length..-1]
+            if sub_content.index(devide_key) == nil and sub_content != nil
+              item = sub_content[0..-1]
+              items.push(item)
+              break
+            else
+              item = sub_content[0..sub_content.index(devide_key)-1]
+              items.push(item)
+            end 
+          end
+      items
     end
 end
