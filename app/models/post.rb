@@ -5,7 +5,6 @@ class Post < ModelBase
 	field :content, type: String
 	field :num_children, type: Integer, default: 0
 	field :has_parent, type: Boolean, default: false
-	# field :index, type: Integer
 	has_many :post_children
 	has_one :post_parent
 	belongs_to :user

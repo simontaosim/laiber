@@ -1,4 +1,4 @@
-class UserController < ApplicationController
+class MobileApp::UserController < ApplicationController
 	use Rack::Cors do
 		allow do
 			origins '*', 'null'
@@ -15,18 +15,6 @@ class UserController < ApplicationController
 	def setPostFavor
 		currentUser = User.GetCurrentUser(params[:token])
 		currentUser.setPostFavor(params[:isFavor], params[:post][:id])
-		return 0
-	end
-
-	# 切换帖子收藏关系
-	# 参数： post[id]帖子id
-	# 可选参数：token用户验证
-	# 成功：0
-	# 失败：-1
-	def switchPostFavor
-		currentUser = User.GetCurrentUser(params[:token])
-		postId = params[:post][:id]
-		currentUser.setPostFavor(!currentUser.isPostFavor(postId), params[:post][:id])
 		return 0
 	end
 end
