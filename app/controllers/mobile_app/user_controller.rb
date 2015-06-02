@@ -17,4 +17,17 @@ class MobileApp::UserController < ApplicationController
 		currentUser.setPostFavor(params[:isFavor] == "true", params[:post][:id])
 		render json: 0
 	end
+
+	# 获取收藏的帖子
+	# 可选参数：token用户验证
+	# 返回：{posts:[*帖子完整数据固定格式*, *帖子完整数据固定格式*]}
+	def getFavorPosts
+		result = []
+		currentUser = User.GetCurrentUser(params[:token])
+		currentUser.getFavorPosts.each{
+			|eachFavorPost|
+			result.push(eachFavorPost.getPostAndUser)
+		}
+		render json: {"posts": result}
+	end
 end
