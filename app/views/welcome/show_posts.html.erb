@@ -159,7 +159,16 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
 
 
     </div>
-
+<div class="idea_head_3">
+  <% if @notice %>
+  <br>
+  <ol class="am-breadcrumb am-topbar-form am-topbar-left am-form-inline am-topbar-left">
+  <li><a href="<%= root_url %>">首页</a></li>
+  <li><a href="javascript: window.location.assign('<%= welcome_index_path %>');">脑库</a></li>
+  <li class="am-active"><%= @notice  %></li>
+</ol>
+  <% end %>
+</div>
 
  <div class="idea_head_2">
        <form class="am-topbar-form am-topbar-left am-form-inline am-topbar-right" role="search">
@@ -168,6 +177,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
           </div>
           <button type="submit" id="searchBtn" class="am-btn am-btn-default am-btn-sm">搜索</button>
         </form>
+        
   </div>
   </div>
   <hr>
