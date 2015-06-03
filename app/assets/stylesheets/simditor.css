@@ -269,9 +269,8 @@
 }
 .simditor .simditor-toolbar > ul > li {
   position: relative;
-  display: inline-block;
   float: left;
-  width: 10%;
+  
 }
 .simditor .simditor-toolbar > ul > li > span.separator {
   display: block;
