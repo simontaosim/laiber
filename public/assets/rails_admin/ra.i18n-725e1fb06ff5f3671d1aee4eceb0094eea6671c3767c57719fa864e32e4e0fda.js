@@ -1,0 +1,1 @@
+(function(){var t;this.RailsAdmin=function(){function t(){}return t}(),this.RailsAdmin.I18n=t=function(){function t(){}return t.init=function(t){this.locale=t},t.t=function(t){var e;return e=t.charAt(0).toUpperCase()+t.replace("_"," ").slice(1),this.locale[t]||e},t}()}).call(this);
