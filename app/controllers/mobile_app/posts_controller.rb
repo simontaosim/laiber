@@ -19,7 +19,7 @@ class MobileApp::PostsController < ApplicationController
 
 	# 发帖
 	# 参数：post[title]帖子标题 post[content]帖子内容 parent_post[id]父帖子id
-	# 可选参数：token用户验证
+	# 浏览器端参数：token用户验证
 	# 成功：1
 	# 失败：0
 	def new
@@ -38,9 +38,9 @@ class MobileApp::PostsController < ApplicationController
 		end
 	end
 
-	# 获取帖子
+	# 获取帖子{posts:[{post:{id:*, title:*, content:*}, user:{id:*, name:*}}, ...]}
 	# 参数：posts[num]数量 posts_for_top[id]请求更新的帖子 posts_for_bottom[id]请求更老的帖子 parent_post[id]父帖子id
-	# 成功：{parent_post:*, posts:[{post:{id:*, title:*, content:*, created_at:*}, user:{id:*, name:*}]}
+	# 成功：{parent_post:{post:{id:*, title:*, content:*, created_at:*}, user:{id:*, name:*}, isFavor:*}, posts:[{post:{id:*, title:*, content:*, created_at:*}, user:{id:*, name:*}}, ...]}
 	# 失败：-1
 	def get
 		flag = false
