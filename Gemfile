@@ -27,8 +27,6 @@ gem 'rails_admin'
 
 gem 'devise'
 
-gem 'puma'
-
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 
 gem 'mongoid-grid_fs', github: 'ahoward/mongoid-grid_fs'
@@ -53,7 +51,6 @@ group :development, :test do
   gem 'spring'
   gem "mongoid", "~> 4.0.0"
   gem 'thin'
-  gem 'rails_kindeditor'
 
 end
 group :production do
