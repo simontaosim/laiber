@@ -54,4 +54,8 @@ group :development, :test do
   gem "mongoid", "~> 4.0.0"
   gem 'thin'
   gem 'rails_kindeditor'
+
+end
+group :production do
+  gem 'therubyracer'
 end

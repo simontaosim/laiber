@@ -19,9 +19,6 @@ Rails.application.config.assets.precompile += %w( hotkeys.js )
 Rails.application.config.assets.precompile += %w( simditor.css )
 Rails.application.config.assets.precompile += %w( module.js )
 Rails.application.config.assets.precompile += %w( uploader.js )
-Rails.application.config.assets.precompile += %w( simditor.js )
-Dir[ Rails.root.join('kindeditor','assets','*/') ].each do |dir|
-  dir = Pathname.new(dir)
-  Rails.application.config.assets.precompile += Dir[ dir.join('**','*') ].select{ |f| File.file?(f) }.map{ |f|                      
-  Pathname.new(f).relative_path_from(dir).to_s }
-end
+Rails.application.config.assets.precompile += %w( kindeditor )
+Rails.application.config.assets.precompile += %w( kindeditor.js )
+
