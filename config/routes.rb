@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'welcome/get_comments'
   get 'welcome/post_one_comment'
   get 'welcome/get_one_post'
+  get 'welcome/get_tags'
   get 'get_test/index'
   post 'welcome/get_user_info'
   #get 'welcome/get_user_info'
