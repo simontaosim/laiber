@@ -1,0 +1,24 @@
+
+<% @invitations.each_with_index do |invi,index| %>
+  
+
+<% end %>
+<div class='panel'>
+<div class="row">
+	<table cellpadding="10">
+  <tbody>
+   <tr>
+  <% @invitations.each_with_index do |invi,index| %>
+	  <% if (index/10) >= 1 and (index%10) == 0 %>
+	  	</tr><tr><td  style="font-size: 120%; padding: 10px;"><%= invi.code %></td>
+	  <% else %>
+	   	<td  style="font-size: 120%; padding: 10px;"><%= invi.code %></td>
+	  <% end %>
+ 
+  	
+<% end %>
+</tr>
+  </tbody>
+</table>
+</div>
+</div>

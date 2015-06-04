@@ -1,4 +1,5 @@
 class UserSessionsController < ApplicationController
+  skip_before_filter :verify_authenticity_token, only: [:destroy]
   def new
   	@user = User.new
   end

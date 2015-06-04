@@ -1,7 +1,6 @@
 class WelcomeController < ApplicationController
 
   skip_before_filter :verify_authenticity_token, only: [:get_user_info]
-
   def index
   	redirect_to welcome_show_posts_path
   end

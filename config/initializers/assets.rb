@@ -16,4 +16,6 @@ Rails.application.config.assets.precompile += %w( amazeui.min.js )
 Rails.application.config.assets.precompile += %w( app.js )
 Rails.application.config.assets.precompile += %w( font-awesome.css )
 Rails.application.config.assets.precompile += %w( ckeditor/* )
+Rails.application.config.assets.precompile += %w( vendor/modernizr.js )
+
 

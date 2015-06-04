@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'idea_store/index'
+
+  get 'invitation_admin/get_200_codes'
+  get 'invitation_admin/index'
+
   mount Ckeditor::Engine => '/ckeditor'
   get 'home/index'
   get 'welcome/show_posts'
