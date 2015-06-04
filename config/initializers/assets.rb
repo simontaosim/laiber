@@ -19,6 +19,5 @@ Rails.application.config.assets.precompile += %w( hotkeys.js )
 Rails.application.config.assets.precompile += %w( simditor.css )
 Rails.application.config.assets.precompile += %w( module.js )
 Rails.application.config.assets.precompile += %w( uploader.js )
-Rails.application.config.assets.precompile += %w( kindeditor )
-Rails.application.config.assets.precompile += %w( kindeditor.js )
+Rails.application.config.assets.precompile += %w( ckeditor/* )
 

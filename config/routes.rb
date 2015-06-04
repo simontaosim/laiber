@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   get 'home/index'
   get 'welcome/show_posts'
   get 'welcome/get_comments'

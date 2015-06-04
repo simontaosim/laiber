@@ -27,6 +27,8 @@ gem 'rack-cors', '~> 0.4.0'
 gem 'devise'
 
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem 'mini_magick'
+gem 'ckeditor'
 
 gem 'mongoid-grid_fs', github: 'ahoward/mongoid-grid_fs'
 

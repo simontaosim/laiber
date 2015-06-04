@@ -1,9 +1,3 @@
-<%= stylesheet_link_tag    'simditor.css', media: 'all', 'data-turbolinks-track' => true %>
-<%= javascript_include_tag    'module.js', media: 'all', 'data-turbolinks-track' => true %>
-<%= javascript_include_tag    'hotkeys.js', media: 'all', 'data-turbolinks-track' => true %>
-<%= javascript_include_tag    'uploader.js', media: 'all', 'data-turbolinks-track' => true %>
-<%= javascript_include_tag    'simditor.js', media: 'all', 'data-turbolinks-track' => true %>
-
 <div class="idea_head">
    <div class="idea_head_1">
 
@@ -106,7 +100,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
                 <fieldset>
                       <div class="am-form-group">
                           <div><label for="doc-ta-1">创意详情</label></div>
-                    <%= f.text_area :content, placeholder: '正文' %>
+                    <%= f.cktext_area :content, :value => 'Default value', :id => 'sometext' %>
                   </div>
                 </fieldset>
       
@@ -129,9 +123,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
 </div>
 <script type="text/javascript">
   $(document).ready(function($) {
-    var editor = new Simditor({
-      textarea: $('#post_content')
-    });
+    
     
     var content = '';
     $("#new_post").submit(function(){
