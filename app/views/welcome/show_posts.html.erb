@@ -37,14 +37,16 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
    </div>
     <hr>
   <div class="ideaDiscuss">
-        <div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div>
+        <div class="idea_author_img"><a href="#">
+        <%=image_tag 'default_portrait2.jpg', style: 'width:40px;margin-left:20px;' height: '40px;' class: 'am-circle'  %>
+        </a></div>
         <div class="i_input">
                 <textarea placeholder="说点什么吧..." class="W_input" action-type="check" cols="" rows="" name="" node-type="textEl" range="0&amp;0" style="overflow: hidden; line-height: 40px; outline: none; height: 40px;width:80%;border-radius: 2px; border: 1px solid rgb(204,204,204);"></textarea>
             </div>
             <div class="discussButton"><button class="am-btn am-btn-primary am-btn-xs event-for-ajax">发送</button></div>
             <div class="alsoCollect">收藏了该创意的还有:<a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a>
-<a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a>
-           <a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a>            
+<a href="#"><%=image_tag 'default_portrait2.jpg', style: 'width:40px;margin-left:20px;' height: '40px;' class: 'am-circle'  %></a>
+           <a href="#"><%=image_tag 'default_portrait2.jpg', style: 'width:40px;margin-left:20px;' height: '40px;' class: 'am-circle'  %></a>            
             </div>
              <hr>    
   </div>
