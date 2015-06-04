@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   get 'personal_center/upload'
 
   devise_for :admins
-  mount RailsAdmin::Engine => '/poo_poo_admin', as: 'rails_admin'
   get 'personal_center/index'
 
   get 'user_mobile/is_name_exist'

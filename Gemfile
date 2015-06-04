@@ -23,7 +23,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'rack-cors', '~> 0.4.0'
 
-gem 'rails_admin'
 
 gem 'devise'
 
