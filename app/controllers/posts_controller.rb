@@ -36,8 +36,8 @@ class PostsController < ApplicationController
         ########装照片
         if params[:from_index]
           sub_content = post_params[:content]
-          while sub_content.index('img src="') != nil do
-            sub_content = sub_content[sub_content.index('img src="')+1..-1]
+          while sub_content.index('src="') != nil do
+            sub_content = sub_content[sub_content.index('src="')+1..-1]
             sub_content = sub_content[sub_content.index('"')+1..-1]
             img_url = sub_content[1..sub_content.index('"')-1]
             image_urls.push(img_url)
@@ -68,7 +68,7 @@ class PostsController < ApplicationController
           ##存标签
 
           redirect_to welcome_index_url, notice: '发帖成功'
-          #render plain: devide_string_to_array('|^',params[:tag_ids])
+          #render plain: image_urls
 
         else
           redirect_to @post, notice: '发帖成功'
