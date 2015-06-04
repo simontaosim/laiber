@@ -30,6 +30,8 @@ gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'mini_magick'
 gem 'ckeditor'
 
+gem 'foundation-rails'
+
 gem 'mongoid-grid_fs', github: 'ahoward/mongoid-grid_fs'
 
 # Use ActiveModel has_secure_password

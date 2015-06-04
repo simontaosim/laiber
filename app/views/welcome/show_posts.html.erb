@@ -86,6 +86,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
     <div class="am-popup-bd" style="background-color: white;padding:0px;">
     <div class="ideaTitle">
      <div class="am-form-group">
+     
       <%= form_for @post, :html => { :class => "am-form" }  do |f| %>
       <%= hidden_field_tag :from_index,  "1" %>
       <% if session[:progress] %>
@@ -100,7 +101,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
                 <fieldset>
                       <div class="am-form-group">
                           <div><label for="doc-ta-1">创意详情</label></div>
-                    <%= f.cktext_area :content, :value => 'Default value', :id => 'sometext' %>
+                    <%= f.cktext_area :content, :ckeditor => {:uiColor => '#BDC0BA', :toolbar => 'mini'} %>
                   </div>
                 </fieldset>
       
