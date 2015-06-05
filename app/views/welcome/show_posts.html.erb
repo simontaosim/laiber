@@ -234,6 +234,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
                 <% if @user_session %>
                 $("#commenter").find('img').attr('src', '<%= @user_session.user.head_url.thumb %>')
                 <% else %>
+                  alert('请先登录！');
                   window.location.assign('<%= new_user_session_path %>');
                 <% end %>
                 
