@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
+  get 'idea_store/get_posts'
+  get 'idea_store/get_tags'
+  get 'idea_store/get_session'
+  get 'idea_store/get_one_post'
+  get 'idea_store/get_comments'
   get 'idea_store/index'
+  get 'idea_store/get_posts_from_topid'
 
   get 'invitation_admin/get_200_codes'
   get 'invitation_admin/index'
