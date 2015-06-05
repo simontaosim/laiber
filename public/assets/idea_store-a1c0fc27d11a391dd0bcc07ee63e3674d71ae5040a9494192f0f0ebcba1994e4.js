@@ -3,10 +3,7 @@ function operateObj(obj,flag, msg){
 	if(flag == 'get_top15_posts'){
 		var rows
 		for(var i=0; i< msg.length; i++){
-      var post_box = '<div id="post'+i+'" post-id:"'+msg[i][0]['$oid']+'">post'+i+''
-      post_box += '<div id="img_box'+i+'"></div>' 
-      post_box += '</div>'
-			obj.append(post_box);
+			obj.append('<div class="post_box" id="post'+i+'" post-id:"'+msg[i][0]['$oid']+'">post'+i+'</div>');
       $('#post'+i).addClass('post_box')
 		}
 		

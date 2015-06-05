@@ -7,12 +7,13 @@ class User < ModelBase
 	has_many :sign_tokens, dependent: :destroy
 	has_many :post_favors, dependent: :destroy
 	has_many :followers, dependent: :destroy
+	has_and_belongs_to_many :tags
 	field :name, type: String
 	field :email, type: String
 	field :mobile, type: String
 	field :screct_pass, type: String
 	field :invite_code, type: String
-
+	mount_uploader :head_url, AvatarUploader
 	validates_confirmation_of :password
 	validates :password, confirmation: true
 	validates_length_of :name, :within => 3..100

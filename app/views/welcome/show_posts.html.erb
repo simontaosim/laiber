@@ -31,7 +31,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
    </div>
     <hr>
   <div class="ideaDiscuss">
-        <div class="idea_author_img"><a href="#">
+        <div class="idea_author_img" id="commenter"><a href="#">
         <%=image_tag 'default_portrait2.jpg', style: "width:40px; margin-left: 20px;", height: '40px;', class: 'am-circle'  %>
         </a></div>
         <div class="i_input">
@@ -224,6 +224,15 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
                 dataType: "json"
               }).done(function( msg ){ 
                 $obj.html(msg.name);
+                msg.head_url.url.toString()
+                if(msg.head_url.url == '')
+                {
+                  $obj.parent('div').parent('div').find(".idea_author_img").find('img').attr('src', '/assets/default_portrait2.jpg');  
+                }else{
+                  $obj.parent('div').parent('div').find(".idea_author_img").find('img').attr('src', msg.head_url.thumb.url.toString()); 
+                }
+                $("#commenter").find('img').attr('src', '<%= @user_session.user.head_url.thumb %>')
+                
               }).fail(function(){alert('请等待服务器');});
 
        }
@@ -278,7 +287,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
               }).fail(function(){alert('请等待服务器');});
                   //================================
                   $discuss.find('.discuss_id').html('<%= @user_session.name %>:');
-                  $(".DiscussArea").prepend('<div class="allDiscuss"><div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><div class="allDiscuss_name"><span class="discuss_id">'+'<%= session[:progress]?@user_session.name.to_s: nil %> '+':</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">'+$('.W_input').first().val()+'</span></div><div class="allDdiscuss_time"><%= Time.now.to_s[0..-6] %></div></div>')
+                  $(".DiscussArea").prepend('<div class="allDiscuss"><div class="idea_author_img"><a href="#"><img class="am-circle" src="<%= @user_session.user.head_url.thumb %>" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><div class="allDiscuss_name"><span class="discuss_id">'+'<%= session[:progress]?@user_session.name.to_s: nil %> '+':</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">'+$('.W_input').first().val()+'</span></div><div class="allDdiscuss_time"><%= Time.now.to_s[0..-6] %></div></div>')
                 $('.W_input').first().val('');
                 $(this).html('发送');
                 <% else %>

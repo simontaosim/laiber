@@ -23,7 +23,9 @@ Rails.application.routes.draw do
 
   get 'personal_center/edit'
 
+  post 'personal_center/upload'
   get 'personal_center/upload'
+  patch 'personal_center/upload'
 
   devise_for :admins
   get 'personal_center/index'
