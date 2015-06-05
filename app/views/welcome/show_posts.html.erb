@@ -231,7 +231,11 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
                 }else{
                   $obj.parent('div').parent('div').find(".idea_author_img").find('img').attr('src', msg.head_url.thumb.url.toString()); 
                 }
+                <% if @user_session %>
                 $("#commenter").find('img').attr('src', '<%= @user_session.user.head_url.thumb %>')
+                <% else %>
+                  window.location.assign('<%= new_user_session_path %>');
+                <% end %>
                 
               }).fail(function(){alert('请等待服务器');});
 
