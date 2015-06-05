@@ -1,1 +1,0 @@
-!function(t){"use strict";t(function(){var e=t(".admin-fullText");t("#admin-fullscreen").on("click",function(){t.AMUI.fullscreen.toggle()}),t(document).on(t.AMUI.fullscreen.raw.fullscreenchange,function(){e.text(t.AMUI.fullscreen.isFullscreen?"\u5173\u95ed\u5168\u5c4f":"\u5f00\u542f\u5168\u5c4f")})})}(jQuery);
