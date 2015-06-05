@@ -2,7 +2,9 @@ class IdeaStoreController < ApplicationController
   layout 'foundation_view'
 
   def index
-  	@notice = "你好"
+  	@title = 'Laiber——改变世界的愿景'
+    @posts = Post.where(:title.gt => '' ).desc(:created_at).limit(15).pluck(:id, :title, :image_item_ids, :created_at, :tag_ids)
+    @post = Post.new
   end
 
   def get_posts

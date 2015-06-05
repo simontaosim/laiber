@@ -16,18 +16,56 @@
     <%= javascript_include_tag "vendor/modernizr", 'data-turbolinks-track' => true %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+    <style>
+    #scrollerBox{
+    text-align: center;
+    }
+    .navDisplay{
+      position: fixed !important;
+      width: 100%;
+      z-index: 400;
+    }
+    .brDisplay{
+      position: absolute !important;
+      height: 100% !important;
+      z-index: 500;
+    }
+    .display{
+    max-width: 100% !important;
+    width: 100% !important;
+    text-align: center !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  .columnsDisplay{
+    height: auto !important;
+    margin-bottom: 5rem !important;
+    max-width: 100% !important;
+  }
+  .titleDisplay{
+    background-color: white !important;
+  }
+
+    </style>
   </head>
 
   <body>
-    <nav class="top-bar inverse" data-topbar role="navigation" data-options="is_hover: true">
-  <ul class="title-area">
-    <li class="name">
-      <h1><a href="<%=root_path %>"><%=image_tag 'laiber_logo.png', alt: "图片", class: "logo_img" %></a></h1>
+<div class="off-canvas-wrap " data-offcanvas>
+  <div class="inner-wrap">
+        <nav class="top-bar navDisplay" data-topbar role="navigation" data-options="is_hover: true">
+        <section class="left-larger">
+        
+      </section>
+  <ul class="title-area titleDisplay">
+    <li class="name active">
+    <h1 class="left-off-canvas-toggle menu-icon"><a data-tooltip aria-haspopup="true" class="has-tip" title="点击打开侧面菜单" href="#" >
+    <%=image_tag 'laiber_logo.png', alt: "点此可进入侧面菜单", width: '100' %></a>
+     </h1>
     </li>
      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-    <li class="toggle-topbar menu-icon"><a href="#"><span>菜单</span></a></li>
-  </ul>
 
+    
+  </ul>
   <section class="top-bar-section">
     <!-- Right Nav Section -->
     <ul class="right">
@@ -38,27 +76,19 @@
       <!--     登录后 -->
       <li class="has-dropdown not-click"><a href="#"><%= user_session.name %></a>
         <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li><li class="parent-link hide-for-medium-up"><a class="parent-link js-generated" href="#">Item 1</a></li>
-          <li><label>个人中心</label></li>
-          <li><a href="#">Sub-item 1</a></li>
-          <li><a href="#">Sub-item 2</a></li>
+          <li><a href="#">个人中心</a></li>
+          <li><a href="#">我的账号</a></li>
           <li class="divider"></li>
-          <li><a href="#">Sub-item 3</a></li>
-          <li class="has-dropdown not-click"><a href="#">Sub-item 4</a>
-
-            <!-- Nested Dropdown -->
-            <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li><li class="parent-link hide-for-medium-up"><a class="parent-link js-generated" href="#">Sub-item 4</a></li>
-              <li><label>Level Two</label></li>
-              <li><a href="#">Sub-item 2</a></li>
-              <li><a href="#">Sub-item 3</a></li>
-              <li><a href="#">Sub-item 4</a></li>
-            </ul>
+          <li>
+          <%= link_to '登出', user_session_path(user_session)+'?page=foundation',
+               method: :delete,
+               data: { confirm: '您确定不?' } %>
           </li>
-          <li><a href="#">Sub-item 5</a></li>
         </ul>
       </li>
     <% else %>
     <li  class="active">
-      <a href="<%= new_user_session_path %>">注册/登录</a>
+      <a href="<%= user_active_login_path %>">注册/登录</a>
     </li>
       
     <% end %>
@@ -69,11 +99,43 @@
     <!-- Left Nav Section -->
     <ul class="left">
       <li><a href="#">发帖</a></li>
+      
     </ul>
   </section>
 </nav>
 
-    <%= yield %>
+
+    <!-- Off Canvas Menu -->
+    <aside class="left-off-canvas-menu">
+        <!-- whatever you want goes here -->
+        <ul class="off-canvas-list">
+        <li><a href="<%= idea_store_index_url %>">首页</a></li>
+    <li><a href="#">推荐</a></li>
+    <li><a href="#">人气</a></li>
+    <li><a href="#">合作</a></li>
+    <li><a href="#">活跃会员</a></li>
+    <li><a href="#">关于我们</a></li>
+    </ul>
+    <br><br> 
+    <% tags = Tag.all %>
+  <div class="panel">
+  <div>标签云：</div>
+  <% tags.each_with_index do |tag,index| %>
+    <a href="#"><span><%= tag.name %></span></a>&nbsp;
+  <% end %>
+</div>
+        
+    </aside>
+<br><br><br><br>
+    <!-- main content goes here -->
+     <%= yield %>
+
+  <!-- close the off-canvas menu -->
+  <a class="exit-off-canvas"></a>
+
+  </div>
+</div>
+   
 <script>
   $(document).foundation();
 </script>

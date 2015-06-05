@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'user_active/login'
+
+  get 'user_active/logout'
+
   get 'idea_store/get_posts'
   get 'idea_store/get_tags'
   get 'idea_store/get_session'
