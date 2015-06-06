@@ -39,7 +39,6 @@
   }
   .columnsDisplay{
     height: auto !important;
-    margin-bottom: 5rem !important;
     max-width: 100% !important;
   }
   .titleDisplay{
@@ -126,8 +125,19 @@
 </div>
         
     </aside>
-<br><br><br><br>
+<br><br>
+<% if notice %>
+      <div data-alert class="alert-box"><%= notice %>
+        <a href="#" class="close">&times;</a>
+      </div>
+    <% end %>
+<br>
+
+<br>
     <!-- main content goes here -->
+    
+    
+    
      <%= yield %>
 
   <!-- close the off-canvas menu -->

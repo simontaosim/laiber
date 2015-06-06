@@ -26,16 +26,22 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.screct_pass = @user.md5(user_params[:password].to_s)
-    # @invite_code = Invitation.where(code: @user.invite_code).first
-    # if @invite_code.nil?
-    #   @invite_code.destroy
-    #   redirect_to new_user_session_path, notice: '邀请码不正确！'
-    #   return nil
-    # end
+    @invite_code = Invitation.where(code: @user.invite_code).first
+     if @invite_code.nil?
+       @invite_code.destroy
+       redirect_to new_user_session_path, notice: '邀请码不正确！'
+       return nil
+     end
     respond_to do |format|
       if @user.save
-        format.html { redirect_to new_user_session_path, notice:'注册成功，请登录' }
-        format.json { render :show, status: :created, location: @user }
+        if params[:page]=='foundation'
+          format.html { redirect_to user_active_login_path, notice:'注册成功，请登录' }
+          format.json { render :show, status: :created, location: @user }
+        else
+          format.html { redirect_to new_user_session_path, notice:'注册成功，请登录' }
+          format.json { render :show, status: :created, location: @user }
+        end
+        
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }

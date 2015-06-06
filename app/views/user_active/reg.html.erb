@@ -31,12 +31,14 @@ button:hover{box-shadow:0 15px 30px 0 rgba(255,255,255,.15) inset,0 2px 7px 0 rg
 }
 .boxDisplay{
     clear: both !important;
+    width: 800px !important;
 }
 .inputDisplay{
     clear: both !important;
     display: inline-block !important;
     color: white !important;
     background-color: black !important;
+    width: 450px !important; 
 }
 .panel{
     background-color: black !important;
@@ -76,27 +78,68 @@ $(function(){
 <style type="text/css">#yddContainer{display:block;font-family:Microsoft YaHei;position:relative;width:100%;height:100%;top:-4px;left:-4px;font-size:12px;border:1px solid}#yddTop{display:block;height:22px}#yddTopBorderlr{display:block;position:static;height:17px;padding:2px 28px;line-height:17px;font-size:12px;color:#5079bb;font-weight:bold;border-style:none solid;border-width:1px}#yddTopBorderlr .ydd-sp{position:absolute;top:2px;height:0;overflow:hidden}.ydd-icon{left:5px;width:17px;padding:0px 0px 0px 0px;padding-top:17px;background-position:-16px -44px}.ydd-close{right:5px;width:16px;padding-top:16px;background-position:left -44px}#yddKeyTitle{float:left;text-decoration:none}#yddMiddle{display:block;margin-bottom:10px}.ydd-tabs{display:block;margin:5px 0;padding:0 5px;height:18px;border-bottom:1px solid}.ydd-tab{display:block;float:left;height:18px;margin:0 5px -1px 0;padding:0 4px;line-height:18px;border:1px solid;border-bottom:none}.ydd-trans-container{display:block;line-height:160%}.ydd-trans-container a{text-decoration:none;}#yddBottom{position:absolute;bottom:0;left:0;width:100%;height:22px;line-height:22px;overflow:hidden;background-position:left -22px}.ydd-padding010{padding:0 10px}#yddWrapper{color:#252525;z-index:10001;background:url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ab20.png);}#yddContainer{background:#fff;border-color:#4b7598}#yddTopBorderlr{border-color:#f0f8fc}#yddWrapper .ydd-sp{background-image:url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ydd-sprite.png)}#yddWrapper a,#yddWrapper a:hover,#yddWrapper a:visited{color:#50799b}#yddWrapper .ydd-tabs{color:#959595}.ydd-tabs,.ydd-tab{background:#fff;border-color:#d5e7f3}#yddBottom{color:#363636}#yddWrapper{min-width:250px;max-width:400px;}</style>
 
 <div class="login-box boxDisplay">
-    <h1>登录Laiber</h1>
-    <%= form_for @user, url: user_sessions_auth_url do |f| %>
+    <h1>注册Laiber</h1>
+    <%= form_for @user,  :html => { 'data-abide': ''} do |f| %>
         <div class="name boxDisplay">
-            <%= f.text_field :name, id: "doc-ipt-3", placeholder: "用户名/邮箱/手机号码", class: "inputDisplay" %>
+        <span class="labelDisplay">用&nbsp;&nbsp;户&nbsp;&nbsp;名:&nbsp;</span>
+            <%= f.text_field :name, placeholder: "字母开头，允许4-16字节，允许字母数字下划线", class: "inputDisplay", required: '',  pattern: '^[a-zA-z]\w{3,15}$' %>
+            <br>
+            <small class="error" id="user_name_error" user-exist=''>字母开头，允许4-16字节，允许字母数字下划线</small>
         </div>
         <div class="password boxDisplay">
-            <%= f.password_field :password, id: "doc-ipt-3", placeholder: "请输入密码", class: "inputDisplay" %>
+        <span class="labelDisplay">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:&nbsp;</span>
+            <%= f.password_field :password, placeholder: "6到16由数字英文字母下划线组成", class: "inputDisplay",  required: '', pattern: '^[a-zA-Z0-9_][a-zA-Z0-9_]{5,15}$' %>
+            <small class="error">6到16由数字英文字母下划线组成</small>
         </div>
-        <div class="remember boxDisplay">
+        <div class="password boxDisplay">
+        <span class="labelDisplay">密码确认:&nbsp;</span>
+            <%= f.password_field :password_confirmation, placeholder: "再次输入密码以确认", class: "inputDisplay", required: '', pattern: "[a-zA-Z]+", 'data-equalto': "user_password" %>
+            <small class="error">两次密码不一致</small>
+        </div>
+        <div class="name boxDisplay">
+        <span class="labelDisplay">邀&nbsp;&nbsp;请&nbsp;&nbsp;码:&nbsp;</span>
+            <%= f.text_field :invite_code, placeholder: "4位数字字母组成", class: "inputDisplay", required: '', pattern: '^[a-zA-Z0-9][a-zA-Z0-9]{3}$' %>
+            <small class="error">4位数字字母组成</small>
 
-            <input class="inputDisplay" type="checkbox" id="remember" tabindex="4">
-            <label  class="labelDisplay">记住密码</label>
         </div>
         <div class="login">
+        <br> <hr><a href="#">用户协议</a><br><br><br>
         <input type="hidden" value="foundation" name='page' />
-            <button type="submit" tabindex="5">登录</button>
+            <button id="toSubmit" type="submit" tabindex="5">同意本站用户协议并注册</button>
         </div>
     <%  end %>
-    <div><span>忘记密码</span>｜<span><%= link_to '新用户注册', user_active_reg_path  %></span></div>
+    <div><span>已有账号？</span>｜<span><%= link_to '登录', user_active_login_path  %></span></div>
 </div>
-
+<script>
+    $(document).ready(function(){
+        $('input').blur(function(event) {
+            user_name = $("#user_name").val();
+            var params = {'user[user_attr]': user_name}
+            var $obj = $('#user_name_error')
+            var url = '<%= user_sessions_user_exist_path %>'
+            var flag = 'user_is_exist'
+            if(user_name != ''){
+                ByPost(params, $obj, url, flag);
+            }else{
+                $obj.show();
+            }
+        });
+        $('#toSubmit').click(function(event) {
+            window.location.href('#new_user');
+             user_name = $("#user_name").val();
+            var params = {'user[user_attr]': user_name}
+            var $obj = $('#user_name_error')
+            var url = '<%= user_sessions_user_exist_path %>'
+            var flag = 'user_is_exist'
+            if(user_name != ''){
+                ByPost(params, $obj, url, flag);
+            }else{
+                $obj.show();
+            }
+        });
+    });
+</script>
+<br><br><br><br><br>
 <div class="bottom">©2014 Laiber <a href="javascript:;" target="_blank">关于</a> <span>京ICP证030173号</span></div>
 
 <div class="screenbg">
@@ -106,5 +149,5 @@ $(function(){
         <li><a href="javascript:;"><img src="http://www.17sucai.com/preview/133362/2014-12-08/login/images/2.jpg"></a></li>
     </ul>
 </div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
 

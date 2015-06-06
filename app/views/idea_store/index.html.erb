@@ -6,11 +6,7 @@
 		padding-left: 1rem !important;
 		padding-right: 1rem !important;
 	}
-	.columnsDisplay{
-		height: auto !important;
-		margin-bottom: 5rem !important;
-		max-width: 100% !important;
-	}
+	
 	
 </style>
 
@@ -25,32 +21,41 @@
 <section id="scrollerBox" class="scroll-container  display">
 <br>
 <div class="row display">
-	<div class="row">
+	<div class="row"  data-equalizer='foo' data-equalizer-mq >
 	<% @posts.each_with_index do |post,index| %>
 		<% if (index/4) >= 1 and (index%4) == 0 %>
-	  	</div><div class="row"><div class="small-12 medium-3 large-3 columns columnsDisplay">
+	  	</div><div class="row" data-equalizer='foo' data-equalizer-mq="foo" ><div class="small-12 medium-3 large-3 columns" >
+	  	<div data-equalizer-watch="foo" class="panel" >
 	  	<h4><%= post[1] %></h4>
 	  	<% if post[2] %>
 	  		<img src="../<%= ImageItem.find(post[2][0]).url_from_content %>"  alt="">
 	  	<% else %>
 			<%= image_tag 'default.jpg', alt: '图片' %>
 	  	<% end %>
-	  	
+	  	</div>
 	  	</div>
 	  <% else %>
-	   	<div class="small-12 medium-3 large-3 columns columnsDisplay">
+	   	<div class="small-12 medium-3 large-3 columns">
+	   	<div data-equalizer-watch="foo" class="panel" >
 	   	<h4><%= post[1] %></h4>
 	   	<% if post[2] %>
 	   	<img src="../<%= ImageItem.find(post[2][0]).url_from_content %>"  alt="">
 	   	<% else %>
 	   		<%= image_tag 'default.jpg', alt: '图片' %>
 	   	<% end %>
-	   	
+	   	</div>
 	   	
 	   	</div>
 	  <% end %>
 	<% end %>
 </div>
+<script type="text/javascript">
+	$(".panel").each(function(index, el) {
+		if(index%3 == 0){
+			$(this).addClass('callout')
+		}	
+	});
+</script>
 </section>
 <div class="row pageDisplay">
 <br>

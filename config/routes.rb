@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'user_active/login'
-
+  get 'user_active/reg'
   get 'user_active/logout'
 
   get 'idea_store/get_posts'
@@ -54,7 +54,7 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
 
-  get 'user_sessions/user_exist'
+  post 'user_sessions/user_exist'
 
   get 'user_sessions/success_info'
 

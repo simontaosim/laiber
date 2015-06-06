@@ -1,5 +1,5 @@
 class UserSessionsController < ApplicationController
-  skip_before_filter :verify_authenticity_token, only: [:destroy]
+  skip_before_filter :verify_authenticity_token, only: [:destroy, :user_exist]
   def new
   	@user = User.new
   end
@@ -45,16 +45,26 @@ class UserSessionsController < ApplicationController
           @user_session.save
           session[:progress] = @user_session
 	  			respond_to do |format|
-	  				format.html{ redirect_to root_url }
+	  				format.html{ redirect_to idea_store_index_path, notice: "欢迎，"+@user_session.name }
 	  			end
 	  		else
 	  			respond_to do |format|
-  					format.html{ redirect_to new_user_session_path, notice: "密码错误" }
+            if params[:page] == 'foundation'
+              format.html{ redirect_to user_active_login_path, notice: "密码错误" }
+            else
+              format.html{ redirect_to new_user_session_path, notice: "密码错误" }
+            end
+  					
   				end
 	  		end
   		else
   			respond_to do |format|
-          format.html{ redirect_to new_user_session_path, notice: "用户名不存在" }
+          if params[:page] == 'foundation'
+              format.html{ redirect_to user_active_login_path, notice: "用户名不存在" }
+            else
+              format.html{ redirect_to new_user_session_path, notice: "用户名不存在" }
+            end
+          
   			end
   		end
 
@@ -68,8 +78,11 @@ class UserSessionsController < ApplicationController
     end
     session[:progress] = nil
     if @user_session.destroy
-
-      redirect_to root_url, notice: "您已经退出！"
+      if params[:page] == 'foundation'
+        redirect_to idea_store_index_path, notice: "您已经退出！"
+      else
+        redirect_to root_url, notice: "您已经退出！"
+      end
     end
   end
 
