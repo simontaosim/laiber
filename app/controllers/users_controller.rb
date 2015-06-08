@@ -28,9 +28,16 @@ class UsersController < ApplicationController
     @user.screct_pass = @user.md5(user_params[:password].to_s)
     @invite_code = Invitation.where(code: @user.invite_code).first
      if @invite_code.nil?
+      if params[:page] == 'foundation'
+          redirect_to user_active_reg_path, notice: '邀请码不正确'.html_safe()
+          return nil
+      else
+        redirect_to new_user_session_path, notice: '邀请码不正确！'
+        return nil
+      end
+       
+     else
        @invite_code.destroy
-       redirect_to new_user_session_path, notice: '邀请码不正确！'
-       return nil
      end
     respond_to do |format|
       if @user.save

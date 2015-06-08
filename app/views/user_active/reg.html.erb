@@ -79,6 +79,11 @@ $(function(){
 
 <div class="login-box boxDisplay">
     <h1>注册Laiber</h1>
+    <% if notice %>
+      <div data-alert class="alert-box"><%= notice %>
+        <a href="#" class="close">&times;</a>
+      </div>
+    <% end %>
     <%= form_for @user,  :html => { 'data-abide': ''} do |f| %>
         <div class="name boxDisplay">
         <span class="labelDisplay">用&nbsp;&nbsp;户&nbsp;&nbsp;名:&nbsp;</span>
