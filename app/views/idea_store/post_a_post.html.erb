@@ -10,18 +10,20 @@
 <%= form_for @post  do |f| %>
 <div class="row display">
 	<div class="small-3 medium-3 large-3 column">
-		<div class="panel callout">
-	<span>已选择分类：</span>
-	</div>
+		<div class="panel callout", id="tag_container">
+		</div>
 	<div class="panel" style="height:300px !important;">
  		<label>请选择分类</label>
 		<% Tag.all.each_with_index do |tag,index| %>
       	<div style="float:left;width:auto;height:auto !important; background-color;"><input type="checkbox" id="tag_choose<%=index%>" class='tag-check' tag-id='<%=tag.id%>' ><span style="bottom:8px;position:relative;">&nbsp;&nbsp;<%= tag.name %>&nbsp;&nbsp;</span></div>
 		<% end %>
+		<%= hidden_field_tag :tag_ids, '' %>
+		<%= hidden_field_tag :is_publish, '' %>
+		<%= hidden_field_tag :from_foundation, 'true' %>
 	</div>
 	<div class="panel">
-		<button type="submit">发表这个帖子</button>
-		<button type="button">存个草稿</button>
+		<button type="submit" id="to_post_btn" is-publish="true">发表这个帖子</button>
+		<button type="submit" id="to_save_btn" is-publish="false">存个草稿</button>
 	</div>
 	</div>
 	<div class="small-9 medium-9 large-9 column">
@@ -36,13 +38,13 @@
                 <fieldset>
                   <%= f.label "帖子标题", for: 'doc-ta-1' %>
                    <div>
-                     <%= f.text_field :title, placeholder: '' %>
+                     <%= f.text_field :title,:value=> @post_draft ? @post_draft.title : '', placeholder: '' %>
                   </div>
                 </fieldset>
                 <fieldset>
                       <div class="am-form-group">
                           <div><label for="doc-ta-1">正文</label></div>
-                    <%= f.cktext_area :content, :rows => '80', :ckeditor => {:uiColor => '#BDC0BA', :toolbar => 'full',:height => '60rem'} %>
+                    <%= f.cktext_area :content, :value => @post_draft ? @post_draft.content.html_safe() : '', :ckeditor => {:uiColor => '#BDC0BA', :toolbar => 'full',:height => '60rem'} %>
                   </div>
                 </fieldset>
       
@@ -71,9 +73,10 @@
 			});
 		$('.tag-check').each(function(index){
 			var is_changed = false;
-			$(this).change(function(event) {
+			$(this).bind('change', function(event) {
 				if(is_changed){
 					is_changed = false;
+					$(this).removeAttr('checked')
 					$('#tag'+index).remove();
 
 				}else{
@@ -81,12 +84,13 @@
 					tag = tag + $(this).parent().find('span').html();
 					tag += '<span class="close">&times;</span></span>';
 					$('.callout:first').append(tag);
+					$(this).attr("checked","checked")
 					is_changed = true;
 
 					$('.tag_to_submit').each(function(index, el) {
 					$(this).click(function(event) {
-					var i = $(this).attr("tag-index")
-					$('#tag-choose'+i).change();
+					var i = $(this).attr("tag-index");
+					$('#tag_choose'+i).removeAttr('checked');
 					$(this).remove();
 			});
 		});
@@ -94,14 +98,45 @@
 				
 			});
 		});
+		
 
+        $("#to_post_btn").click(function(event) {
+        	$("#is_publish").val($(this).attr("is-publish"));
+        });
+        $("#to_save_btn").click(function(event) {
+        	$("#is_publish").val($(this).attr("is-publish"));
+        });
+        var content = '';
 
         $("#new_post").submit(function(){
         	if($("#post_title").val()==''){
         		$('#myModal').foundation('reveal', 'open');
         		return false;
         	}
+        	if ($.trim($("#tag_container").html()).length== 0) {
+        		$("#errorM").html("请至少选择一个分类！");
+        		$('#myModal').foundation('reveal', 'open');
+        		return false;
+        	}
+        	$('input[checked]').each(function(index, el) {
+        		content += '|^'+$(this).attr('tag-id');
+        	});
+        	$("#tag_ids").val(content);
+
         });
+        
+         	$('.tag-check').each(function(index, el) {
+         		<% if @post_draft %>
+        	 <% @post_draft.tags.each do |tag| %>
+        		if($(this).attr('tag-id') == '<%= tag.id %>'){
+        			$(this).trigger('change');
+        			$('#progress_text').html("草稿保存成功！");
+        		}
+
+			<% end %>
+        	<% end %>
+        	});
+         
 
 	});
 </script>

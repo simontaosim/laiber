@@ -66,8 +66,27 @@ class PostsController < ApplicationController
 
 
           ##存标签
+          if params[:is_publish] == 'true'
+            @post.is_publish = 1
+            @post.save
+          else
+            @post.is_publish = 0
+            @post.save
+          end
+          if params[:from_foundation]
+            if params[:is_publish] == 'false'
 
-          redirect_to welcome_index_url, notice: '发帖成功'
+              redirect_to idea_store_post_a_post_path+"?draft_id="+@post.id.to_s
+
+            else
+              redirect_to idea_store_index_path, notice: '发帖成功'
+
+            end
+            
+          else
+            redirect_to welcome_index_url, notice: '发帖成功'
+          end
+          
           #render plain: image_urls
 
         else
