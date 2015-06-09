@@ -145,6 +145,7 @@
 
 .simditor {
   position: relative;
+  width: 80%;
   border: 1px solid #c9d8db;
 }
 .simditor .simditor-wrapper {
@@ -154,7 +155,7 @@
 }
 .simditor .simditor-wrapper > textarea {
   display: none !important;
-  width: 100%;
+  width: 80%;
   box-sizing: border-box;
   font-family: monaco;
   font-size: 16px;
@@ -269,6 +270,7 @@
 .simditor .simditor-toolbar > ul > li {
   position: relative;
   float: left;
+  
 }
 .simditor .simditor-toolbar > ul > li > span.separator {
   display: block;

@@ -1,16 +1,25 @@
 class WelcomeController < ApplicationController
 
+  skip_before_filter :verify_authenticity_token, only: [:get_user_info]
   def index
   	redirect_to welcome_show_posts_path
   end
 
   def show_posts
     @title = 'Laiber——改变世界的愿景'
-    @posts = Post.where(:title.gt => '' ).desc(:created_at).pluck(:id, :title, :image_item_ids, :created_at)
+    @posts = Post.where(:title.gt => '' ).desc(:created_at).pluck(:id, :title, :image_item_ids, :created_at, :tag_ids)
     @post = Post.new
+    
     if session[:progress]
       @user_session = UserSession.find(session[:progress].fetch("_id").fetch("$oid"))
     end
+    @tags = Tag.all
+    if params[:tag_id]
+      @notice = Tag.find(params[:tag_id]).name
+      @posts = nil
+      @posts = Tag.find(params[:tag_id]).posts.pluck(:id, :title, :image_item_ids, :created_at, :tag_ids)
+    end
+
   end
 
   def get_one_post
@@ -35,4 +44,28 @@ class WelcomeController < ApplicationController
   		render json: Post.GetPostsFromParentPost(params[:parent_id], nil)
   	end
   end
+  def get_tags
+    tags = Array.new
+    devide_string_to_array('|^', params[:tag_ids]).each do |tag_id|
+      tag_names.push(Tag.find(tag_id))
+    end
+    render json: tags
+  end
+  private
+  def devide_string_to_array(devide_key, content)
+      items = Array.new
+      sub_content = content
+          while sub_content.index(devide_key) != nil do
+            sub_content = sub_content[sub_content.index(devide_key)+devide_key.length..-1]
+            if sub_content.index(devide_key) == nil and sub_content != nil
+              item = sub_content[0..-1]
+              items.push(item)
+              break
+            else
+              item = sub_content[0..sub_content.index(devide_key)-1]
+              items.push(item)
+            end 
+          end
+      items
+    end
 end

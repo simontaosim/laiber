@@ -15,7 +15,7 @@ width: 30%;
     margin-right: auto;
     margin-left: auto;
        padding: 2%;
-    border: 1px solid rgb(204,204,204);
+/*    border: 1px solid rgb(204,204,204);*/
     border-radius: 8px;
 }
 
@@ -25,7 +25,7 @@ width: 30%;
     margin-right: auto;
     margin-left: auto;
     padding: 2%;
-    border: 1px solid rgb(204,204,204);
+/*    border: 1px solid rgb(204,204,204);*/
     border-radius: 8px;
 }
 
@@ -61,6 +61,7 @@ margin: 1%;
 }
 .pre_infor_tag{
 margin-top: 0;
+    margin-bottom: 13px;
 }
 .pre_infor_u_1{
 margin-left: 20%
@@ -349,5 +350,9 @@ font-weight: 100;}
 .tags-list li{
     list-style-type: none;
     
+}
+
+#post_content{
+    width: 100%;
 }
 

@@ -23,7 +23,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
 </article>
  <hr>
   <div class="idea_author">
-       <div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait1.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div>
+       <div class="idea_author_img"><a href="#"><%=image_tag 'default_portrait1.jpg', style: "width:40px; margin-left: 20px;", height: '40px;', class: 'am-circle'  %></a></div>
        <div class="idea_author_name" style="
     font-weight: 600;">陈芸莹</div>
     <div class="ideaClassfy" style="
@@ -31,20 +31,22 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
    </div>
     <hr>
   <div class="ideaDiscuss">
-        <div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div>
+        <div class="idea_author_img" id="commenter"><a href="#">
+        <%=image_tag 'default_portrait2.jpg', style: "width:40px; margin-left: 20px;", height: '40px;', class: 'am-circle'  %>
+        </a></div>
         <div class="i_input">
                 <textarea placeholder="说点什么吧..." class="W_input" action-type="check" cols="" rows="" name="" node-type="textEl" range="0&amp;0" style="overflow: hidden; line-height: 40px; outline: none; height: 40px;width:80%;border-radius: 2px; border: 1px solid rgb(204,204,204);"></textarea>
             </div>
             <div class="discussButton"><button class="am-btn am-btn-primary am-btn-xs event-for-ajax">发送</button></div>
-            <div class="alsoCollect">收藏了该创意的还有:<a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a>
-<a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a>
-           <a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a>            
+            <div class="alsoCollect">收藏了该创意的还有:<a href="#"><%=image_tag 'default_portrait2.jpg', style: "width:40px; margin-left: 20px;", height: '40px;', class: 'am-circle'  %></a>
+<a href="#"><%=image_tag 'default_portrait2.jpg', style: "width:40px; margin-left: 20px;", height: '40px;', class: 'am-circle'  %></a>
+           <a href="#"><%=image_tag 'default_portrait2.jpg', style: "width:40px; margin-left: 20px;", height: '40px;', class: 'am-circle'  %></a>            
             </div>
              <hr>    
   </div>
   <div class="DiscussArea">
 <div class="allDiscuss">
-    <div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div>
+    <div class="idea_author_img"><a href="#"><%=image_tag 'default_portrait2.jpg', style: "width:40px; margin-left: 20px;", height: '40px;', class: 'am-circle'  %></a></div>
     <div class="allDiscuss_name">
     <span class="discuss_id">一直特例独行的猪:</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">钟恺是个傻逼啊！！！！！</span>
     </div>
@@ -52,7 +54,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
     </div>                             
     <hr> 
     <div class="allDiscuss">
-    <div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div>
+    <div class="idea_author_img"><a href="#"><%=image_tag 'default_portrait2.jpg', style: "width:40px; margin-left: 20px;", height: '40px;', class: 'am-circle'  %></a></div>
     <div class="allDiscuss_name">
     <span class="discuss_id">一直特例独行的猪:</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！钟恺是个傻逼啊！！！！！</span>
     </div>
@@ -84,6 +86,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
     <div class="am-popup-bd" style="background-color: white;padding:0px;">
     <div class="ideaTitle">
      <div class="am-form-group">
+     
       <%= form_for @post, :html => { :class => "am-form" }  do |f| %>
       <%= hidden_field_tag :from_index,  "1" %>
       <% if session[:progress] %>
@@ -98,12 +101,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
                 <fieldset>
                       <div class="am-form-group">
                           <div><label for="doc-ta-1">创意详情</label></div>
-                    <%= f.kindeditor :content,  :items =>
-                    [
-                      'source', 'justifyleft', 'justifycenter', 'justifyright', 'justifyfull',
-                      'formatblock', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage', 'hr', 'link', 'unlink'
-                    ]
-                     %>
+                    <%= f.cktext_area :content, :ckeditor => {:uiColor => '#BDC0BA', :toolbar => 'mini'} %>
                   </div>
                 </fieldset>
       
@@ -116,35 +114,41 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
   </div>
    <div class="tags-list">
     <ul class="tags-list-item nav nav-pills">
-       <button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">社交</button>   
+    <% @tags.each do |tag| %>
+       <button id="doc-single-toggle" type="button" class="post-tag-btn am-btn am-btn-default" data-am-button style="  height: 20px;line-height: 1px;" tag-id='<%= tag.id %>'><%= tag.name %></button>
+    <% end %>
+    <%= hidden_field_tag :tag_ids, '' %>
 
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">硬件</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">媒体</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">游戏</button>
- <button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">视频</button>
-  <button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">招聘</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">旅游</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">教育</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">金融</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">体育</button>
-  <button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">工具</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">娱乐</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">婚恋</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">健康</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">营销</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">安全</button>
- <button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">文化</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">阅读</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">公益</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">创意</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">交通</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">O2O</button>
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">P2P</button>
-
-<button id="doc-single-toggle" type="button" class="am-btn am-btn-default " data-am-button style="  height: 20px;line-height: 1px;">其他</button>
 </ul>
-   <p style="text-align:center;"><button type="submit" class="am-btn am-btn-primary">提交</button></p>
+   <p style="text-align:center;"><button id="addOnePostBtn" type="submit" class="am-btn am-btn-primary">提交</button></p>
 </div>
+<script type="text/javascript">
+  $(document).ready(function($) {
+    
+    
+    var content = '';
+    $("#new_post").submit(function(){
+      
+      $(".post-tag-btn").each(function(index, el) {
+        if ($(this).hasClass('am-active')){
+          content += '|^'+$(this).attr('tag-id');
+          
+        }
+      });
+      $("#tag_ids").val(content);
+      if ($('#post_title').val()=='') {
+        alert('标题不能为空');
+        return false;
+      }
+      
+
+      return true;
+      
+      
+    });
+  });
+</script>
+
 <% end %>
 <!--   tag-->
 
@@ -155,15 +159,25 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
 
 
     </div>
-
+<div class="idea_head_3">
+  <% if @notice %>
+  <br>
+  <ol class="am-breadcrumb am-topbar-form am-topbar-left am-form-inline am-topbar-left">
+  <li><a href="<%= root_url %>">首页</a></li>
+  <li><a href="javascript: window.location.assign('<%= welcome_index_path %>');">脑库</a></li>
+  <li class="am-active"><%= @notice  %></li>
+</ol>
+  <% end %>
+</div>
 
  <div class="idea_head_2">
        <form class="am-topbar-form am-topbar-left am-form-inline am-topbar-right" role="search">
           <div class="am-form-group">
             <input type="text" class="am-form-field am-input-sm" placeholder="搜索创意">
           </div>
-          <button type="submit" class="am-btn am-btn-default am-btn-sm">搜索</button>
+          <button type="submit" id="searchBtn" class="am-btn am-btn-default am-btn-sm">搜索</button>
         </form>
+        
   </div>
   </div>
   <hr>
@@ -184,7 +198,10 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
               }).done(function( msg ){ 
                 $(".DiscussArea").html('');
                 for(var i=0; i< msg.length; i++){
-                  $(".DiscussArea:first").append('<div class="allDiscuss"><div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><div class="allDiscuss_name"><span class="discuss_id">'+msg[i].user_id.$oid+':</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">'+msg[i].content+'</span></div><div class="allDdiscuss_time">'+new Date(msg[i].created_at).toLocaleTimeString( )+'</div></div> ');                
+
+                  $(".DiscussArea:first").append('<div class="allDiscuss"><div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><div class="allDiscuss_name"><span id="user_discuss_'+i.toString()+'" class="discuss_id"></span>:<span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">'+msg[i].content+'</span></div><div class="allDdiscuss_time">'+new Date(msg[i].created_at).toLocaleTimeString( )+'</div></div> ');
+                      getPostOwnerInfo(msg[i].user_id.$oid.toString(),$("#user_discuss_"+i.toString()));
+
                 }
                 
               }).fail(function(){alert('请等待服务器');});
@@ -193,11 +210,11 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
 
 
 
-       function getPostOwnerInfo(id){
+       function getPostOwnerInfo(id,$obj){
         //获取发帖人信息
 
           $.ajax({
-                method: "GET",
+                method: "POST",
                 url: "<%= welcome_get_user_info_path %>",
                 beforeSend: function( xhr ) {
                   xhr.overrideMimeType( "text/plain; charset=utf-8" );
@@ -206,7 +223,20 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
                 data: {id: id},
                 dataType: "json"
               }).done(function( msg ){ 
-                $('#my-alert .idea_author_name').html(msg.name);
+                $obj.html(msg.name);
+                msg.head_url.url.toString()
+                if(msg.head_url.url == '')
+                {
+                  $obj.parent('div').parent('div').find(".idea_author_img").find('img').attr('src', '/assets/default_portrait2.jpg');  
+                }else{
+                  $obj.parent('div').parent('div').find(".idea_author_img").find('img').attr('src', msg.head_url.thumb.url.toString()); 
+                }
+                <% if @user_session %>
+                $("#commenter").find('img').attr('src', '<%= @user_session.user.head_url.thumb %>')
+                <% else %>
+                  $("#commenter").find('img').attr('src', '/assets/default_portrait2.jpg')
+                <% end %>
+                
               }).fail(function(){alert('请等待服务器');});
 
        }
@@ -230,7 +260,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
                   $('#my-alert').attr('post-id', msg._id.$oid.toString());
                   $('#my-alert .am-modal-hd').html(msg.title);
                   $('#my-alert article').html(msg.content);
-                  getPostOwnerInfo(msg.user_id.$oid.toString())
+                  getPostOwnerInfo(msg.user_id.$oid.toString(),$(".idea_author_name"));
                   getPostComments(msg._id.$oid.toString())
                   $modal.modal();
               }).fail(function(){alert('请等待服务器');});
@@ -261,7 +291,7 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
               }).fail(function(){alert('请等待服务器');});
                   //================================
                   $discuss.find('.discuss_id').html('<%= @user_session.name %>:');
-                  $(".DiscussArea").prepend('<div class="allDiscuss"><div class="idea_author_img"><a href="#"><img class="am-circle" src="/assets/default_portrait2.jpg" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><div class="allDiscuss_name"><span class="discuss_id">'+'<%= session[:progress]?@user_session.name.to_s: nil %> '+':</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">'+$('.W_input').first().val()+'</span></div><div class="allDdiscuss_time"><%= Time.now.to_s[0..-6] %></div></div>')
+                  $(".DiscussArea").prepend('<div class="allDiscuss"><div class="idea_author_img"><a href="#"><img class="am-circle" src="<%= @user_session.user.head_url.thumb %>" style="width:40px;margin-left:20px;" height="40px" alt=""/></a></div><div class="allDiscuss_name"><span class="discuss_id">'+'<%= session[:progress]?@user_session.name.to_s: nil %> '+':</span><span>&nbsp;&nbsp;&nbsp;</span><span class="discusstext">'+$('.W_input').first().val()+'</span></div><div class="allDdiscuss_time"><%= Time.now.to_s[0..-6] %></div></div>')
                 $('.W_input').first().val('');
                 $(this).html('发送');
                 <% else %>
@@ -303,7 +333,13 @@ data-am-paragraph="{ tableScrollable: true, pureview: true }">
   <hr>
 
  <hr>
-  <div class="ideaClassify">#文化娱乐体育#</div>
+  <div class="ideaClassify">
+  <% if post[4] %>
+  <% post[4].each do |tag| %>
+  <a href="javascript:window.location.assign('<%= welcome_show_posts_path %>?tag_id=<%= tag.to_s%>')">#<%= Tag.find(tag.to_s).name %>#</a>
+  <% end %>
+  <% end %>
+  </div>
   <div style="text-align: center;font-size: small">
     <%= post[3].in_time_zone.to_s[0..-6] %>
   </div>
@@ -355,24 +391,7 @@ $(function() {
     
 var hArr=[];//存放图片的高度，开始存第一行的四张图片的高度，之后存每一列的高度；
 var oBoxW = 0;
-var xmlhttp;
-if (window.XMLHttpRequest) {
-    xmlhttp = new XMLHttpRequest();
-}
-else {
-    xmlhttp = new ActiveXObject(Microsoft.XMLHTTP);
-};
-xmlhttp.open('GET', 'http://localhost:3000/posts/all', 'true');
-xmlhttp.send();
-    if (xmlhttp.readyState === 4) {
-        //     var data_length = xmldate.getElementsByTagName('title').length
-        //     for(var i =0;i< data_length;i++){
-        //         var titledata=xmldate.getElementsByTagName('title')[i].innerHTML);
-        //     }
-        alert(xmlhttp.responseXML);
-    }
-//
-//
+
 $(function() {
   $('#doc-prompt-toggle').on('click', function() {
     $('#my-prompt').modal({

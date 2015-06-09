@@ -23,13 +23,14 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'rack-cors', '~> 0.4.0'
 
-gem 'rails_admin'
 
 gem 'devise'
 
-gem 'puma'
-
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem 'mini_magick'
+gem 'ckeditor'
+
+gem 'foundation-rails'
 
 gem 'mongoid-grid_fs', github: 'ahoward/mongoid-grid_fs'
 
@@ -53,5 +54,8 @@ group :development, :test do
   gem 'spring'
   gem "mongoid", "~> 4.0.0"
   gem 'thin'
-  gem 'rails_kindeditor'
+
+end
+group :production do
+  gem 'therubyracer'
 end

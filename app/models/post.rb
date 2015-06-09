@@ -5,9 +5,11 @@ class Post < ModelBase
 	field :content, type: String
 	field :num_children, type: Integer, default: 0
 	field :has_parent, type: Boolean, default: false
+	field :is_publish, type: Integer, default: 1
 	has_many :post_children
 	has_one :post_parent
 	belongs_to :user
+	belongs_to :recommand_list
 	has_and_belongs_to_many :tags
 	has_and_belongs_to_many :image_items
 

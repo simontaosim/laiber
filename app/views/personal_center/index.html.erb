@@ -5,19 +5,39 @@
     <div class="am-g am-g-collapse">
         <div class="am-u-sm-4 am-u-md-4 am-u-lg-4 am-u-lg-push-1 " >
               <div class="usr_img">
-              <img class="am-img-circle am-img-thumbnail" src="" alt=""/>
+              <% head_url = @user.head_url %>
+              <% if head_url.thumb != '' %>
+              <img class="am-img-circle am-img-thumbnail" src="<%=head_url.thumb %>" alt=""/ style="width: 113px;height: 113px; border: none;">  
+              <% else %>
+              <img class="am-img-circle am-img-thumbnail" src="/assets/default_portrait2.jpg" alt=""/ style="width: 113px;height: 113px; border: none;">  
+              <% end %>
+              
               </div>
               </div>    
         <div class="am-u-sm-8 am-u-md-8 am-u-md-8">
+             <div calss="am-g am-u-sm-6 am-u-md-6 am-u-md-6" style="float:left;">
              <div calss="am-g">
             <div class="pre_infor_u">
-                <p>用户名：<%= @user_session.name %></p>
+                <p>用户名：<%= @user.name %></p>
             </div>
-            <div class="pre_infor_tag">
+                       <div class="pre_infor_tag">
  <p>前端&nbsp;&nbsp;美工&nbsp;&nbsp;设计&nbsp;&nbsp;产品&nbsp;&nbsp;程序员&nbsp;&nbsp;</p>
+                <span class="pre_infor_detail">粉丝数:<%= @followers_count %></span><span class="pre_infor_detail">&nbsp;&nbsp;&nbsp;&nbsp;关注数:<%= @folloeds %></span>
+                </div>
+            <div class="pre_infor_tag">
                 <span class="pre_infor_detail"><a  class="pre_infor_detail" href="<%= personal_center_edit_path %>">点击查看详细资料</a></span>
                 </div>
+                </div>
             </div>
+<!--其他用户看到，对自己不可见-->
+              <div calss="am-g am-u-sm-6 am-u-md-6 am-u-md-6" style="float:left;">
+             <button type="button" class="am-btn am-btn-success  am-btn-xs" data-am-loading="{ loadingText: '已关注', resetText: '已关注'}" style="
+    margin-left: 96px;
+">关注</button>
+              </div>
+<!--其他用户看到，对自己不可见-->
+            
+            
         </div>
 </div>
 <div>
@@ -32,7 +52,7 @@
     
     
             <div class="am-panel am-panel-default">
-         <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-2'}">参与项目<span class="am-icon-chevron-down am-fr" ></span></div>
+         <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-2'}">参与项目</div>
           <div id="collapse-panel-2" class="am-in">
             <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover">
               <tbody>
@@ -70,9 +90,9 @@
             </table>
           </div>
         </div>
-        </div>
         
         
+<!--        自己看到，其他用户看不到-->
                 <div class="am-panel am-panel-default">
           <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-2'}">收藏Idea<span class="am-icon-chevron-down am-fr" ></span></div>
           <div id="collapse-panel-2" class="am-in">
@@ -117,4 +137,13 @@
             </table>
           </div>
         </div>
-    
+    <!--        自己看到，其他用户看不到-->
+<script>
+    $('.am-btn-xs').click(function () {
+  var $btn = $(this)
+  $btn.button('loading');
+    setTimeout(function(){
+      $btn.button('reset');
+  }, 5000);
+});
+</script>
