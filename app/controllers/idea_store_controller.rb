@@ -9,7 +9,9 @@ class IdeaStoreController < ApplicationController
 
   def post_a_post
     @post = Post.new 
-    @post_draft = Post.find(params[:draft_id]);
+    if params[:draft_id]
+      @post_draft = Post.find(params[:draft_id]);
+    end
     @user_session = nil
     if session[:progress]
       @user_session = UserSession.find(session[:progress].fetch("_id").fetch("$oid"))
