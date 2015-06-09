@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  get 'idea_store/show_post'
   get 'user_active/login'
   get 'user_active/reg'
   get 'user_active/logout'

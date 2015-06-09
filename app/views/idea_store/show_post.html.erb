@@ -1,0 +1,40 @@
+<div>
+	<div>
+		<div style="text-align: center;position:relative;top:-20px; height:5rem;font-size:3rem !important;font-weight:bolder;"><%= @post.title %><span style="float:right;font-size:1rem !important;top:3rem;right:2rem; !important;position:relative;">作者：<%= @post.user.name %><br>
+		<script type="text/javascript">
+			var last =new Date('<%=@post.created_at %>').toLocaleTimeString()
+			document.write('<%=@post.created_at.to_s[0..9] %>'+last);
+		</script>
+		</span></div>
+	</div>
+	<div class="panel">
+		<div style="width:auto;background-color:white;padding:40px !important;"><%= @post.content.html_safe() %></div>
+		<div>
+		<div style="clear:both;"><br>&nbsp;&nbsp;&nbsp;&nbsp;标签：
+			<% @post.tags.each do |tag| %>
+				<span tag-index="3" class="tag_to_submit label round button" id="tag3">&nbsp;&nbsp;<%= tag.name %>&nbsp;&nbsp;</span>
+			<% end %>
+		</div>
+			
+		</div>
+		<div><input type="text"></div>	
+		<% Post.GetPostsFromParentPost(@post.id, 15).each do |comment|%>
+		<div style="background-color:white;padding-right:4rem;marge-right:4rem;padding-left:4rem;marge-left:4rem !important;">
+			<div style="width:10%;font-weight:bolder;display:inline-block;float:left;"><%= comment.user.name %>:&nbsp;
+			</div>
+			<div style="width:auto;display:inline-block;clear:left;">
+				<%= comment.content.html_safe() %>
+			</div>
+			<div style="font-size:small;bottom:1rem;">
+				<script type="text/javascript">
+					var last =new Date('<%=comment.created_at %>').toLocaleTimeString()
+					document.write('<%=comment.created_at.to_s[0..9] %>'+last+"<br>");
+				</script>
+				<hr>
+			</div>
+		</div>
+		<% end %>
+	</div>
+	<div></div>
+	<div></div>
+</div>
