@@ -66,7 +66,10 @@ class IdeaStoreController < ApplicationController
   end
 
   def show_post
-
+    @user_session = nil
+    if session[:progress]
+      @user_session = UserSession.find(session[:progress].fetch("_id").fetch("$oid"))
+    end
     if params[:post_id]
       @post = Post.find(params[:post_id])
     else
