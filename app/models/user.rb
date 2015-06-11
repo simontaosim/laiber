@@ -48,6 +48,10 @@ class User < ModelBase
 		return result
 	end
 
+	def getRootPosts
+		return self.posts.desc(:created_at).where(:has_parent => false)
+	end
+
 	def auth_pass(pass)
 		if self.screct_pass == self.md5(pass)
 			self
