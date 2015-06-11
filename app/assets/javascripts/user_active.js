@@ -26,6 +26,20 @@ function operateObj(obj,flag, msg){
 		}
 		
 	}
+	if (flag == 'collect_post') {
+		//alert(msg);
+    obj.find("#errorM").html(msg);
+    obj.foundation('reveal', 'open');
+    $("#post_collect").html('取消收藏');
+	$("#post_collect").attr('flag','cancel');
+  }
+  if (flag == 'collect_cancel') {
+		//alert(msg);
+    obj.find("#errorM").html(msg);
+    obj.foundation('reveal', 'open');
+    $("#post_collect").html('收藏');
+	$("#post_collect").attr('flag','collect');
+  }
 
 }
 //============ajax调用前的操作
@@ -45,7 +59,21 @@ function beforeOperate(obj){
                 dataType: "json"
               }).done(function( msg ){ 
                 operateObj($obj,flag, msg);
-              }).fail(function(){alert('请等待服务器');});
+              });
+	}
+	function ByPostText(params, $obj, url, flag){
+		$.ajax({
+                method: "POST",
+                url: url,
+                beforeSend: function( xhr ) {
+                  xhr.overrideMimeType( "text/plain; charset=utf-8" );
+                  beforeOperate($obj)
+                 },
+                data: params,
+                dataType: "text"
+              }).done(function( msg ){ 
+                operateObj($obj,flag, msg);
+              });
 	}
 	function ByGet(params, $obj, url, flag){
 		$.ajax({
@@ -62,6 +90,22 @@ function beforeOperate(obj){
               }).fail(function(){alert('请等待服务器');});
 
 	}
+	function ByGetText(params, $obj, url, flag){
+		$.ajax({
+                method: "GET",
+                url: url,
+                beforeSend: function( xhr ) {
+                  xhr.overrideMimeType( "text/plain; charset=utf-8" );
+
+                 },
+                data: params,
+                dataType: "text"
+              }).done(function( msg ){ 
+                operateObj($obj, flag, msg);
+              }).fail(function(){alert('请等待服务器');});
+
+	}
+
 //==============
 
 

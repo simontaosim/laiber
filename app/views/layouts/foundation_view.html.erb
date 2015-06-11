@@ -25,6 +25,7 @@
       width: 100%;
       z-index: 400;
     }
+   
     .brDisplay{
       position: absolute !important;
       height: 100% !important;
@@ -58,7 +59,8 @@
   <ul class="title-area titleDisplay">
     <li class="name active">
     <h1 class="left-off-canvas-toggle menu-icon"><a data-tooltip aria-haspopup="true" class="has-tip" title="点击打开侧面菜单" href="#" >
-    <%=image_tag 'laiber_logo.png', alt: "点此可进入侧面菜单", width: '100' %></a>
+    <!-- <span class="arrow label secondary">&laquo;</span> -->
+    ️<%=image_tag 'laiber_logo.png', alt: "点此可进入侧面菜单", width: '100' %></a>
      </h1>
     </li>
      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
@@ -107,7 +109,7 @@
     <!-- Off Canvas Menu -->
     <aside class="left-off-canvas-menu">
         <!-- whatever you want goes here -->
-        <ul class="off-canvas-list">
+        <ul class="off-canvas-list ">
         <li><a href="<%= idea_store_index_url %>">首页</a></li>
     <li><a href="#">推荐</a></li>
     <li><a href="#">人气</a></li>
