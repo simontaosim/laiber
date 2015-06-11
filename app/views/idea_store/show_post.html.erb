@@ -38,18 +38,19 @@
 				<span tag-index="3" class="tag_to_submit label round button" id="tag3">&nbsp;&nbsp;<%= tag.name %>&nbsp;&nbsp;</span>
 			<% end %>
 		</div>
+		<% if session[:progress] %>
 		<% post_favor = PostFavor.where(user_id: @post.user.id, favor_post_id: @post.id).first %>
 		<% if post_favor %>
 		<div class="collection button small" postFavor='<%=post_favor.id %>' flag='cancel' id="post_collect">取消收藏</div>
 		<% else %>
 		<div class="collection button small" flag='collect' id="post_collect">❤收藏</div>
 		<% end %>
-		
+		<% end %>
 			<br>
 		</div>
 		<div>
 		<% if @user_session %>
-		
+		<div style="text-align: center !important;position:relative !important; left:4rem !important;">
 			<div class="head-round panel" style="display:inline-block;">
 				<script type="text/javascript">
 					$(document).ready(function(){
@@ -58,7 +59,9 @@
 					})
 				</script>
 			</div>
-			<%= cktext_area_tag :content, @user_session.user.name+':说些什么呗！', :ckeditor => {:uiColor => '#BDC0BA', :toolbar => 'mini',:height => '5rem'} %>
+			
+			<%= cktext_area_tag :content, @user_session.user.name+':说些什么呗！', :ckeditor => {:uiColor => '#BDC0BA', :toolbar => 'mini',:width => '80%',:height => '5rem'} %>
+			</div>
 		</div>
 		<div class="panel display">
 			<div class="button" id="commentBtn">提交</div>	
