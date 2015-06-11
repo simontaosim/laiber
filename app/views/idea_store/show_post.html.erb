@@ -1,0 +1,169 @@
+<style>
+	.head-round{
+		border-radius: 100px 100px 0px 100px; 
+		-webkit-border-radius: 100px 100px 0px 100px; 
+		-moz-border-radius: 100px 100px 0px 100px; 
+		float:left;
+		padding: 2rem;
+		background-color: grey;
+    	background-position: center; 
+
+	}
+	.collection{
+		display: inline-block;
+		margin-right: 4rem;
+		float: right;
+		position: relative;
+		bottom: 2rem;
+		cursor: pointer;
+
+	}
+	
+
+</style>
+<div>
+	<div>
+		<div style="text-align: center;position:relative;top:-20px; height:5rem;font-size:3rem !important;font-weight:bolder;"><%= @post.title %><span style="float:right;font-size:1rem !important;top:3rem;right:2rem; !important;position:relative;">作者：<%= @post.user.name %><br>
+		<script type="text/javascript">
+			var last =new Date('<%=@post.created_at %>').toLocaleTimeString()
+			document.write('<%=@post.created_at.to_s[0..9] %>'+last);
+		</script>
+		</span></div>
+	</div>
+	<div class="panel">
+		<div style="width:auto;background-color:white;padding:40px !important;"><%= @post.content.html_safe() %></div>
+		<div>
+		<div style="clear:both;"><br>&nbsp;&nbsp;&nbsp;&nbsp;标签：
+			<% @post.tags.each do |tag| %>
+				<span tag-index="3" class="tag_to_submit label round button" id="tag3">&nbsp;&nbsp;<%= tag.name %>&nbsp;&nbsp;</span>
+			<% end %>
+		</div>
+		<% if session[:progress] %>
+		<% post_favor = PostFavor.where(user_id: @post.user.id, favor_post_id: @post.id).first %>
+		<% if post_favor %>
+		<div class="collection button small" postFavor='<%=post_favor.id %>' flag='cancel' id="post_collect">取消收藏</div>
+		<% else %>
+		<div class="collection button small" flag='collect' id="post_collect">❤收藏</div>
+		<% end %>
+		<% end %>
+			<br>
+		</div>
+		<div>
+		<% if @user_session %>
+		<div style="text-align: center !important;position:relative !important; left:4rem !important;">
+			<div class="head-round panel" style="display:inline-block;">
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$(".head-round").css("background-image",'url("<%= @user_session.user.head_url.headMini %>")');
+						$(".head-round").css("background-repeat",'no-repeat');
+					})
+				</script>
+			</div>
+			
+			<%= cktext_area_tag :content, @user_session.user.name+':说些什么呗！', :ckeditor => {:uiColor => '#BDC0BA', :toolbar => 'mini',:width => '80%',:height => '5rem'} %>
+			</div>
+		</div>
+		<div class="panel display">
+			<div class="button" id="commentBtn">提交</div>	
+		</div>
+		<% else  %>
+		<div class="panel display">
+			<div><a  class="button" href="<%= user_active_login_path %>">登录后可以评论</a></div>	
+		</div>
+		<% end  %>
+		<div id="comment_panel" class="panel">
+		<% Post.GetPostsFromParentPost(@post.id, 15).each do |comment|%>
+		<div style="background-color:white;padding-right:4rem;marge-right:4rem;padding-left:4rem;marge-left:4rem !important;">
+		<div id="head<%=comment.id%>" class="head-round panel" style="display:inline-block;">
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$("#head"+'<%= comment.id%>').css("background-image",'url("<%= comment.user.head_url.headMini %>")');
+						$("#head"+'<%= comment.id%>').css("background-repeat",'no-repeat');
+					})
+				</script>
+			</div>
+			<div style="width:10%;font-weight:bolder;display:inline-block;float:left;"><%= comment.user.name %>:&nbsp;
+			</div>
+			<div style="width:auto;display:inline-block;clear:left;">
+			<%  if comment.content %>
+				<%= comment.content.html_safe() %>
+				<% else %>
+				他没有评论成功～
+				<% end %>
+			</div>
+			<div style="font-size:small;bottom:1rem;">
+				<script type="text/javascript">
+					var last =new Date('<%=comment.created_at %>').toLocaleTimeString()
+					document.write('<%=comment.created_at.to_s[0..9] %>'+last+"<br>");
+				</script>
+				<hr>
+			</div>
+		</div>
+		<% end %>
+		</div>
+	</div>
+	<div></div>
+	<div></div>
+</div>
+<div id="myModal" class="reveal-modal tiny" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  
+  <p id="errorM" class="lead">标题不得为空</p>
+  
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#post_collect").click(function(event) {
+			if($(this).attr('flag') == 'collect'){
+				$(this).html('取消收藏');
+				$(this).attr('flag','cancel');
+				var $obj = $("#myModal");
+				var url = '<%= user_active_collect_post_path %>'
+				var params = {post_id: '<%= @post.id %>',user_id: '<%= @post.user.id %>'}
+				var flag = 'collect_post' ;
+				ByPostText(params, $obj, url, flag);
+				return false;
+				
+			}
+			if($(this).attr('flag') == 'cancel'){
+				$(this).html('收藏');
+				$(this).attr('flag','collect');
+				var $obj = $("#myModal");
+				var url = '<%= user_active_cancel_collect_post_path %>'
+				var params = {post_favor_id: $(this).attr('postFavor'),post_id: '<%= @post.id %>',user_id: '<%= @post.user.id %>'}
+				var flag = 'collect_cancel' ;
+				ByGetText(params, $obj, url, flag);
+				return false;
+			}
+			
+		});
+		$('#commentBtn').click(function(event) {
+                
+                var father_post_id = '<%= @post.id %>';
+                <% if session[:progress] %>
+                  //================================ajax发评论
+                  $.ajax({
+                method: "GET",
+                url: "<%= welcome_post_one_comment_path %>",
+                beforeSend: function( xhr ) {
+                  xhr.overrideMimeType( "text/plain; charset=utf-8" );
+                  $(this).html('发送中...');
+                 },
+                data: {title: null, content: CKEDITOR.instances.content.getData(), user_id: '<%= @user_session.user_id %>', post_id: father_post_id},
+                dataType: "json"
+              }).done(function( msg ){ 
+                $("#errorM").html('评论成功');
+                window.location.reload();
+        		$('#myModal').foundation('reveal', 'open');
+              }).fail(function(){alert('请等待服务器');});
+                  //===============================
+                	$(this).html('提交');
+                <% else %>
+                  $("#errorM").html('请先<a href="<%= user_active_login_path %>">登录</a>');
+        		$('#myModal').foundation('reveal', 'open');
+                  return false;
+                <% end %>
+                
+              });
+	})
+</script>

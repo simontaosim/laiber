@@ -85,18 +85,18 @@
 <header class="am-topbar am-topbar-fixed-top">
   <div class="am-container">
     <h1 class="am-topbar-brand">
-      <a href="<%= root_url %>"><img src="/assets/laiber_logo.png" alt="" style="
-    height: 40px;"></a>
+      <a href="<%= root_url %>"><%=image_tag 'laiber_logo.png', style: "height: 40px;" %> </a>
     </h1>
 
     <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-secondary am-show-sm-only"
             data-am-collapse="{target: '#collapse-head'}"><span class="am-sr-only">导航切换</span> <span
         class="am-icon-bars"></span></button>
-
+   
     <div class="am-collapse am-topbar-collapse" id="collapse-head">
       <ul class="am-nav am-nav-pills am-topbar-nav">
         <li class="am-active"><a href="<%= root_url %>">首页</a></li>
-        <li><a href="<%= welcome_index_path %>">脑库</a></li>
+        <li><a href="javascript: window.location.assign('<%= idea_store_index_path %>');" data-ajax="false">脑库</a></li>
+
       </ul>
       <%
         if session[:progress]
@@ -124,12 +124,19 @@
 <div class="get" >
 <div class="am-slider am-slider-default" data-am-flexslider="{controlNav: 'false'}">
   <ul class="am-slides">
+<<<<<<< HEAD
     <li><img src="/assets/index1.jpg" /></li>
     <li><img src="/assets/index1.jpg" /></li>
 <!--
     <li><img src="/assets/index1.jpg" /></li>
     <li><img src="/assets/index1.jpg" /></li>
 -->
+=======
+    <li><%= image_tag "index1.jpg" %></li>
+    <li><%= image_tag "index1.jpg" %></li>
+    <li><%= image_tag "index1.jpg" %></li>
+    <li><%= image_tag "index1.jpg" %></li>
+>>>>>>> ef611ac40272af89aaec1ef84f37c12573f1fc48
 
   </ul>
 </div>
@@ -193,7 +200,8 @@
 <div class="hope">
   <div class="am-g am-container">
     <div class="am-u-lg-4 am-u-md-6 am-u-sm-12 hope-img">
-      <img src="assets/landing.png" alt="" data-am-scrollspy="{animation:'slide-left', repeat: false}">
+      
+      <%= image_tag 'landing.png', 'ata-am-scrollspy': "{animation:'slide-left', repeat: false}"  %>
       <hr class="am-article-divider am-show-sm-only hope-hr">
     </div>
     <div class="am-u-lg-8 am-u-md-6 am-u-sm-12">

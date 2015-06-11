@@ -1,18 +1,41 @@
 Rails.application.routes.draw do
-  get 'home/index'
+  get 'user_active/cancel_collect_post'
+  get 'idea_store/show_post'
+  post 'user_active/collect_post'
+  get 'user_active/login'
+  get 'user_active/reg'
+  get 'user_active/logout'
+######idea_store
+  get 'idea_store/post_a_post'
+  get 'idea_store/get_posts'
+  get 'idea_store/get_tags'
+  get 'idea_store/get_session'
+  get 'idea_store/get_one_post'
+  get 'idea_store/get_comments'
+  get 'idea_store/index'
+  get 'idea_store/get_posts_from_topid'
 
+  get 'invitation_admin/get_200_codes'
+  get 'invitation_admin/index'
+
+  mount Ckeditor::Engine => '/ckeditor'
+  get 'home/index'
+  get 'welcome/show_posts'
   get 'welcome/get_comments'
   get 'welcome/post_one_comment'
   get 'welcome/get_one_post'
+  get 'welcome/get_tags'
   get 'get_test/index'
-  get 'welcome/get_user_info'
+  post 'welcome/get_user_info'
+  #get 'welcome/get_user_info'
 
   get 'personal_center/edit'
 
+  post 'personal_center/upload'
   get 'personal_center/upload'
+  patch 'personal_center/upload'
 
   devise_for :admins
-  mount RailsAdmin::Engine => '/poo_poo_admin', as: 'rails_admin'
   get 'personal_center/index'
 
   get 'user_mobile/is_name_exist'
@@ -35,7 +58,7 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
 
-  get 'user_sessions/user_exist'
+  post 'user_sessions/user_exist'
 
   get 'user_sessions/success_info'
 
@@ -66,6 +89,11 @@ Rails.application.routes.draw do
   post 'mobile_app/sign/autoSignIn'
   get 'mobile_app/sign/signOut'
   post 'mobile_app/sign/signOut'
+
+  get 'mobile_app/user/setPostFavor'
+  post 'mobile_app/user/setPostFavor'
+  get 'mobile_app/user/getFavorPosts'
+  post 'mobile_app/user/getFavorPosts'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

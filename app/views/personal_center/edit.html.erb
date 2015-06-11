@@ -8,7 +8,11 @@
         <div class="am-u-sm-4 am-u-md-4 am-u-lg-4 am-u-lg-push-1 " >
               <div class="usr_img">
               <img class="am-circle" src="http://amui.qiniudn.com/bw-2014-06-19.jpg?imageView/1/w/1000/h/1000/q/80"  width="140" height="140" alt=""/>
-              <input type="file" id="user-pic" style="font-size:5px;">
+              <%= form_for @user, url: {:controller => 'personal_center', :action => 'upload'} do |f| %>
+              <%= f.file_field :head_url, id: "user-pic", style: "font-size:5px;"  %>
+              <%= f.hidden_field :id, value: @user.id  %>
+              <input type='submit', value='上传'/>
+              <% end %>
               </div>
               </div>    
         </div>

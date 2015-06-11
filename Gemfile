@@ -1,5 +1,4 @@
-source 'https://rubygems.org'
-
+source 'https://rubygems.org/'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
@@ -22,12 +21,17 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'rack-cors', '~> 0.4.0'
-
-gem 'rails_admin'
+gem 'kaminari'
+gem "json", '1.8.3'
 
 gem 'devise'
 
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem 'mini_magick'
+gem 'ckeditor'
+
+gem 'foundation-rails'
+
 
 gem 'mongoid-grid_fs', github: 'ahoward/mongoid-grid_fs'
 
@@ -51,5 +55,8 @@ group :development, :test do
   gem 'spring'
   gem "mongoid", "~> 4.0.0"
   gem 'thin'
-  gem 'rails_kindeditor'
+
+end
+group :production do
+  gem 'therubyracer'
 end

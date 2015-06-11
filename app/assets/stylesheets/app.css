@@ -353,6 +353,7 @@ font-weight: 100;}
     
 }
 
+<<<<<<< HEAD
 
 .notice1 {
     display:block;
@@ -404,3 +405,9 @@ font-weight: 100;}
     margin-top: -5px;
     display: none;
 }
+=======
+#post_content{
+    width: 100%;
+}
+
+>>>>>>> ef611ac40272af89aaec1ef84f37c12573f1fc48

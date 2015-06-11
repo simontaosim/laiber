@@ -15,8 +15,7 @@ Rails.application.config.assets.precompile += %w( jquery.min.js )
 Rails.application.config.assets.precompile += %w( amazeui.min.js )
 Rails.application.config.assets.precompile += %w( app.js )
 Rails.application.config.assets.precompile += %w( font-awesome.css )
-Rails.application.config.assets.precompile += %w( hotkeys.js )
-Rails.application.config.assets.precompile += %w( simditor.css )
-Rails.application.config.assets.precompile += %w( module.js )
-Rails.application.config.assets.precompile += %w( uploader.js )
-Rails.application.config.assets.precompile += %w( simditor.js )
+Rails.application.config.assets.precompile += %w( ckeditor/* )
+Rails.application.config.assets.precompile += %w( vendor/modernizr.js )
+
+

@@ -25,12 +25,7 @@ class MobileApp::PostsController < ApplicationController
 	def new
 		flag = false
 		if params[:post]
-			if params[:token]
-				signTokenId = params[:token]
-			else
-				signTokenId = session[:signToken]
-			end
-			currentUserId = SignToken.find(signTokenId).user.getId
+			currentUserId = User.GetCurrentUser(params[:token]).getId
 			parentPostId = params[:parent_post] ? params[:parent_post][:id] : nil
 
 			Post.NewPost(params[:post][:title], params[:post][:content], currentUserId, parentPostId)
@@ -96,20 +91,5 @@ class MobileApp::PostsController < ApplicationController
 
 		render json: -1
 		return
-	end
-
-	def testName
-		# render json: testparam()
-	end
-
-	def test
-		# result = []
-		# Post.GetRootPosts().each{
-		# 	|x|
-		# 	result.push(x.getPostAndUser)
-		# }
-		# render json: result
-		Post.DeletePost("556bdcf369702d141a040000")
-		render json: 0
 	end
 end

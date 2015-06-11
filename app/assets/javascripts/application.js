@@ -11,7 +11,9 @@
 // about supported directives.
 //
 //= require jquery
+//= require ckeditor/init
 //= require jquery_ujs
-//= require kindeditor
 //= require turbolinks
 //= require_tree .
+//= require foundation
+$(document).foundation();
