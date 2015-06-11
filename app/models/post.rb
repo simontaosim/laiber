@@ -14,32 +14,27 @@ class Post < ModelBase
 	has_and_belongs_to_many :image_items
 
 	def self.GetPosts(limit = nil)
-		limit = limit ? limit : -1
-		return Post.desc(:created_at).limit(limit)
+		return Post.Get(limit)
 	end
 
 	def self.GetRootPosts(limit = nil)
-		limit = limit ? limit : -1
-		return Post.desc(:created_at).where(:has_parent => false).limit(limit)
+		return Post.Get.where(:has_parent => false).limit(limit)
 	end
 
 	def self.GetRootPostsForTop(topPostId, limit = nil)
-		llimit = limit ? limit : -1
 		topPostCreatedAt = Post.find(topPostId).created_at
-		return Post.desc(:created_at).where(:has_parent => false).where(:created_at.gt => topPostCreatedAt).limit(limit)
+		return Post.Get.where(:has_parent => false).where(:created_at.gt => topPostCreatedAt).limit(limit)
 	end
 
 	def self.GetRootPostsForBottom(bottomPostId, limit = nil)
-		limit = limit ? limit : -1
 		bottomPostCreatedAt = Post.find(bottomPostId).created_at
-		return Post.desc(:created_at).where(:has_parent => false).where(:created_at.lt => bottomPostCreatedAt).limit(limit)
+		return Post.Get.where(:has_parent => false).where(:created_at.lt => bottomPostCreatedAt).limit(limit)
 	end
 
 	def self.GetPostsFromParentPost(parentPostId, limit = nil)
 		result = []
-		limit = limit ? limit : -1
 		parentPost = Post.find(parentPostId)
-		parentPost.post_children.desc(:created_at).limit(limit).each{
+		parentPost.post_children.Get(limit).each{
 			|x|
 			result.push(Post.find(x.child_post_id))
 		}
@@ -50,7 +45,7 @@ class Post < ModelBase
 		result = []
 		parentPost = Post.find(parentPostId)
 		topPostCreatedAt = PostChild.where(:child_post_id => topPostId).first.created_at
-		parentPost.post_children.desc(:created_at).where(:created_at.gt => topPostCreatedAt).limit(limit).each{
+		parentPost.post_children.Get.where(:created_at.gt => topPostCreatedAt).limit(limit).each{
 			|x|
 			result.push(Post.find(x.child_post_id))
 		}
@@ -61,7 +56,7 @@ class Post < ModelBase
 		result = []
 		parentPost = Post.find(parentPostId)
 		bottomPostCreatedAt = PostChild.where(:child_post_id => bottomPostId).first.created_at
-		parentPost.post_children.desc(:created_at).where(:created_at.lt => bottomPostCreatedAt).limit(limit).each{
+		parentPost.post_children.Get.where(:created_at.lt => bottomPostCreatedAt).limit(limit).each{
 			|x|
 			result.push(Post.find(x.child_post_id))
 		}
@@ -129,13 +124,17 @@ class Post < ModelBase
 		result = []
 		self.tags.each_with_index{
 			|x|
-			result.push({"id": getId, "name": x.name})
+			result.push({"id": x.getId, "name": x.name})
 		}
 		return result
 	end
 
 	def getPostAndUser
 		return {"post": getPost, "user": getUser}
+	end
+
+	def getPostAndUserAndIsFavor
+		return {"post": getPost, "user": getUser, "isFavor": self.user.isPostFavor(getId)}
 	end
 
 	def getPostAndUserAndTags
