@@ -97,6 +97,9 @@ Rails.application.routes.draw do
   get 'mobile_app/user/getRootPosts'
   post 'mobile_app/user/getRootPosts'
 
+  get 'mobile_app/tags/all'
+  post 'mobile_app/tags/all'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
