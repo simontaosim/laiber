@@ -6,4 +6,8 @@ class MobileApp::TagsController < ApplicationController
 		end
 	end
 	skip_before_filter :verify_authenticity_token, only: [:get]
+
+	
+
+
 end

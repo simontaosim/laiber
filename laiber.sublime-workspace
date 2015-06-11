@@ -7,6 +7,14 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "app/controllers/mobile_app/tags_controller.rb",
+			"settings":
+			{
+				"buffer_size": 245,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -40,7 +48,11 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/wenjiangtao/Study/Laiber/laiber"
+		"/home/wenjiangtao/Study/Laiber/laiber",
+		"/home/wenjiangtao/Study/Laiber/laiber/app",
+		"/home/wenjiangtao/Study/Laiber/laiber/app/controllers",
+		"/home/wenjiangtao/Study/Laiber/laiber/app/controllers/mobile_app",
+		"/home/wenjiangtao/Study/Laiber/laiber/app/mailers"
 	],
 	"file_history":
 	[
@@ -78,8 +90,37 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "app/controllers/mobile_app/tags_controller.rb",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 245,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								245,
+								245
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
