@@ -28,19 +28,18 @@ skip_before_filter :verify_authenticity_token, only: [:collect_post]
   		if @post_favor.length > 1
   			@post_favor.destroy
   			@msg = '已取消收藏'
-  			render plain: @msg
   		elsif params[:user_id] and params[:post_id]
   			PostFavor.where(user_id: params[:user_id], favor_post_id: params[:post_id]).destroy
   			@msg = '已取消收藏'
   		end
   	else
-  		render plain: '异常'
+  	     @msg = '异常'
   	end
   	if params[:user_id] and params[:post_id]
   			PostFavor.where(user_id: params[:user_id], favor_post_id: params[:post_id]).destroy
   			@msg = '已取消收藏'
-  			render plain: @msg
   	end
+    render plain: @msg
 
   	
   end
