@@ -104,6 +104,8 @@ production:
     default:
       database: laiber_production
       hosts:
-        - localhost:27017
+        - laiber-mongo-1:27017
+        username: laiber
+        password: production@2015
       options:
        
