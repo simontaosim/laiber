@@ -15,4 +15,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require foundation
+//= .tree
 $(document).foundation();
