@@ -324,11 +324,11 @@ font-weight: 100;}
 
 .allDdiscuss_time {
       float:right;
+     margin-top: 13px;
+    color: rgb(204,204,204);
+    font-size: 5px;
     height: 20px;
     line-height: 20px;
-    font-size: 5px;
-    color: rgb(204,204,204);
-     margin-top: 13px;
   margin-right: 26px;
   
 }
@@ -352,9 +352,6 @@ font-weight: 100;}
     list-style-type: none;
     
 }
-
-<<<<<<< HEAD
-
 .notice1 {
     display:block;
    
@@ -371,12 +368,12 @@ font-weight: 100;}
 }
 .Balert {
 
-  margin-bottom: 17px;
-  padding-left: 10px;
-  border-radius: 0;
+    display: none;
     font-size: 15px;
     margin-top: -5px;
-    display: none;
+  border-radius: 0;
+  margin-bottom: 17px;
+  padding-left: 10px;
 }
 .Balert1 {
 
@@ -405,9 +402,4 @@ font-weight: 100;}
     margin-top: -5px;
     display: none;
 }
-=======
-#post_content{
-    width: 100%;
-}
 
->>>>>>> ef611ac40272af89aaec1ef84f37c12573f1fc48
