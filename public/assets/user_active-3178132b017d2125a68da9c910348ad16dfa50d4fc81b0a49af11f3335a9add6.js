@@ -40,7 +40,9 @@ function operateObj(obj,flag, msg){
     $("#post_collect").html('收藏');
 	$("#post_collect").attr('flag','collect');
   }
-
+  if (flag == 'yang_judge_user_exist') {
+    alert(msg);
+  } 
 }
 //============ajax调用前的操作
 function beforeOperate(obj){
@@ -59,7 +61,7 @@ function beforeOperate(obj){
                 dataType: "json"
               }).done(function( msg ){ 
                 operateObj($obj,flag, msg);
-              });
+              }) ;
 	}
 	function ByPostText(params, $obj, url, flag){
 		$.ajax({

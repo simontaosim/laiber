@@ -1,6 +1,6 @@
 
 
-
+<%= javascript_include_tag "user_active.js"%>
 <%= form_for @user, :html => {:class => 're_form', :id => 're_form' } do |f| %>
 <% if @user.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -10,7 +10,7 @@
       <div class="panel-body">
         <ul>
         <% @user.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+          <li><%= msg %></li> 
         <% end %>
         </ul>
       </div>
@@ -110,7 +110,12 @@ $(document).ready(function(){
         }
         }
         else{
-              $(".Balert").html('<i class="am-icon-smile-o"></i>&nbsp;用户名可用')
+           params={'user[user_attr]':$(".field-usename").val()};
+            $obj=$('.Balert');
+            url= '<%= user_sessions_user_exist_path %>';
+            flag= 'user_exist_yes';
+            ByGet(params, $obj, url, flag);
+            $(".Balert").html('<i class="am-icon-smile-o"></i>&nbsp;用户名可用')
         }; 
     });
 });
@@ -161,7 +166,7 @@ $(document).ready(function(){
        $(".Balert3").slideDown("fast");
   });
 $(".field-invitecode").blur(function(){
-        var reuse=/^[a-zA-Z0-9]{4}$/g;
+     var reuse=/^[a-zA-Z0-9_]{4}$/g;
         if (reuse.test($(".field-invitecode").val())){
             $(".Balert3").html('<i class="am-icon-smile-o"></i>&nbsp;OK')
         }
