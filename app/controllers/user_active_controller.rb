@@ -88,6 +88,6 @@ skip_before_filter :verify_authenticity_token, only: [:collect_post]
       @msg = '取消关注失败，烦请重试！'
     end
     render plain: @msg
-  end
+  end#to_cancel_follow
 
 end
