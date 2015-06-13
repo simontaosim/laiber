@@ -77,7 +77,7 @@
       <!--     登录后 -->
       <li class="has-dropdown not-click"><a href="#"><%= user_session.name %></a>
         <ul class="dropdown"><li class="title back js-generated"><h5><a href="javascript:void(0)">Back</a></h5></li><li class="parent-link hide-for-medium-up"><a class="parent-link js-generated" href="#">Item 1</a></li>
-          <li><a href="#">个人中心</a></li>
+          <li><%= link_to '我的主页', user_session.user %></li>
           <li><a href="#">我的账号</a></li>
           <li class="divider"></li>
           <li>
