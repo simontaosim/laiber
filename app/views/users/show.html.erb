@@ -1,19 +1,11 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-
-<p>
-  <strong>Screct pass:</strong>
-  <%= @user.screct_pass %>
-</p>
-
-<p>
-  <strong>Invite code:</strong>
-  <%= @user.invite_code %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= @user.name %>
+<%= @user.followers.count %>
+<%= Follower.where(follower_id: @user.id).count %>
+<div>
+	<% @user.post_favors.each do |favor| %>
+			<%= Post.find(favor.favor_post_id).title %>
+	<% end %> 
+</div>
+<%= @user.post_favors.to_json %>
+<br><br>
+<%= @user.to_json %>

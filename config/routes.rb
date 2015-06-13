@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'user_active/to_follow'
   get 'user_active/cancel_collect_post'
   get 'idea_store/show_post'
   post 'user_active/collect_post'
