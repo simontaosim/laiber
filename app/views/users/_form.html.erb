@@ -1,7 +1,7 @@
 
 
-
-<%= form_for @user, :html => {:class => 'am-form', :id => 'doc-vld-msg' } do |f| %>
+<%= javascript_include_tag "user_active.js"%>
+<%= form_for @user, :html => {:class => 're_form', :id => 're_form' } do |f| %>
 <% if @user.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
@@ -10,45 +10,54 @@
       <div class="panel-body">
         <ul>
         <% @user.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+          <li><%= msg %></li> 
         <% end %>
         </ul>
       </div>
     </div>
   <% end %>
-  <fieldset>
+    <form action="" class="am-form" id="doc-vld-msg">
     <legend>新用户注册</legend>
-    <div class="am-form-group">
-      <label for="doc-vld-name-2">用户名：</label>
-      <%= f.text_field :name, id:"doc-vld-name-2", minlength:"3", placeholder:"只能英文字母、数字、中文中的一种或者混搭", required: 1 %>
-    </div>
+      <div class="am-form-group am-form-icon">
+    <i class="am-icon-user"></i>
+    <input type="text" name="username" class="am-form-field field-usename" placeholder="用户名">
+  </div>
+  <div class="Balert"><i class="am-icon-bolt"></i>&nbsp;英文字母,数字,字符长度5-25位</div>
+  
 
-   <div class="am-form-group">
-      
-      <label for="doc-vld-pwd-1">设置密码：</label>
-      <%= f.password_field :password, id: "doc-vld-pwd-1", placeholder: "6-12位，输入字符无限制", pattern: '^\d{6,12}$'.to_s, required: 1,  'data-foolish-msg': "请输入正确位数的密码！" %>
-    </div>
+  <div class="am-form-group am-form-icon">
+    <i class="am-icon-lock"></i>
+    <input type="password" name="password" class="am-form-field field-password" placeholder="密码">
+  </div>
+  <div class="Balert1"><i class="am-icon-bolt"></i>&nbsp;6-12位，输入字符无限制</div>
+   <div class="am-form-group am-form-icon">
+    <i class="am-icon-lock"></i>
+    <input type="password" class="am-form-field field-password2" name="password2" placeholder="密码确认">
+  </div>
+  <div class="Balert2"><i class="am-icon-bolt"></i>&nbsp;输入密码与设置密码内容一致</div>
+   <div class="am-form-group am-form-icon">
+    <i class="am-icon-joomla"></i>
+    <input type="text" class="am-form-field field-invitecode" name="inviteword" placeholder="邀请码">
+  </div>
+  <div class="Balert3"><i class="am-icon-bolt"></i>&nbsp;必须输入且正确的邀请码才可以成功注册</div>
 
-<div class="am-form-group">
-      <label for="doc-vld-pwd-2">确认密码：</label>
-      <%= f.password_field :password_confirmation, id: "doc-vld-pwd-2", placeholder: "必须与设置密码内的内容一致", 'data-equal-to': "#doc-vld-pwd-1", required: 1, 'data-foolish-msg': "两次密码不一致" %>
-    </div>
-    
-<div class="am-form-group">
-      <label for="doc-vld-pwd-1-0">邀请码：</label>
-      <%= f.password_field :invite_code, id: "doc-vld-pwd-1-0", placeholder: "必须输入正确的邀请码才能登录", pattern: '^\d{4}$'.to_s, required: 1, 'data-foolish-msg': "请输入正确的邀请码！" %>
-      
-    </div>
-
-
-  </fieldset>
 
         <div class="am-checkbox">
           <label>
             <input type="checkbox"> 阅读并且同意 <a href="">《xx服务协议xx》</a>
           </label>
         </div>
-        <button type="submit" class="am-btn am-btn-secondary  am-btn-block">注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册</button>
+    
+        <button type="button" class="am-btn am-btn-secondary  am-btn-block">注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册</button>
+    </form>
+
+<!--      <%= f.text_field :name, id:"doc-vld-name-2", minlength:"3", placeholder:"只能英文字母、数字、中文中的一种或者混搭", required: 1 %>-->
+
+<!--      <%= f.password_field :password, id: "doc-vld-pwd-1", placeholder: "6-12位，输入字符无限制", pattern: '^\w{6,12}$'.to_s, required: 1,  'data-foolish-msg': "请输入正确位数的密码！" %>-->
+     
+<!--      <%= f.password_field :password_confirmation, id: "doc-vld-pwd-2", placeholder: "必须与设置密码内的内容一致", 'data-equal-to': "#doc-vld-pwd-1", required: 1, 'data-foolish-msg': "两次密码不一致" %>-->
+     
+<!--      <%= f.password_field :invite_code, id: "doc-vld-pwd-1-0", placeholder: "必须输入正确的邀请码才能登录", pattern: '^\d{4}$'.to_s, required: 1, 'data-foolish-msg': "请输入正确的邀请码！" %>-->
     <% end %>
   <script>
     
@@ -68,7 +77,6 @@
     onValid: function(validity) {
       $(validity.field).closest('.am-form-group').find('.am-alert').hide();
     },
-
     onInValid: function(validity) {
       var $field = $(validity.field);
       var $group = $field.closest('.am-form-group');
@@ -86,7 +94,87 @@
     }
   });
 });
+$(document).ready(function(){
+  $(".field-usename").focus(function(){
+       $(".Balert").slideDown("fast");
+  });
+    $(".field-usename").blur(function(){
+         var reuse=/^[a-zA-Z0-9_]{5,25}$/g;
+        if (!reuse.test($(".field-usename").val())){
+              if($(".field-usename").val()==="")
+        {
+         $(".Balert").html('<i class="am-icon-frown-o"></i>&nbsp;用户名不能为空')
+        }
+            else{
+           $(".Balert").html('<i class="am-icon-frown-o"></i>&nbsp;该用户名不可用')
+        }
+        }
+        else{
+           params={'user[user_attr]':$(".field-usename").val()};
+            $obj=$('.Balert');
+            url= '<%= user_sessions_user_exist_path %>';
+            flag= 'user_exist_yes';
+            ByGet(params, $obj, url, flag);
+            $(".Balert").html('<i class="am-icon-smile-o"></i>&nbsp;用户名可用')
+        }; 
+    });
+});
+//密码验证
+$(document).ready(function(){
+  $(".field-password").focus(function(){
+       $(".Balert1").slideDown("fast");
+  });
+    $(".field-password").blur(function(){
+        var reuse=/^[a-zA-Z0-9_]{6,12}$/g;
+   if (!reuse.test($(".field-password").val())){
+              if($(".field-password").val()==="")
+        {
+         $(".Balert1").html('<i class="am-icon-frown-o"></i>&nbsp;密码不能为空')
+        }
+            else{
+           $(".Balert1").html('<i class="am-icon-frown-o"></i>&nbsp;密码长度不对或者含有非法字符')
+        }
+        }
+        else{
+              $(".Balert1").html('<i class="am-icon-smile-o"></i>&nbsp;OK')
+        }; 
+    });
+});
+//密码二次验证
+$(document).ready(function(){
+  $(".field-password2").focus(function(){
+       $(".Balert2").slideDown("fast");
+  });
+  $(".field-password2").blur(function(){
+   if (!($(".field-password2").val()==$(".field-password").val())){
+              if($(".field-password2").val()==="")
+        {
+         $(".Balert2").html('<i class="am-icon-smile-o"></i>&nbsp;此项不能为空')
+        }
+            else{
+           $(".Balert2").html('<i class="am-icon-frown-o"></i>&nbsp;两次输入密码不一致')
+        }
+        }
+        else{
+              $(".Balert2").html('<i class="am-icon-smile-o"></i>&nbsp;OK')
+        }; 
+    });
+});
+//验证码验证
+$(document).ready(function(){
+  $(".field-invitecode").focus(function(){
+       $(".Balert3").slideDown("fast");
+  });
+$(".field-invitecode").blur(function(){
+     var reuse=/^[a-zA-Z0-9_]{4}$/g;
+        if (reuse.test($(".field-invitecode").val())){
+            $(".Balert3").html('<i class="am-icon-smile-o"></i>&nbsp;OK')
+        }
+        else{
+             $(".Balert3").html('<i class="am-icon-frown-o"></i>&nbsp;邀请码不正确')
+        };
+    });
+});
 </script>
-
 
 <!--<![endif]-->

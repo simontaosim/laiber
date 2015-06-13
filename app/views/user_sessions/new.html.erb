@@ -32,7 +32,7 @@
     <div class="col-sm-offset-2 col-sm-10">
       <div class="checkbox">
         <label>
-          <input type="checkbox"> 记住十万年
+          <input type="checkbox">记住十万年
         </label>
       </div>
     </div>
@@ -46,3 +46,26 @@
   <div class="forget_pw"><a href="<%= new_user_path %>">没有账号</a><a class="fg_pw" href="">忘记密码</a></div>
 <% end %>
 </div>
+
+<script>
+    $(document).ready(function(){
+    $("#doc-ipt-3").blur(function(){
+        var reuse=/^[a-zA-Z0-9_]{6,12}$/g;
+   if (!reuse.test($("#doc-ipt-3").val())){
+              if($("#doc-ipt-3").val()==="")
+        {
+         $(".Balert1").html('<i class="am-icon-frown-o"></i>&nbsp;密码不能为空')
+        }
+            else{
+           $(".Balert1").html('<i class="am-icon-frown-o"></i>&nbsp;密码长度不对或者含有非法字符')
+        }
+        }
+        else{
+              $(".Balert1").html('<i class="am-icon-smile-o"></i>&nbsp;OK')
+        }; 
+    });
+});
+
+
+
+</script>

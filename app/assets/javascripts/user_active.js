@@ -40,7 +40,14 @@ function operateObj(obj,flag, msg){
     $("#post_collect").html('收藏');
 	$("#post_collect").attr('flag','collect');
   }
-
+  if (flag == 'user_exist_yes') {
+    if(msg == 0){
+      obj.html('<i class="am-icon-smile-o"></i>&nbsp;该用户名可用');
+    }
+    else{
+      obj.html('<i class="am-icon-frown-o"></i>&nbsp;该用户名不可用');
+    }
+  } 
 }
 //============ajax调用前的操作
 function beforeOperate(obj){
@@ -59,7 +66,7 @@ function beforeOperate(obj){
                 dataType: "json"
               }).done(function( msg ){ 
                 operateObj($obj,flag, msg);
-              });
+              }) ;
 	}
 	function ByPostText(params, $obj, url, flag){
 		$.ajax({
@@ -80,7 +87,7 @@ function beforeOperate(obj){
                 method: "GET",
                 url: url,
                 beforeSend: function( xhr ) {
-                  xhr.overrideMimeType( "text/plain; charset=utf-8" );
+                xhr.overrideMimeType( "text/plain; charset=utf-8" );
 
                  },
                 data: params,

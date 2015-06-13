@@ -3,8 +3,8 @@
 /*      background-image: url(images/index.jpg);*/
       color: #fff;
       text-align: center;
-/*      padding: 100px 0;*/
-        height: 431px;
+      padding: 100px 0;
+        height: auto;
     }
 
     .get-title {
@@ -95,7 +95,7 @@
     <div class="am-collapse am-topbar-collapse" id="collapse-head">
       <ul class="am-nav am-nav-pills am-topbar-nav">
         <li class="am-active"><a href="<%= root_url %>">首页</a></li>
-        <li><a href="javascript: window.location.assign('<%= idea_store_index_path %>');" data-ajax="false">脑库</a></li>
+        <li><a href="javascript: window.location.assign('<%= welcome_show_posts_path %>');" data-ajax="false">脑库</a></li>
 
       </ul>
       <%
@@ -122,16 +122,16 @@
 </header>
 
 <div class="get" >
-<div class="am-slider am-slider-default" data-am-flexslider>
+<div class="am-slider am-slider-default" data-am-flexslider="{controlNav: 'false'}">
   <ul class="am-slides">
     <li><%= image_tag "index1.jpg" %></li>
     <li><%= image_tag "index1.jpg" %></li>
     <li><%= image_tag "index1.jpg" %></li>
     <li><%= image_tag "index1.jpg" %></li>
-
   </ul>
 </div>
 </div>
+<!--
 
 <div class="detail">
   <div class="am-g am-container">
@@ -184,7 +184,9 @@
     </div>
   </div>
 </div>
+-->
 
+<!--
 <div class="hope">
   <div class="am-g am-container">
     <div class="am-u-lg-4 am-u-md-6 am-u-sm-12 hope-img">
@@ -201,12 +203,13 @@
     </div>
   </div>
 </div>
+-->
 
 
 
 <footer class="footer">
-  <p>© 2015 <a href="http://www.laiber.ml" target="_blank">Laiber, Inc.</a> Licensed under <a
-      href="http://opensource.org/licenses/MIT" target="_blank">MIT license</a>. by the Ulaiber.</p>
+  <p style="background-color: white;">© 2015 <a href="http://www.laiber.ml" target="_blank">Laiber, Inc.</a> Licensed under <a
+      href="http://opensource.org/licenses/MIT" target="_blank"></a>. by the Ulaiber.</p>
 </footer>
 
 <!--[if lt IE 9]>

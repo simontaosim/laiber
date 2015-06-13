@@ -59,7 +59,7 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
 
-  post 'user_sessions/user_exist'
+  get 'user_sessions/user_exist'
 
   get 'user_sessions/success_info'
 
