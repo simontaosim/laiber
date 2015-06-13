@@ -18,7 +18,7 @@ skip_before_filter :verify_authenticity_token, only: [:collect_post]
       @user_session = UserSession.find(session[:progress].fetch("_id").fetch("$oid"))
     end
     if @user_session
-      if params[:user_id] and params[:post_id]
+      if params[:user_id] or params[:post_id]
         @post_favor = PostFavor.NewPostFavor(@user_session.user.id, params[:post_id])
         @msg = '帖子收藏成功！'
       else
@@ -50,7 +50,7 @@ skip_before_filter :verify_authenticity_token, only: [:collect_post]
       @user_session = UserSession.find(session[:progress].fetch("_id").fetch("$oid"))
     end
     if @user_session
-      if params[:user_id] and params[:post_id]
+      if params[:user_id] or params[:post_id]
         PostFavor.where(user_id: @user_session.user.id, favor_post_id: params[:post_id]).destroy
         @msg = '已取消收藏'
       end

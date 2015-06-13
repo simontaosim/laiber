@@ -40,7 +40,7 @@
 			<% end %>
 		</div>
 		<% if session[:progress] %>
-		<% post_favor = PostFavor.where(user_id: @post.user.id, favor_post_id: @post.id).first %>
+		<% post_favor = PostFavor.where(user_id: @user_session.user.id, favor_post_id: @post.id).first %>
 		<% if post_favor %>
 		<div class="collection button small" postFavor='<%=post_favor.id %>' flag='cancel' id="post_collect">取消收藏</div>
 		<% else %>
