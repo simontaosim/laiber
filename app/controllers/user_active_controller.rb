@@ -77,6 +77,25 @@ skip_before_filter :verify_authenticity_token, only: [:collect_post]
     
   end
 
+  def is_collected
+    @msg = '内部错误'
+    @user_session = nil
+    if session[:progress]
+      @user_session = UserSession.find(session[:progress].fetch("_id").fetch("$oid"))
+    end
+    if params[:post_id]
+      post_favors = PostFavor.where(user_id: @user_session.user.id, favor_post_id: params[:post_id]);
+      if post_favors.length > 0
+        @msg = 1
+      else
+        @msg = 0
+      end
+    else
+       @msg = -1
+    end
+    render plain: @msg
+  end
+
   def to_cancel_follow
     @msg = '内部错误'
     if params[:user_id]
