@@ -34,6 +34,10 @@ class Post < ModelBase
 		bottomPostCreatedAt = Post.find(bottomPostId).created_at
 		return Post.Get.where(:has_parent => false).where(:created_at.lt => bottomPostCreatedAt).limit(limit)
 	end
+	def self.GetRootPublishedPostsForBottom(bottomPostId, limit = nil)
+		bottomPostCreatedAt = Post.find(bottomPostId).created_at
+		return Post.Get.where(:has_parent => false).where(:created_at.lt => bottomPostCreatedAt).limit(limit)
+	end
 
 	def self.GetPostsFromParentPost(parentPostId, limit = nil)
 		result = []

@@ -22,7 +22,7 @@ class WelcomeController < ApplicationController
 
   end
   def get_next_15_posts
-    @posts = Post.GetRootPostsForBottom(params[:post_id], 15).pluck(:id, :title, :image_item_ids, :created_at, :tag_ids)
+    @posts = Post.GetRootPublishedPostsForBottom(params[:post_id], 15).pluck(:id, :title, :image_item_ids, :created_at, :tag_ids)
     render json: @posts
   end
 
