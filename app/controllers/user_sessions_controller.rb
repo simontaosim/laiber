@@ -45,7 +45,12 @@ class UserSessionsController < ApplicationController
           @user_session.save
           session[:progress] = @user_session
 	  			respond_to do |format|
-	  				format.html{ redirect_to idea_store_index_path, notice: "欢迎，"+@user_session.name }
+            if params[:page] == 'foundation'
+              format.html{ redirect_to idea_store_index_path, notice: "欢迎，"+@user_session.name }
+            else
+              format.html{ redirect_to root_path, notice: "欢迎，"+@user_session.name }
+            end
+
 	  			end
 	  		else
 	  			respond_to do |format|
