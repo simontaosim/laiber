@@ -7,7 +7,7 @@
               <div class="usr_img">
               <% head_url = @user.head_url %>
               <% if head_url.thumb != '' %>
-              <img class="am-img-circle am-img-thumbnail" src="<%=head_url.thumb %>" alt=""/ style="width: 113px;height: 113px; border: none;">  
+              <img class="am-circle am-img-thumbnail" src="<%=head_url.thumb %>" alt=""/ style="width: 113px;height: 113px; border: none;">  
               <% else %>
               <img class="am-circle am-img-thumbnail" src="/assets/default_portrait2.jpg" alt=""/ style="
     width: 113px;
@@ -32,10 +32,11 @@
             </div>
 <!--其他用户看到，对自己不可见-->
               <div calss="am-g am-u-sm-6 am-u-md-6 am-u-md-6" style="float:left;">
-             <button type="button" class="am-btn am-btn-success  am-btn-xs" data-am-loading="{ loadingText: '已关注', resetText: '已关注'}" style="
+             <button type="button" class="am-btn am-btn-success  am-btn-xs" style="
     margin-left: 96px;
 ">关注</button>
               </div>
+
 <!--其他用户看到，对自己不可见-->
             
             
@@ -142,9 +143,7 @@
 <script>
     $('.am-btn-xs').click(function () {
   var $btn = $(this)
-  $btn.button('loading');
-    setTimeout(function(){
-      $btn.button('reset');
-  }, 5000);
+  $btn.addClass('active').html('取消关注');
+
 });
 </script>
