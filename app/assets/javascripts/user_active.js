@@ -48,7 +48,24 @@ function operateObj(obj,flag, msg){
       obj.html('<i class="am-icon-frown-o"></i>&nbsp;该用户名不可用');
     }
   } 
-}
+  if (flag == 'idea_if_uncollect') {
+                alert(msg);
+              }
+  if (flag == 'idea_if_collect') {
+                alert(msg);
+              };
+  if (flag == 'if_already_collected') {
+        if(msg == 0)
+        {
+       obj.removeClass('active').attr('src','/assets/xing2.png')
+        };
+        if(msg == 1)
+        {
+       obj.addClass('active').attr('src','/assets/xing.png')
+        };
+        }
+
+  };
 //============ajax调用前的操作
 function beforeOperate(obj){
 
