@@ -26,6 +26,11 @@ class WelcomeController < ApplicationController
     render json: @posts
   end
 
+  def get_image_by_id
+    image_item = ImageItem.find(params[:id])
+    render json: image_item
+  end
+
   def get_one_post
     @post = Post.find(params[:id])
     render json: @post
