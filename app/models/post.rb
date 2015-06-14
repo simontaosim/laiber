@@ -21,6 +21,10 @@ class Post < ModelBase
 		return Post.Get.where(:has_parent => false).limit(limit)
 	end
 
+	def self.GetRootPublishedPosts(limit = nil)
+		return Post.Get.where(:has_parent => false, :is_publish => 1).limit(limit)
+	end
+
 	def self.GetRootPostsForTop(topPostId, limit = nil)
 		topPostCreatedAt = Post.find(topPostId).created_at
 		return Post.Get.where(:has_parent => false).where(:created_at.gt => topPostCreatedAt).limit(limit)
