@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'welcome/get_image_by_id'
   get 'welcome/get_next_15_posts'
   get 'user_active/is_collected'
   get 'user_active/to_follow'
