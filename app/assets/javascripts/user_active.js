@@ -57,11 +57,11 @@ function operateObj(obj,flag, msg){
   if (flag == 'if_already_collected') {
         if(msg == 0)
         {
-       obj.removeClass('active').attr('src','/assets/xing2.png')
+       obj.removeClass('active').attr('src','xing2.png')
         };
         if(msg == 1)
         {
-       obj.addClass('active').attr('src','/assets/xing.png')
+       obj.addClass('active').attr('src','xing.png')
         };
         }
 
