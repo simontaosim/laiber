@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
 
-  skip_before_filter :verify_authenticity_token, only: [:get_user_info]
+  skip_before_filter :verify_authenticity_token, only: [:get_user_info, :get_next_15_posts]
   def index
   	redirect_to welcome_show_posts_path
   end
@@ -20,6 +20,10 @@ class WelcomeController < ApplicationController
       @posts = Tag.find(params[:tag_id]).posts.pluck(:id, :title, :image_item_ids, :created_at, :tag_ids)
     end
 
+  end
+  def get_next_15_posts
+    @posts = Post.GetRootPostsForBottom(params[:post_id], 15).pluck(:id, :title, :image_item_ids, :created_at, :tag_ids)
+    render json: @posts
   end
 
   def get_one_post
