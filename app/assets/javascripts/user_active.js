@@ -55,15 +55,15 @@ function operateObj(obj,flag, msg){
                 alert(msg);
               };
   if (flag == 'if_already_collected') {
-        if(msg == 0)
-        {
-       obj.removeClass('active').attr('src','/assets/xing2.png')
-        };
-        if(msg == 1)
-        {
-       obj.addClass('active').attr('src','/assets/xing.png')
-        };
+        if(msg == 0){
+           obj.removeClass('active');
+           obj.attr('src','/assets/xing2.png');
         }
+        if(msg == 1){
+           obj.addClass('active');
+           obj.attr('src','/assets/xing.png');
+        }
+    }
 
 
   }
