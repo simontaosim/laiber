@@ -16,28 +16,32 @@
       </div>
     </div>
   <% end %>
-    <form action="" class="am-form" id="doc-vld-msg">
+    
+    <%= form_for @user, url: user_sessions_auth_path, html:{class: 'am-form', id: 'doc-vld-msg'} do |f| %>
+   
     <legend>新用户注册</legend>
       <div class="am-form-group am-form-icon">
     <i class="am-icon-user"></i>
-    <input type="text" name="username" class="am-form-field field-usename" placeholder="用户名">
+   
+    <%= f.text_field :name, placeholder: "用户名", class: "am-form-field field-usename" %>
   </div>
   <div class="Balert"><i class="am-icon-bolt"></i>&nbsp;英文字母,数字,字符长度5-25位</div>
   
 
   <div class="am-form-group am-form-icon">
     <i class="am-icon-lock"></i>
-    <input type="password" name="password" class="am-form-field field-password" placeholder="密码">
+    <%= f.password_field :password, placeholder: "密码", class: "am-form-field field-password" %>
   </div>
   <div class="Balert1"><i class="am-icon-bolt"></i>&nbsp;6-12位，输入字符无限制</div>
    <div class="am-form-group am-form-icon">
     <i class="am-icon-lock"></i>
-    <input type="password" class="am-form-field field-password2" name="password2" placeholder="密码确认">
+    
+    <%= f.password_field :password_confirmation, placeholder: "密码确认", class: "am-form-field field-password2" %>
   </div>
   <div class="Balert2"><i class="am-icon-bolt"></i>&nbsp;输入密码与设置密码内容一致</div>
    <div class="am-form-group am-form-icon">
     <i class="am-icon-joomla"></i>
-    <input type="text" class="am-form-field field-invitecode" name="inviteword" placeholder="邀请码">
+    <%= f.text_field :invite_code, placeholder: "邀请码", class: "am-form-field field-invitecode" %>
   </div>
   <div class="Balert3"><i class="am-icon-bolt"></i>&nbsp;必须输入且正确的邀请码才可以成功注册</div>
 
@@ -48,9 +52,9 @@
           </label>
         </div>
     
-        <button type="button" class="am-btn am-btn-secondary  am-btn-block">注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册</button>
+        <button type="submit" class="am-btn am-btn-secondary  am-btn-block">注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册</button>
     </form>
-
+ <% end %>
 <!--      <%= f.text_field :name, id:"doc-vld-name-2", minlength:"3", placeholder:"只能英文字母、数字、中文中的一种或者混搭", required: 1 %>-->
 
 <!--      <%= f.password_field :password, id: "doc-vld-pwd-1", placeholder: "6-12位，输入字符无限制", pattern: '^\w{6,12}$'.to_s, required: 1,  'data-foolish-msg': "请输入正确位数的密码！" %>-->
