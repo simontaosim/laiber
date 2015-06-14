@@ -1,13 +1,36 @@
 //=========ajax调用成功后的操作
 function operateObj(obj,flag, msg){
-  if(flag == 'get_top15_posts'){//根据旗标给予返回的ajax不同的操作
-    var rows
+  if(flag == 'reflash_data'){//根据旗标给予返回的ajax不同的操作
     for(var i=0; i< msg.length; i++){
-      var post_box = '<div id="post'+i+'" post-id:"'+msg[i][0]['$oid']+'">post'+i+''
-      post_box += '<div id="img_box'+i+'"></div>' 
-      post_box += '</div>'
-      obj.append(post_box);
-      $('#post'+i).addClass('post_box')
+      var createdBox = $('<div></div>').attr('class','box');
+      var createdPic = $('<div></div>').attr('class','pic');
+      var createdA = $('<a></a>');
+      var hr = $('<hr>');
+      var hr1 = $('<hr>');  
+      if (msg[i][2] == null) {
+         var createdImg = $('<img>').height('400px').attr('src','/image_for_good/default.jpg');
+      } else{
+         // params = {'id':msg[i][2][0]};
+         // url = '<%= welcome_get_image_by_id %>';
+         // flag = 'get_img'
+         // ByGet(params, $obj, url, flag);
+         //  if (flag == 'get_img') {
+         //    alert('加载头像');
+            var createdImg = $('<img>').height('400px').attr('src',msg[i][2]);
+          // };
+      };
+      var createdTitle = $('<div></div>').html('<a><h3>'+msg[i][1]+'</h3></a>').addClass('ideaTitle1');
+      var createdClassify = $('<div></div>').html('<a>'+msg[i][2]+'</a>').addClass('ideaClassify');
+      var creatTime = $('<div></div>').html(msg[i][2]);
+      createdBox.append(createdPic);
+      createdA.append(createdImg);
+      createdPic.append(createdA);
+      createdPic.append(createdTitle);
+      createdPic.append(hr);
+      createdPic.append(hr1);
+      createdPic.append(createdClassify);
+      obj.append(createdBox);
+      // $('#post'+i).addClass('post_box')
     }
     
   }

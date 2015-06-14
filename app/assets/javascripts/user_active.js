@@ -10,9 +10,15 @@ function operateObj(obj,flag, msg){
       if (msg[i][2] == null) {
          var createdImg = $('<img>').height('400px').attr('src','/image_for_good/default.jpg');
       } else{
-         var createdImg = $('<img>').height('400px').attr('src',msg[i][2]);
+         // params = {'id':msg[i][2][0]};
+         // url = '<%= welcome_get_image_by_id %>';
+         // flag = 'get_img'
+         // ByGet(params, $obj, url, flag);
+         //  if (flag == 'get_img') {
+         //    alert('加载头像');
+            var createdImg = $('<img>').height('400px').attr('src',msg[i][2]);
+          // };
       };
-     
       var createdTitle = $('<div></div>').html('<a><h3>'+msg[i][1]+'</h3></a>').addClass('ideaTitle1');
       var createdClassify = $('<div></div>').html('<a>'+msg[i][2]+'</a>').addClass('ideaClassify');
       var creatTime = $('<div></div>').html(msg[i][2]);
