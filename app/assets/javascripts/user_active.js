@@ -1,6 +1,6 @@
 //=========ajax调用成功后的操作
 function operateObj(obj,flag, msg){
-  if(flag == 'get_top15_posts'){//根据旗标给予返回的ajax不同的操作
+  if(flag == 'reflash_data'){//根据旗标给予返回的ajax不同的操作
     var rows
     for(var i=0; i< msg.length; i++){
       var post_box = '<div id="post'+i+'" post-id:"'+msg[i][0]['$oid']+'">post'+i+''

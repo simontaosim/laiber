@@ -7,7 +7,7 @@ class WelcomeController < ApplicationController
 
   def show_posts
     @title = 'Laiber——改变世界的愿景'
-    @posts = Post.where(:title.gt => '' ).desc(:created_at).pluck(:id, :title, :image_item_ids, :created_at, :tag_ids)
+    @posts = Post.GetRootPublishedPosts(15).pluck(:id, :title, :image_item_ids, :created_at, :tag_ids)
     @post = Post.new
     
     if session[:progress]
@@ -22,7 +22,7 @@ class WelcomeController < ApplicationController
 
   end
   def get_next_15_posts
-    @posts = Post.GetRootPostsForBottom(params[:post_id], 15).pluck(:id, :title, :image_item_ids, :created_at, :tag_ids)
+    @posts = Post.GetRootPublishedPostsForBottom(params[:post_id], 15).pluck(:id, :title, :image_item_ids, :created_at, :tag_ids)
     render json: @posts
   end
 

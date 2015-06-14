@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  post 'welcome/get_next_15_posts'
+  get 'welcome/get_next_15_posts'
   get 'user_active/is_collected'
   get 'user_active/to_follow'
   get 'user_active/cancel_collect_post'

@@ -40,6 +40,24 @@
 </head>
 <body>
 <%= javascript_include_tag 'jquery.min.js', 'data-turbolinks-track' => true %>
+<% if notice %>
+<div class="am-alert" data-am-alert>
+  <button type="button" class="am-close">&times;</button>
+  <p>
+  <%= notice %></p>
+</div>
+<% end %>
+<% if alert %>
+<div class="am-alert" data-am-alert>
+  <button type="button" class="am-close">&times;</button>
+  <p><%= alert %></p>
+</div>
+<% end %>
+<script type="text/javascript">
+   $(document).ready(function(){
+    $(".am-alert").fadeOut(2000);
+  });
+</script>
 <%= yield %>
 
 <%= javascript_include_tag 'amazeui.min.js', 'data-turbolinks-track' => true %>
