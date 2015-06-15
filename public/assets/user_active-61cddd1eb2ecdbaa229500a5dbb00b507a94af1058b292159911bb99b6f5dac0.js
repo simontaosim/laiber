@@ -30,6 +30,7 @@ function operateObj(obj,flag, msg){
       createdPic.append(hr1);
       createdPic.append(createdClassify);
       obj.append(createdBox);
+      var   
       // $('#post'+i).addClass('post_box')
     }
     
@@ -124,7 +125,7 @@ function beforeOperate(obj){
                 operateObj($obj,flag, msg);
               });
   }
-  function ByGet(params, $obj, url, flag){
+  function ByGet(params, $obj, url, flag, handle){
     $.ajax({
                 method: "GET",
                 url: url,
@@ -136,7 +137,10 @@ function beforeOperate(obj){
                 dataType: "json"
               }).done(function( msg ){ 
                 operateObj($obj, flag, msg);
-              }).fail(function(){alert('请等待服务器');});
+                handle = true;
+                // console.log(handle);
+              }).fail(function(){alert('请等待服务器');
+              });
 
   }
   function ByGetText(params, $obj, url, flag){
