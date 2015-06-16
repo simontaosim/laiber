@@ -155,7 +155,6 @@ function beforeOperate(obj){
               }).done(function( msg ){ 
                 operateObj($obj, flag, msg);
                 handle = true;
-                console.log(handle);
               }).fail(function(){alert('请等待服务器');
               });
 
