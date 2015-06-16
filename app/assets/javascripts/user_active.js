@@ -1,40 +1,57 @@
 //=========ajax调用成功后的操作
 function operateObj(obj,flag, msg){
-  if(flag == 'reflash_data'){//根据旗标给予返回的ajax不同的操作
+  if(flag == 'reflash_data'){
     for(var i=0; i< msg.length; i++){
-      var createdBox = $('<div></div>').attr('class','box');
-      var createdPic = $('<div></div>').attr('class','pic');
-      var createdA = $('<a></a>');
-      var hr = $('<hr>');
-      var hr1 = $('<hr>');  
-      if (msg[i][2] == null) {
-         var createdImg = $('<img>').height('400px').attr('src','/image_for_good/default.jpg');
-      } else{
-         // params = {'id':msg[i][2][0]};
-         // url = '<%= welcome_get_image_by_id %>';
-         // flag = 'get_img'
-         // ByGet(params, $obj, url, flag);
-         //  if (flag == 'get_img') {
-         //    alert('加载头像');
-            var createdImg = $('<img>').height('400px').attr('src',msg[i][2]);
-          // };
-      };
-      var createdTitle = $('<div></div>').html('<a><h3>'+msg[i][1]+'</h3></a>').addClass('ideaTitle1');
-      var createdClassify = $('<div></div>').html('<a>'+msg[i][2]+'</a>').addClass('ideaClassify');
-      var creatTime = $('<div></div>').html(msg[i][2]);
-      createdBox.append(createdPic);
-      createdA.append(createdImg);
-      createdPic.append(createdA);
-      createdPic.append(createdTitle);
-      createdPic.append(hr);
-      createdPic.append(hr1);
-      createdPic.append(createdClassify);
-      obj.append(createdBox);
-      var   
-      // $('#post'+i).addClass('post_box')
-    }
+    var oBox=$('<div></div>').addClass('box');
+    var oPic=$('<div></div>').addClass('pic').appendTo($(oBox));
+    var oA=$('<a></a>');
+    oA.appendTo($(oPic));
+    $('<img>').attr('src','/image_for_good/default.jpg').height("400px").appendTo($(oA));
+    var oTitle=$('<div></div>').addClass('ideaTitle1').html('<a><h3>'+msg[i][1]+'</h3></a>').appendTo($(oPic));
+    var oHr=$('<hr>').appendTo($(oPic));
+    var oIntruduce=$('<div></div>').addClass('ideaIntruduce').appendTo($(oPic));
+    var oA=$('<a></a>').appendTo($(oIntruduce));
+    var ideaClassify=$('<div></div>').addClass('ideaClassify').html('<a>'+msg[i][2]+'</a>').appendTo($(oPic));
+    obj.append(oBox);
+    waterfall();
+}
+  };
+
+  //========================================mark
+  // {//根据旗标给予返回的ajax不同的操作
+  //   for(var i=0; i< msg.length; i++){
+  //     var createdBox = $('<div></div>').attr('class','box');
+  //     var createdPic = $('<div></div>').attr('class','pic');
+  //     var createdA = $('<a></a>');
+  //     var hr = $('<hr>');
+  //     var hr1 = $('<hr>');  
+  //     if (msg[i][2] == null) {
+  //        var createdImg = $('<img>').height('400px').attr('src','/image_for_good/default.jpg');
+  //     } else{
+  //        // params = {'id':msg[i][2][0]};
+  //        // url = '<%= welcome_get_image_by_id %>';
+  //        // flag = 'get_img'
+  //        // ByGet(params, $obj, url, flag);
+  //        //  if (flag == 'get_img') {
+  //        //    alert('加载头像');
+  //           var createdImg = $('<img>').height('400px').attr('src',msg[i][2]);
+  //         // };
+  //     };
+  //     var createdTitle = $('<div></div>').html('<a><h3>'+msg[i][1]+'</h3></a>').addClass('ideaTitle1');
+  //     var createdClassify = $('<div></div>').html('<a>'+msg[i][2]+'</a>').addClass('ideaClassify');
+  //     var creatTime = $('<div></div>').html(msg[i][2]);
+  //     createdBox.append(createdPic);
+  //     createdA.append(createdImg);
+  //     createdPic.append(createdA);
+  //     createdPic.append(createdTitle);
+  //     createdPic.append(hr);
+  //     createdPic.append(hr1);
+  //     createdPic.append(createdClassify);
+  //     obj.append(createdBox);
+  //     // $('#post'+i).addClass('post_box')
+  //   }
     
-  }
+  // }
   if(flag == 'user_is_exist'){
     if(msg == 1){
       obj.html('用户名已经存在');
@@ -138,7 +155,7 @@ function beforeOperate(obj){
               }).done(function( msg ){ 
                 operateObj($obj, flag, msg);
                 handle = true;
-                // console.log(handle);
+                console.log(handle);
               }).fail(function(){alert('请等待服务器');
               });
 
