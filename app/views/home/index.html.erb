@@ -3,7 +3,7 @@
 /*      background-image: url(images/index.jpg);*/
       color: #fff;
       text-align: center;
-      padding: 100px 0;
+     /* padding: 100px 0;*/
         height: auto;
     }
 
@@ -107,10 +107,10 @@
        <div class="am-topbar-right">
        <%= link_to '<span class="am-icon-user"></span> 登出'.html_safe(), user_session_path(user_session),
                method: :delete,
-               data: { confirm: '您确定不?' }, class: "am-btn am-btn-secondary am-topbar-btn am-btn-sm" %>
+               data: { confirm: '您确定不?' }, class: "am-btn am-btn-secondary am-topbar-btn am-btn-sm", style:"color:white;" %>
       </div>
         <div class="am-topbar-right">
-        <%= link_to user_session.name.to_s, personal_center_index_path, class: "am-btn am-btn-secondary am-topbar-btn am-btn-sm" %>
+        <%= link_to user_session.name.to_s, personal_center_index_path, class: "am-btn am-btn-secondary am-topbar-btn am-btn-sm", style:"color:white;" %>
       </div>
       <% else %>
       <div class="am-topbar-right">
@@ -122,12 +122,16 @@
 </header>
 
 <div class="get" >
-<div class="am-slider am-slider-default" data-am-flexslider="{controlNav: 'false'}">
+<div class="am-slider am-slider-default" data-am-flexslider="{controlNav: false,directionNav:false  }">
   <ul class="am-slides">
-    <li><%= image_tag "index1.jpg" %></li>
-    <li><%= image_tag "index1.jpg" %></li>
-    <li><%= image_tag "index1.jpg" %></li>
-    <li><%= image_tag "index1.jpg" %></li>
+     <li><%= image_tag "index11.jpg" %></li>
+      <li><%= image_tag "index3.jpg" %></li>
+      <li><%= image_tag "index4.jpg" %></li>
+     <li><%= image_tag "index10.jpg" %></li>
+    
+    <!-- <li><%= image_tag "index1.jpg" %></li> -->
+   
+    
   </ul>
 </div>
 </div>
@@ -197,12 +201,12 @@
     <div class="am-u-lg-8 am-u-md-6 am-u-sm-12">
       <h2 class="hope-title">我们一起玩泥巴</h2>
 
-      <p>
+      <p> 
         在知识爆炸的年代，继续噼里噼里噼里噼里噼里噼里一大堆噼里噼里噼里噼里噼里噼里一大堆
       </p>
     </div>
   </div>
-</div>
+</div>  
 -->
 
 

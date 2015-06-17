@@ -1,0 +1,260 @@
+/* line 364, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+meta.foundation-version {
+  font-family: "/5.5.2/";
+}
+
+/* line 368, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+meta.foundation-mq-small {
+  font-family: "/only screen/";
+  width: 0;
+}
+
+/* line 373, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+meta.foundation-mq-small-only {
+  font-family: "/only screen and (max-width: 40em)/";
+  width: 0;
+}
+
+/* line 378, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+meta.foundation-mq-medium {
+  font-family: "/only screen and (min-width:40.0625em)/";
+  width: 40.0625em;
+}
+
+/* line 383, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+meta.foundation-mq-medium-only {
+  font-family: "/only screen and (min-width:40.0625em) and (max-width:64em)/";
+  width: 40.0625em;
+}
+
+/* line 388, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+meta.foundation-mq-large {
+  font-family: "/only screen and (min-width:64.0625em)/";
+  width: 64.0625em;
+}
+
+/* line 393, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+meta.foundation-mq-large-only {
+  font-family: "/only screen and (min-width:64.0625em) and (max-width:90em)/";
+  width: 64.0625em;
+}
+
+/* line 398, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+meta.foundation-mq-xlarge {
+  font-family: "/only screen and (min-width:90.0625em)/";
+  width: 90.0625em;
+}
+
+/* line 403, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+meta.foundation-mq-xlarge-only {
+  font-family: "/only screen and (min-width:90.0625em) and (max-width:120em)/";
+  width: 90.0625em;
+}
+
+/* line 408, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+meta.foundation-mq-xxlarge {
+  font-family: "/only screen and (min-width:120.0625em)/";
+  width: 120.0625em;
+}
+
+/* line 413, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+meta.foundation-data-attribute-namespace {
+  font-family: false;
+}
+
+/* line 422, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+html, body {
+  height: 100%;
+}
+
+/* line 425, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+html {
+  box-sizing: border-box;
+}
+
+/* line 428, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+/* line 434, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+html,
+body {
+  font-size: 100%;
+}
+
+/* line 438, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+body {
+  background: #fff;
+  color: #222;
+  cursor: auto;
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+/* line 451, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+a:hover {
+  cursor: pointer;
+}
+
+/* line 454, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* line 456, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+img {
+  -ms-interpolation-mode: bicubic;
+}
+
+/* line 461, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+#map_canvas img,
+#map_canvas embed,
+#map_canvas object,
+.map_canvas img,
+.map_canvas embed,
+.map_canvas object,
+.mqa-display img,
+.mqa-display embed,
+.mqa-display object {
+  max-width: none !important;
+}
+
+/* line 468, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+.left {
+  float: left !important;
+}
+
+/* line 469, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+.right {
+  float: right !important;
+}
+
+/* line 172, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+.clearfix:before, .clearfix:after {
+  content: " ";
+  display: table;
+}
+/* line 173, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+.clearfix:after {
+  clear: both;
+}
+
+/* line 473, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+.hide {
+  display: none;
+}
+
+/* line 478, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+.invisible {
+  visibility: hidden;
+}
+
+/* line 484, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+.antialiased {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* line 487, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+img {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* line 497, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+textarea {
+  height: auto;
+  min-height: 50px;
+}
+
+/* line 500, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+select {
+  width: 100%;
+}
+
+/* Panels */
+/* line 86, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_panels.scss */
+.panel {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #d8d8d8;
+  margin-bottom: 1.25rem;
+  padding: 1.25rem;
+  background: #f2f2f2;
+  color: #333333;
+}
+/* line 61, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_panels.scss */
+.panel > :first-child {
+  margin-top: 0;
+}
+/* line 62, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_panels.scss */
+.panel > :last-child {
+  margin-bottom: 0;
+}
+/* line 67, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_panels.scss */
+.panel h1, .panel h2, .panel h3, .panel h4, .panel h5, .panel h6, .panel p, .panel li, .panel dl {
+  color: #333333;
+}
+/* line 74, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_panels.scss */
+.panel h1, .panel h2, .panel h3, .panel h4, .panel h5, .panel h6 {
+  line-height: 1;
+  margin-bottom: 0.625rem;
+}
+/* line 76, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_panels.scss */
+.panel h1.subheader, .panel h2.subheader, .panel h3.subheader, .panel h4.subheader, .panel h5.subheader, .panel h6.subheader {
+  line-height: 1.4;
+}
+/* line 88, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_panels.scss */
+.panel.callout {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #d8d8d8;
+  margin-bottom: 1.25rem;
+  padding: 1.25rem;
+  background: #ecfaff;
+  color: #333333;
+}
+/* line 61, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_panels.scss */
+.panel.callout > :first-child {
+  margin-top: 0;
+}
+/* line 62, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_panels.scss */
+.panel.callout > :last-child {
+  margin-bottom: 0;
+}
+/* line 67, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_panels.scss */
+.panel.callout h1, .panel.callout h2, .panel.callout h3, .panel.callout h4, .panel.callout h5, .panel.callout h6, .panel.callout p, .panel.callout li, .panel.callout dl {
+  color: #333333;
+}
+/* line 74, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_panels.scss */
+.panel.callout h1, .panel.callout h2, .panel.callout h3, .panel.callout h4, .panel.callout h5, .panel.callout h6 {
+  line-height: 1;
+  margin-bottom: 0.625rem;
+}
+/* line 76, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_panels.scss */
+.panel.callout h1.subheader, .panel.callout h2.subheader, .panel.callout h3.subheader, .panel.callout h4.subheader, .panel.callout h5.subheader, .panel.callout h6.subheader {
+  line-height: 1.4;
+}
+/* line 90, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_panels.scss */
+.panel.callout a:not(.button) {
+  color: #008CBA;
+}
+/* line 93, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_panels.scss */
+.panel.callout a:not(.button):hover, .panel.callout a:not(.button):focus {
+  color: #0078a0;
+}
+/* line 100, /Users/yangzhiqiang/.rvm/gems/ruby-2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_panels.scss */
+.panel.radius {
+  border-radius: 3px;
+}
