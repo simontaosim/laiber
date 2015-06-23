@@ -2,15 +2,35 @@
 function operateObj(obj,flag, msg){
   if(flag == 'reflash_data'){
     for(var i=0; i< msg.length; i++){
-    var oBox=$('<div></div>').addClass('box');
+    var oBox=$('<div></div>').addClass('box').attr({
+      post_id: msg[i][0].$oid
+    });;
     var oPic=$('<div></div>').addClass('pic').appendTo($(oBox));
-    var oA=$('<a></a>');
+    var oA=$('<a></a>').addClass('al-alert').attr({
+      href: "javascript:popAlert('"+msg[i][0].$oid+"')",
+    });;
     oA.appendTo($(oPic));
-    $('<img>').attr('src','/image_for_good/default.jpg').height("400px").appendTo($(oA));
+    //============加载头像，如果有头像，加载头像，如果没有，加载默认头像；
+    if (msg[i][2]!==null) {
+        params = msg[i][2].$oid;
+        url = '<%= welcome_get_image_by_id_path %>';
+        flag = 'imagesExsit';
+        ByGet(params, $obj, url, flag)
+        if (flag=='imagesExsit'){
+          $('<img>').attr('src',msg[0].src).height("400px").appendTo($(oA));
+        }  
+         else{
+          alert('头像读取失败');
+         }
+    } else{
+        $('<img>').attr('src','/image_for_good/default.jpg').height("400px").appendTo($(oA));
+    };
+    //============加载头像，如果有头像，加载头像，如果没有，加载默认头像；
     var oTitle=$('<div></div>').addClass('ideaTitle1').html('<a><h3>'+msg[i][1]+'</h3></a>').appendTo($(oPic));
-    var oHr=$('<hr>').appendTo($(oPic));
-    var oIntruduce=$('<div></div>').addClass('ideaIntruduce').appendTo($(oPic));
-    var oA=$('<a></a>').appendTo($(oIntruduce));
+    var oHr1=$('<hr>').appendTo($(oPic));
+    var oHr2=$('<hr>').appendTo($(oPic));
+    // var oIntruduce=$('<div></div>').addClass('ideaIntruduce').appendTo($(oPic));
+    // var oA=$('<a></a>').appendTo($(oIntruduce));
     var ideaClassify=$('<div></div>').addClass('ideaClassify').html('<a>'+msg[i][2]+'</a>').appendTo($(oPic));
     obj.append(oBox);
     waterfall();
@@ -154,6 +174,24 @@ function beforeOperate(obj){
                 dataType: "json"
               }).done(function( msg ){ 
                 operateObj($obj, flag, msg);
+                handle = true;
+              }).fail(function(){alert('请等待服务器');
+              });
+
+
+  }
+   function ByGet(params, $obj, url, flag, handle){
+    $.ajax({
+                method: "GET",
+                url: url,
+                beforeSend: function( xhr ) {
+                xhr.overrideMimeType( "text/plain; charset=utf-8" );
+
+                 },
+                data: params,
+                dataType: "json"
+              }).done(function( images ){ 
+                operateObj($obj, flag, images);
                 handle = true;
               }).fail(function(){alert('请等待服务器');
               });
