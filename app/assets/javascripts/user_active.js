@@ -10,14 +10,15 @@ function operateObj(obj,flag, msg){
       href: "javascript:popAlert('"+msg[i][0].$oid+"')",
     });;
     oA.appendTo($(oPic));
-    //============加载头像，如果有头像，加载头像，如果没有，加载默认头像；
+    //============加载图片，如果有图片，加载图片，如果图片，加载默认图片；
     if (msg[i][2]!==null) {
+      console.log('加载图片');
         params = msg[i][2].$oid;
         url = '<%= welcome_get_image_by_id_path %>';
         flag = 'imagesExsit';
         ByGet(params, $obj, url, flag)
         if (flag=='imagesExsit'){
-          $('<img>').attr('src',msg[0].src).height("400px").appendTo($(oA));
+          $('<img>').attr('src',msg[0][0].src).height("400px").appendTo($(oA));
         }  
          else{
           alert('头像读取失败');
@@ -25,7 +26,7 @@ function operateObj(obj,flag, msg){
     } else{
         $('<img>').attr('src','/image_for_good/default.jpg').height("400px").appendTo($(oA));
     };
-    //============加载头像，如果有头像，加载头像，如果没有，加载默认头像；
+   //============加载图片，如果有图片，加载图片，如果图片，加载默认图片；
     var oTitle=$('<div></div>').addClass('ideaTitle1').html('<a><h3>'+msg[i][1]+'</h3></a>').appendTo($(oPic));
     var oHr1=$('<hr>').appendTo($(oPic));
     var oHr2=$('<hr>').appendTo($(oPic));
@@ -178,23 +179,6 @@ function beforeOperate(obj){
               }).fail(function(){alert('请等待服务器');
               });
 
-
-  }
-   function ByGet(params, $obj, url, flag, handle){
-    $.ajax({
-                method: "GET",
-                url: url,
-                beforeSend: function( xhr ) {
-                xhr.overrideMimeType( "text/plain; charset=utf-8" );
-
-                 },
-                data: params,
-                dataType: "json"
-              }).done(function( images ){ 
-                operateObj($obj, flag, images);
-                handle = true;
-              }).fail(function(){alert('请等待服务器');
-              });
 
   }
   function ByGetText(params, $obj, url, flag){
