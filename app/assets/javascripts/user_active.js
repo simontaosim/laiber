@@ -12,18 +12,29 @@ function operateObj(obj,flag, msg){
     oA.appendTo($(oPic));
     //============加载图片，如果有图片，加载图片，如果图片，加载默认图片；
     if (msg[i][2]!==null) {
-      console.log('加载图片');
-        params = msg[i][2].$oid;
-        url = '<%= welcome_get_image_by_id_path %>';
-        flag = 'imagesExsit';
-        ByGet(params, $obj, url, flag)
-        if (flag=='imagesExsit'){
-          $('<img>').attr('src',msg[0][0].src).height("400px").appendTo($(oA));
-        }  
-         else{
-          alert('头像读取失败');
-         }
-    } else{
+      $.ajax({
+        url :obj.attr('images'),
+        type: 'GET',
+        dataType: 'json',
+        data:"id="+msg[i][2][0].$oid,
+      })
+      .done(function(data) {
+        console.log("success");
+        $('<img>').attr('src','../'+data.url_from_content).height("400px").appendTo($(oA));
+      })
+      .fail(function() {
+        console.log("error");
+      })
+      .always(function() {
+        console.log("complete");
+      });
+
+  }
+
+
+     else{
+      console.log('加载默认图片');
+
         $('<img>').attr('src','/image_for_good/default.jpg').height("400px").appendTo($(oA));
     };
    //============加载图片，如果有图片，加载图片，如果图片，加载默认图片；
@@ -196,5 +207,19 @@ function beforeOperate(obj){
               }).fail(function(){alert('请等待服务器');});
 
   }
+      function ByGetImg(params, $obj, url, flag){
+    $.ajax({
+                method: "GET",
+                url: url,
+                beforeSend: function( xhr ) {
+                xhr.overrideMimeType( "text/plain; charset=utf-8" );
 
+                 },
+                data: params,
+                dataType: "json"
+              }).done(function( img ){ 
+                imagesReady($obj, flag, img);
+              }).fail(function(){alert('获取图片失败');
+              });
+            };
 //==============
