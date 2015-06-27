@@ -1,37 +1,37 @@
-
      <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">个人资料</strong></div>
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">个人资料</strong>
+      <a href="">／修改</a></div>
     </div>
-    
-    <div class="am-u-sm-6 am-u-md-4 am-u-lg-3" style="float:left;height:auto;padding-top: 10px;">
+  <div style="width:1000px;height:1000px;margin:24px;">
+    <div class="img" style="float:left;height:auto;padding-top: 10px;">
        <div class="infor_detail_up">
         <div class="am-u-sm-4 am-u-md-4 am-u-lg-4 am-u-lg-push-1 " >
               <div class="usr_img">
-              <img class="am-circle" src="http://amui.qiniudn.com/bw-2014-06-19.jpg?imageView/1/w/1000/h/1000/q/80"  width="140" height="140" alt=""/>
-              <%= form_for @user, url: {:controller => 'personal_center', :action => 'upload'} do |f| %>
-              <%= f.file_field :head_url, id: "user-pic", style: "font-size:5px;"  %>
-              <%= f.hidden_field :id, value: @user.id  %>
-              <input type='submit', value='上传'/>
-              <% end %>
+              <img class="am-circle" src="images/index.jpg"  width="140" height="140" alt=""/>
               </div>
               </div>    
         </div>
         </div>
         
                
-<div class="am-u-sm-6 am-u-md-8 am-u-lg-9" style="float:left;height:auto;">
-<ul class="infor_detail_list" style="line-height:42px;">
-            <li><span>用户名：</span><span>一只特立独行的猪&nbsp;&nbsp;</span><span class="edit_up"><a href="">编辑</a></span></li>
-            <li><span>标签：</span><span>前端&nbsp;&nbsp;</span>前端&nbsp;&nbsp;<span>前端&nbsp;&nbsp;</span>前端&nbsp;&nbsp;<span></span><span class="edit_up"><a href="">编辑</a></span></li>
-        
-                <li><span>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：1234***45@163.com&nbsp;&nbsp;</span><i class="am-icon-check"></i><span class="edit_down">已认证&nbsp;&nbsp;<a href="">修改</a></span></li>
-                <li><span>手机号码：1234****78&nbsp;&nbsp;</span><i class="am-icon-close"></i><span class="edit_down">未认证&nbsp;&nbsp;<a href="">修改</a></span></li>
-                </ul>
-        
-</div>
-<hr>
-<div style="text-align:center;">
-       <button type="button" class="am-btn am-btn-primary am-btn-xs" style="text-align:center;">保存</button>
-</div>
+<div class="information" style="float:left;height:auto;">
+<ul class="infor_detail_list" style="line-height:52px;">
+    <li><span>用户名：</span><span>一只特立独行的猪&nbsp;&nbsp;</span><span class="edit_up"></span></li>
+    <li>
+    <span>标签：</span>
+    <span class="target">前端</span>
+    <span class="target">前端</span>
+    <span class="target">前端</span>
+    <span class="target last">前端</span>
+    
+    </li>
+    <li>
+    <span style="border-right: solid 1px;">手机号码：1234****789112&nbsp;&nbsp;</span>
+    <span style="margin-left:10px;">邮箱：1234***45@163.com&nbsp;&nbsp;</span>
+    </li>
+  
 
-<!--[if (gte IE 9)|!(IE)]><    !-->
+</ul>
+        
+</div>
+</div>
