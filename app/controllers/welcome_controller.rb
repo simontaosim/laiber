@@ -9,7 +9,7 @@ class WelcomeController < ApplicationController
     @title = 'Laiber——改变世界的愿景'
     @posts = Post.GetRootPublishedPosts(15).pluck(:id, :title, :image_item_ids, :created_at, :tag_ids)
     @post = Post.new
-    
+
     if session[:progress]
       @user_session = UserSession.find(session[:progress].fetch("_id").fetch("$oid"))
     end
@@ -73,8 +73,8 @@ class WelcomeController < ApplicationController
             else
               item = sub_content[0..sub_content.index(devide_key)-1]
               items.push(item)
-            end 
+            end
           end
       items
-    end
+  end
 end

@@ -11,6 +11,7 @@
 %>
 
 <div class="login_content">
+
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
 <%= form_for @user, url: user_sessions_auth_url, :html => {:class=> 'am-form am-form-horizontal'} do |f| %>
@@ -62,7 +63,7 @@
         }
         else{
               $(".Balert1").html('<i class="am-icon-smile-o"></i>&nbsp;OK')
-        }; 
+        };
     });
 });
 
