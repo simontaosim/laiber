@@ -110,7 +110,7 @@
                data: { confirm: '您确定不?' }, class: "am-btn am-btn-secondary am-topbar-btn am-btn-sm", style:"color:white;" %>
       </div>
         <div class="am-topbar-right">
-        <%= link_to user_session.name.to_s, personal_center_index_path, class: "am-btn am-btn-secondary am-topbar-btn am-btn-sm", style:"color:white;" %>
+        <%= link_to user_session.name.to_s, user_path(user_session.user), class: "am-btn am-btn-secondary am-topbar-btn am-btn-sm", style:"color:white;" %>
       </div>
       <% else %>
       <div class="am-topbar-right">

@@ -28,7 +28,7 @@
   <div class="row">
     <div class="medium-1 large-1 small-1 columns"></div>
     <div class="medium-9 large-9 small-9 columns"><h4>我发表过的帖子：</h4><hr></div>
-    <div class="medium-9 large-2 small-2 columns"><a href="#" class="button small"><small>更多</small></a></div>
+    <div class="medium-9 large-2 small-2 columns"><%= link_to '更多',users_show_all_posts_by_user_id_path(user_id: @user.id), class: 'button small' %></div>
   </div>
   <% @user.posts.limit(5).each do |post| %>
    <div class="row">

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  layout 'foundation_view.html.erb', only: [:show]
+  layout 'foundation_view.html.erb', only: [:show, :show_all_posts_by_user_id]
   # GET /users
   # GET /users.json
   def index
@@ -16,12 +16,32 @@ class UsersController < ApplicationController
   end
 
   def show_all_posts_by_user_id
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+    end
+    @title = '我发表的帖子'
+    @page = 1
+    if params[:page]
+      @page = params[:page].to_i
+    end
+    if params[:first]
+      @page = 1
+    end
+    if params[:last]
+      @page = @page.to_i + 1
+      
+    end
     if session[:progress]
       @user_session = UserSession.find(session[:progress].fetch("_id").fetch("$oid"))
-    else
-      redirect_to :action => 'show'
     end
-    @posts = Post.where(:user => @user_session.user)
+    if @user_session.user.eql?(@user)
+       @posts = Post.where(:title.gt => '', :user_id => @user_session.user.id).desc(:created_at).page(@page).per(15).pluck(:id, :title, :image_item_ids, :created_at, :tag_ids, :is_published)
+    else
+      @posts = Post.where(:title.gt => '', :user_id => @user.id).desc(:created_at).page(@page).per(15).pluck(:id, :title, :image_item_ids, :created_at, :tag_ids, :is_published)
+    end
+   
+    #@posts = Post.order('created_at').page(1)
+    @post = Post.new
   end
 
   # GET /users/new
