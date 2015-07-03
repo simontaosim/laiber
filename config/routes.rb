@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :post_favors
+  get 'users/show_all_posts_by_user_id'
   get 'welcome/get_image_by_id'
   get 'welcome/get_next_15_posts'
   get 'user_active/is_collected'

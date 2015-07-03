@@ -34,7 +34,13 @@
    <div class="row">
     <div class="medium-1 large-1 small-1 columns">&nbsp;</div>
     <div class="medium-8 large-8 small-8 columns"><%= post.title%></div>
-    <div class="medium-2 large-2 small-2 columns">查看</div>
+    <div class="medium-2 large-2 small-2 columns">
+      <span>
+      <%= link_to '删除', post_path(post,:from_user => 1,:user_id => post.user.id), method: :delete, data: { confirm: '你确定删除?' } %>
+    </span><span>查看</span><span>编辑</span>
+
+
+    </div>
     <div class="medium-1 large-1 small-1 columns"></div>
   </div>
   <% end %>
@@ -50,7 +56,8 @@
   <div class="row">
     <div class="medium-1 large-1 small-1 columns">&nbsp;</div>
     <div class="medium-8 large-8 small-8 columns"><%= Post.find(favor.favor_post_id).title %></div>
-    <div class="medium-2 large-2 small-2 columns">查看</div>
+    <div class="medium-2 large-2 small-2 columns"><span>取消收藏
+    </span><span>查看</span><span>编辑</span></div>
     <div class="medium-1 large-1 small-1 columns"></div>
   </div>
   <% end %>

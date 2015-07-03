@@ -10,7 +10,18 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    
+    if session[:progress]
+      @user_session = UserSession.find(session[:progress].fetch("_id").fetch("$oid"))
+    end
+  end
+
+  def show_all_posts_by_user_id
+    if session[:progress]
+      @user_session = UserSession.find(session[:progress].fetch("_id").fetch("$oid"))
+    else
+      redirect_to :action => 'show'
+    end
+    @posts = Post.where(:user => @user_session.user)
   end
 
   # GET /users/new
