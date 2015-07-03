@@ -117,7 +117,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-     Post.DeletePost(@post.getId())
+     Post.DeletePost(@post.id)
       if params[:from_user] or params[:from_user_all]
           if params[:from_user_all]
             redirect_to users_show_all_posts_by_user_id_path(user_id:params[:user_id]), notice: '成功删除' 
