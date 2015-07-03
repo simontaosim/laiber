@@ -36,10 +36,12 @@
     <div class="medium-8 large-8 small-8 columns"><%= post.title%></div>
     <div class="medium-2 large-2 small-2 columns">
       <span>
+      <% if @user_session.user.eql?(@user) %>
       <%= link_to '删除', post_path(post,:from_user => 1,:user_id => post.user.id), method: :delete, data: { confirm: '你确定删除?' } %>
-    </span><span>查看</span><span>编辑</span>
 
-
+    </span><span>编辑</span>
+    <% end %>
+    <span>查看</span>
     </div>
     <div class="medium-1 large-1 small-1 columns"></div>
   </div>

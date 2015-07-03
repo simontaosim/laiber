@@ -118,15 +118,10 @@ class PostsController < ApplicationController
   # DELETE /posts/1.json
   def destroy
     @post.destroy
-    
       if params[:from_user]
-        
           redirect_to user_path(params[:user_id]), notice: '成功删除' 
-         
       else
-        
           redirect_to posts_url, notice: 'Post was successfully destroyed.' 
-        
       end
       
 
