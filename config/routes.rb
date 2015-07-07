@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+
+  get 'investors/submit_info'
+  
+  get 'investors/index'
+
+  get 'investors/reg'
+
+  post 'investors/create'
+
+  get 'investors/ban'
+
+  get 'investors/pass'
+
   resources :post_favors
   get 'users/show_all_posts_by_user_id'
   get 'welcome/get_image_by_id'
